@@ -1,0 +1,30 @@
+### Obtener películas
+GET http://localhost:1234/movies
+
+### Obtener una película
+GET http://localhost:1234/movies/c8a7d63f-3b04-44d3-9d95-8782fd7dcfaf
+
+### Obtener películas según género
+GET http://localhost:1234/movies?genre=ACTION
+
+### Crear una película con POST
+POST http://localhost:1234/movies
+Content-Type: application/json
+
+{
+  "title": "Inception",
+
+  "director": "Christopher Nolan",
+  "duration": 148,
+  "poster": "https://m.media-amazon.com/images/S/pv-target-images/e826ebbcc692b4d19059d24125cf23699067ab621c979612fd0ca11ab42a65cb._SX1080_FMjpg_.jpg",
+  "genre": ["Sci-Fi", "Action", "Thriller"],
+  "rate": 8.8
+}
+
+### Actualizar una película
+PATCH http://localhost:1234/movies/c8a7d63f-3b04-44d3-9d95-8782fd7dcfaf
+Content-Type: application/json
+
+{
+    "year": 2005
+}
