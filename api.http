@@ -2,7 +2,7 @@
 GET http://localhost:1234/movies
 
 ### Obtener una película
-GET http://localhost:1234/movies/c8a7d63f-3b04-44d3-9d95-8782fd7dcfaf
+GET http://localhost:1234/movies/2a1c57e9-fa0c-11f0-ac87-26893c942f31
 
 ### Obtener películas según género
 GET http://localhost:1234/movies?genre=ACTION
@@ -12,13 +12,13 @@ POST http://localhost:1234/movies
 Content-Type: application/json
 
 {
-  "title": "Inception",
-
-  "director": "Christopher Nolan",
-  "duration": 148,
-  "poster": "https://m.media-amazon.com/images/S/pv-target-images/e826ebbcc692b4d19059d24125cf23699067ab621c979612fd0ca11ab42a65cb._SX1080_FMjpg_.jpg",
-  "genre": ["Sci-Fi", "Action", "Thriller"],
-  "rate": 8.8
+  "title": "Gladiator",
+  "year": 2000,
+  "director": "Ridley Scott",
+  "duration": 155,
+  "poster": "https://img.fruugo.com/product/0/60/14417600_max.jpg",
+  "genre": ["Action", "Adventure", "Drama"],
+  "rate": 8.5
 }
 
 ### Actualizar una película
@@ -26,5 +26,9 @@ PATCH http://localhost:1234/movies/c8a7d63f-3b04-44d3-9d95-8782fd7dcfaf
 Content-Type: application/json
 
 {
-    "year": 2005
+    "year": 2008
 }
+
+
+### Eliminar una pelicula
+DELETE http://localhost:1234/movies/c8a7d63f-3b04-44d3-9d95-8782fd7dcfaf
