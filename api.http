@@ -2,7 +2,7 @@
 GET http://localhost:1234/movies
 
 ### Obtener una película
-GET http://localhost:1234/movies/2a1c57e9-fa0c-11f0-ac87-26893c942f31
+GET http://localhost:1234/movies/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
 
 ### Obtener películas según género
 GET http://localhost:1234/movies?genre=ACTION

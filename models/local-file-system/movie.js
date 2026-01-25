@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import { randomUUID } from 'node:crypto'
 
-const movies = JSON.parse(fs.readFileSync('../movies.json', 'utf-8'))
+const movies = JSON.parse(fs.readFileSync('./movies.json', 'utf-8'))
 
 export class MovieModel {
   static async getAll({ genre }) {
