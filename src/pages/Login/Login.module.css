@@ -1,0 +1,76 @@
+.background{
+    width: 100%;
+    height: 100vh;
+    background: url("../../assets/background.jpg");
+    background-size: cover;
+}
+
+.contentLogin{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  background: url("../../assets/background.jpg");
+  background-size: cover;
+}
+
+.formLogin{
+  width: 40%;
+  height: 70%;
+  border: 1px solid black;
+  background-color: black;
+  opacity: 0.90;
+  border-radius: 10px;
+  padding: 4% 8% 5% 8%;
+  margin: 35px 0 0 0;
+}
+
+
+.inputLogin{
+  background-color: rgb(30, 25, 25);
+  color: white;
+  font-size: 0.7rem;
+  width: 100%;
+  height: 35px;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 0 0 0 5px;
+  margin: 5px 0 10px 0;
+}
+
+.inputParagragh{
+  color: white;
+  font-size: 0.7rem;
+}
+
+.link{
+  color: rgb(217, 101, 35 );
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+
+.buttonLogin{
+  background-color:  rgb(217, 101, 35 );
+  color: white;
+  width: 100%;
+  height: 35px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 10px 0 20px 0;
+  cursor: pointer;
+}
+
+.buttonLogin:hover{
+  background-color: rgb(146, 70, 25);
+  transition: 0.2s ease-in-out;
+}
+
+.countOptions{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 15px 0 15px 0;
+}

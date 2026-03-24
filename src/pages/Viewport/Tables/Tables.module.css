@@ -1,0 +1,55 @@
+
+.formFlex {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.inputTable {
+  background-color: rgb(30, 25, 25);
+  color: white;
+  font-size: 0.7rem;
+  width: 100%;
+  height: 35px;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 0 0 0 5px;
+  margin: 5px 0 10px 0;
+}
+
+.divSearch,
+.divFilter {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  width: 40px;
+  height: 50px;
+  cursor: pointer;
+}
+
+
+.gridTables {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  gap: 7px;
+}
+
+.tableItem {
+  color: black;
+  background-color: white;
+  font-weight: bold;
+  width: 100%;
+  height: 80px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.tableItem:hover {
+  transform: scale(1.1);
+}
+
+
