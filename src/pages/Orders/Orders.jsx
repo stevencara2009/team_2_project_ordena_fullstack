@@ -1,9 +1,16 @@
 import styles from './Orders.module.css'
 import { CardOrder } from '../Dashboard/CardOrder/CardOrder'
 import { Link } from "react-router-dom"
-import { ButtonAdd, ButtonBack } from '../../components/Button/Button'
+import { Button } from '../../components/Button/Button'
+import { Input, InputSelect } from '../../components/Input/Input'
+import { useState } from 'react'
 
 export const Orders = () => {
+  const [plateType, setPlateType] = useState("")
+  const PLATES_TYPE = ["Todos", "Hamburguesas", "Pizzas", "Ensaladas", "Mexicana", "Japonesa", "Pastas", "Bebidas", "Saludable", "Carnes", "Postres", "Niños", "Acompañamientos", "Entradas", "Internacional"]
+
+
+
   return (
     <div className="background">
       <div className="container">
@@ -15,46 +22,89 @@ export const Orders = () => {
           <div className="module">
             <form action="" >
               <div className="formFlex">
-                <label htmlFor="table-id">N° de mesa
-                  <input type="number" id="table-id" className={styles.inputTable} />
-                </label>
 
-                <label htmlFor="order-id">N° de pedido
-                  <input type="number" id="order-id" className={styles.inputTable} />
-                </label>
+                <Input
+                  label="N° de mesa"
+                  type="number"
+                  className="inputTable"
+                  placeholder=""
+                  name=""
+                  value=""
+                  onChange={() => { }}
+                  required
+                  variant='dark'
+                />
+
+                <Input
+                  label="N° de pedido"
+                  type="number"
+                  className="inputTable"
+                  placeholder=""
+                  name=""
+                  value=""
+                  onChange={() => { }}
+                  required
+                  variant='dark'
+                />
 
                 <div className={styles.divSearch}>
                   <button type='button' ><i className="fa-solid fa-magnifying-glass" style={{ width: 25, height: 25 }}></i></button>
                 </div>
+
               </div>
 
               <h2>Añadí a tu pedido</h2>
               <div className={styles.displayForm}>
-                <label htmlFor="product-category">Tipo
-                  <select id="product-category" className={styles.inputRegister}>
-                    <option value="">Sopa</option>
-                    <option value="">Plato fuerte</option>
-                    <option value="">Bebida</option>
-                    <option value="">Comida Rápida</option>
-                  </select>
-                </label>
 
-                <label htmlFor="productName">Plato
-                  <input type="text" id="productName" placeholder="Elegí el platillo" required className={styles.inputRegister} />
-                </label>
+                <InputSelect
+                  label="Tipo de comida"
+                  type="text"
+                  className="inputTable"
+                  placeholder=""
+                  onChange={(e) => setPlateType(e.target.value)}
+                  data={PLATES_TYPE}
+                />
 
-                <label htmlFor="productQuantity">Cantidad
-                  <input type="password" id="productQuantity" placeholder="0" required className={styles.inputRegister} />
-                </label>
+                <Input
+                  label="Platillo"
+                  type="text"
+                  className="inputPrimary"
+                  placeholder="Elegí el platillo"
+                  name=""
+                  value=""
+                  onChange={() => { }}
+                  required
+                  variant='dark'
+                />
 
-                <label htmlFor="productDescription">Observación
-                  <input type="text" id="productDescription" placeholder='Ingrese alguna nota relevante sobre el pedido...' required className={styles.inputRegister} />
-                </label>
+                <Input
+                  label="Cantidad"
+                  type="0"
+                  className="inputPrimary"
+                  placeholder="Elegí el platillo"
+                  name=""
+                  value=""
+                  onChange={() => { }}
+                  required
+                  variant='dark'
+                />
+
+                <Input
+                  label="Observación"
+                  type="0"
+                  className="inputPrimary"
+                  placeholder="Ingrese alguna nota relevante sobre el pedido..."
+                  name=""
+                  value=""
+                  onChange={() => { }}
+                  required
+                  variant='dark'
+                />
+
 
                 <div className={styles.divActionsOrder}>
-                  <ButtonBack />
-                  <ButtonAdd />
-
+                  <Button className="btnBack" text="Atrás" />
+                  <Button text='Añadir' className='btnAdd' />
                 </div>
 
               </div>

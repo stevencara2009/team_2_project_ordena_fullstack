@@ -1,11 +1,14 @@
-import { ButtonAdd, ButtonAddUser, ButtonDelete } from '../../components/Button/Button'
+import { Button } from '../../components/Button/Button'
 import styles from './Products.module.css'
 import { ProductItem } from './ProductItem/ProductItem'
 import { useEffect, useState } from 'react'
+import { Input, InputSelect } from '../../components/Input/Input'
 
 export const Products = () => {
   const [products, setProducts] = useState([])
-  const [filter, setFilter] = useState("Todos")
+  const [plateType, setPlateType] = useState("Todos")
+
+  const PLATES_TYPE = ["Todos", "Hamburguesas", "Pizzas", "Ensaladas", "Mexicana", "Japonesa", "Pastas", "Bebidas", "Saludable", "Carnes", "Postres", "Niños", "Acompañamientos", "Entradas", "Internacional"]
 
   useEffect(() => {
     fetch('/api/products.json')
@@ -17,13 +20,9 @@ export const Products = () => {
   }, [])
 
 
-  const handleInputChange = (e) => {
-    setFilter(e.target.value)
-  }
-
   const productsFiltered = products.filter((product) => {
-    if (filter === "" || filter === "Todos") return true;
-    return product.category === filter
+    if (plateType === "" || plateType === "Todos") return true;
+    return product.category === plateType
   })
 
   return (
@@ -32,35 +31,33 @@ export const Products = () => {
         <h1>Menú</h1>
 
         <form action="" className="formFlex">
-          <label htmlFor="order-id">
-            <input type="number" id="order-id" className={styles.inputTable} />
-          </label>
+          <Input
+            label="Buscar"
+            type="text"
+            className="inputPrimary"
+            placeholder=""
+            name=""
+            value=""
+            onChange={() =>{}}
+            variant='dark'
+          />
+
           <div className={styles.divSearch}>
             <button type='button' ><i className="fa-solid fa-magnifying-glass" style={{ width: 25, height: 25 }}></i></button>
           </div>
-          <label htmlFor="food-type">Tipo
-            <select id="food-type" className={styles.inputTable} onChange={handleInputChange}>
-              <option value="Todos">Todos</option>
-              <option value="Hamburguesas">Hamburguesas</option>
-              <option value="Pizzas">Pizzas</option>
-              <option value="Ensaladas">Ensaladas</option>
-              <option value="Mexicana">Mexicana</option>
-              <option value="Japonesa">Japonesa</option>
-              <option value="Pastas">Pastas</option>
-              <option value="Bebidas">Bebidas</option>
-              <option value="Saludable">Saludable</option>
-              <option value="Carnes">Carnes</option>
-              <option value="Postres">Postres</option>
-              <option value="Niños">Niños</option>
-              <option value="Acompañamientos">Acompañamientos</option>
-              <option value="Entradas">Entradas</option>
-              <option value="Internacional">Internacional</option>
-            </select>
-          </label>
+
+          <InputSelect
+            label="Tipo de comida"
+            type="text"
+            className="inputPrimary"
+            placeholder=""
+            onChange={(e) => setPlateType(e.target.value) }
+            data={PLATES_TYPE}
+          />
         </form>
 
         <div className="contentFlex">
-          {/* Modulo Formulario Nuevo Platillo*/}
+          {/* Modulo Platillos*/}
           <div className="module">
             <ProductItem products={productsFiltered} />
           </div>
@@ -68,42 +65,64 @@ export const Products = () => {
           {/* Modulo Formulario Nuevo Platillo*/}
           <div className="module">
             <form action="" >
-
               <h2>Platillo</h2>
               <div className={styles.displayForm}>
-                <label htmlFor="product-name">Nombre
-                  <input type="text" id="product-name" placeholder="Bandeja Paisa" required className={styles.inputRegister} />
-                </label>
+                <Input
+                  label="Nombre"
+                  type="text"
+                  className="inputPrimary"
+                  placeholder=""
+                  name=""
+                  value=""
+                  onChange={() =>{}}
+                  required
+                />
 
-                <label htmlFor="product-category">Tipo
-                  <select id="product-category" className={styles.inputRegister}>
-                    <option value="">Sopas</option>
-                    <option value="">Fast food</option>
-                    <option value="">Bebidas</option>
-                    <option value="">Postres</option>
-                    <option value="">Italiana</option>
-                    <option value="">Entradas</option>
-                    <option value="">Mexicana</option>
-                    <option value="">Ensaladas</option>
-                    <option value="">Vinos</option>
-                  </select>
-                </label>
+                <InputSelect
+                  label="Tipo de comida"
+                  type="text"
+                  className="inputPrimary"
+                  placeholder=""
+                  onChange={(e) => setPlateType(e.target.value) }
+                  data={PLATES_TYPE}
+                />
 
-                <label htmlFor="product-price">Precio
-                  <input type="number" id="product-price" placeholder="" required className={styles.inputRegister} />
-                </label>
+                <Input
+                  label="Precio"
+                  type="number"
+                  className="inputPrimary"
+                  placeholder=""
+                  name=""
+                  value=""
+                  onChange={() =>{}}
+                  required
+                />
 
-                <label htmlFor="product-description">Descripción
-                  <input type="text" id="product-description" placeholder="Añada una descripción del producto..." required className={styles.inputRegister} />
-                </label>
+                <Input
+                  label="Descripción"
+                  type="text"
+                  className="inputPrimary"
+                  placeholder="Añada una descripción del producto..."
+                  name=""
+                  value=""
+                  onChange={() =>{}}
+                  required
+                />
 
-                <label htmlFor="product-image">Imágenes
-                  <input type="file" id="product-description" className={styles.inputRegister} />
-                </label>
+                <Input
+                  label="Imágenes"
+                  type="file"
+                  className="inputPrimary"
+                  placeholder="Añada una descripción del producto..."
+                  name=""
+                  value=""
+                  onChange={() =>{}}
+                  required
+                />
 
                 <div className={styles.divActionsOrder}>
-                  <ButtonDelete />
-                  <ButtonAdd />
+                  <Button className='btnDelete' text='Eliminar' />
+                  <Button className='btnAdd' text='Añadir' />
                 </div>
 
               </div>
@@ -112,7 +131,6 @@ export const Products = () => {
           </div>
 
         </div>
-
       </div>
     </div>
   )

@@ -1,8 +1,15 @@
 import { CardOrder } from './CardOrder/CardOrder'
 import { Tables } from './Tables/Tables'
 import styles from './Dashboard.module.css'
+import { InputSelect } from '../../components/Input/Input'
+import { useState } from 'react'
 
 export const Dashboard = () => {
+  const [filter, setFilter] = useState("")
+
+  const FILTERS_BY = ["Más reciente", "Más antiguos", "Mayor precio", "Menor precio"]
+
+
   return (
     <div className="background">
 
@@ -18,20 +25,18 @@ export const Dashboard = () => {
           {/* Modulo pedidos asociados a mesa*/}
           <div className="module">
             <form action="" className="formFlex">
-              <label htmlFor="filter-orders">Filtrar por:
-                <select name="" id="filter-orders" className={styles.inputTable}>
-                  <option value="">Más reciente</option>
-                  <option value="">Más antiguos</option>
-                  <option value="">Mayor precio</option>
-                  <option value="">Menor precio</option>
-                </select>
-              </label>
+              <InputSelect
+                label="Tipo de comida"
+                type="text"
+                className="inputTable"
+                placeholder=""
+                onChange={(e) => setFilter(e.target.value)}
+                data={FILTERS_BY}
+              />
               <div className={styles.divFilter}>
                 <button type='button' ><i className="fa-solid fa-filter" style={{ width: 25, height: 25 }}></i></button>
               </div>
             </form>
-            <CardOrder />
-            <CardOrder />
             <CardOrder />
           </div>
 

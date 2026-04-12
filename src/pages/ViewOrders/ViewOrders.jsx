@@ -1,9 +1,15 @@
+import { useState } from 'react'
 import { CardOrder } from '../Dashboard/CardOrder/CardOrder'
 import { Tables } from '../Dashboard/Tables/Tables'
 import { OrderItem } from './OrderItem/OrderItem'
 import styles from './ViewOrders.module.css'
+import { InputSelect } from '../../components/Input/Input'
 
 export const ViewOrders = () => {
+  const [filter, setFilter] = useState("")
+
+  const FILTERS_BY = ["Más reciente", "Más antiguos", "Mayor precio", "Menor precio"]
+
   return (
     <div className="background">
 
@@ -13,24 +19,21 @@ export const ViewOrders = () => {
 
           {/* Modulo mesas*/}
           <div className="module">
-            <OrderItem/>
-            <OrderItem/>
-            <OrderItem/>
-            <OrderItem/>
-            <OrderItem/>  
+            <OrderItem />
+
           </div>
 
           {/* Modulo pedidos asociados a mesa*/}
           <div className="module">
             <form action="" className="formFlex">
-              <label htmlFor="filter-orders">Filtrar por:
-                <select name="" id="filter-orders" className={styles.inputTable}>
-                  <option value="">Más reciente</option>
-                  <option value="">Más antiguos</option>
-                  <option value="">Mayor precio</option>
-                  <option value="">Menor precio</option>
-                </select>
-              </label>
+              <InputSelect
+                label="Filtrar por"
+                type="text"
+                className="inputTable"
+                placeholder=""
+                onChange={(e) => setFilter(e.target.value)}
+                data={FILTERS_BY}
+              />
               <div className={styles.divFilter}>
                 <button type='button' ><i className="fa-solid fa-filter" style={{ width: 25, height: 25 }}></i></button>
               </div>

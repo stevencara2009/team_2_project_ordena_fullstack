@@ -1,6 +1,8 @@
 import { useState } from "react";
 import styles from "./Login.module.css"
 import { Link, useNavigate } from "react-router-dom"
+import { Input } from "../../components/Input/Input";
+import { Button } from "../../components/Button/Button";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -24,7 +26,7 @@ export const Login = () => {
       email: "",
       password: ""
     })
-    navigate('/')
+    navigate('/dashboard')
   }
 
   return (
@@ -32,21 +34,39 @@ export const Login = () => {
       <div className="background">
         <div className={styles.contentLogin}>
           <div className={styles.formLogin}>
+
             <form action="" onSubmit={handleSubmit}>
               <h1>Iniciar Sesión</h1>
-              <label htmlFor="user-email">Correo Electrónico</label>
-              <input type="email" id="user-email" name="email" placeholder="henan.c@gmail.com" value={formData.email} onChange={handleChange} required className={styles.inputLogin} />
-              
-              <label htmlFor="user-password">Contraseña</label>
-              <input type="password" id="user-password" name="password" value={formData.password} onChange={handleChange} placeholder="**************" required className={styles.inputLogin} />
-              <button type="submit" className={styles.buttonLogin}>Ingresar</button>
-            </form>
+              <Input
+                label="Correo Electrónico"
+                name="email"
+                type="email"
+                placeholder = "henan.c@gmail.com"
+                className="inputLogin"
+                required
+                value={formData.email}
+                onChange={handleChange}
+              />
 
+              <Input
+                label="Contraseña"
+                name="password"
+                type="password"
+                placeholder = "**************"
+                className="inputLogin"
+                required
+                value={formData.password}
+                onChange={handleChange}
+              />
+
+              <Button text="Ingresar" type="submit" className="btnLogin" />
+            </form>
 
             <div className={styles.countOptions}>
               <p className={styles.inputParagragh}><Link to="/" className={styles.link}>Olvide mi contraseña</Link></p>
               <p className={styles.inputParagragh}>¿No tienes cuenta? <span><Link to="/" className={styles.link}>Registrate</Link></span></p>
             </div>
+
           </div>
         </div>
       </div>

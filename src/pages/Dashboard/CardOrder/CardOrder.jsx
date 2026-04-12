@@ -1,5 +1,6 @@
 import styles from './CardOrder.module.css'
-import { ButtonDelete, ButtonUpdate } from '../../../components/Button/Button'
+import { Button } from '../../../components/Button/Button'
+import { Input } from '../../../components/Input/Input'
 
 export const CardOrder = () => {
   return (
@@ -49,14 +50,20 @@ export const CardOrder = () => {
         </tfoot>
       </table>
 
+        <Input
+          label="Observaciones"
+          type="text"
+          className="inputDescription"
+          placeholder=""
+          name=""
+          value=""
+          onChange={() => {}}
+          variant = "Light"
+        />
 
-      <label htmlFor="" className={styles.labelCardItem} >Observaciones
-        <input type="text" className={styles.orderDescription} />
-        <i className="fa-solid fa-trash-can"></i>
-      </label>
       <div className={styles.divActionsOrder}>
-        <ButtonDelete />
-        <ButtonUpdate />
+        <Button className='btnDelete' text='Eliminar' />
+        <Button className='btnUpdate' text='Actualizar' />
       </div>
 
     </div>

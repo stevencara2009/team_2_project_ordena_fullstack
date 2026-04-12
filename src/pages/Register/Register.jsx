@@ -1,9 +1,20 @@
+import { useState } from "react";
+import { Input, InputSelect } from "../../components/Input/Input";
 import styles from "./Register.module.css"
 import { Link, useNavigate } from "react-router-dom"
+import { Button } from '../../components/Button/Button'
 
 export const Register = () => {
-
+  const [filter, setFilter] = useState("")
   const navigate = useNavigate();
+
+  const DOCUMENTS_TYPE = [
+    "Cedula de Ciudadanía",
+    "Cedula de Extranjería",
+    "Pasaporte",
+    "NIT",
+  ]
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -11,6 +22,9 @@ export const Register = () => {
     navigate('/login')
   }
 
+  const handleInputChange = (e) => {
+    setFilter(e.target.value)
+  }
 
   return (
     <>
@@ -22,50 +36,96 @@ export const Register = () => {
               <h1 className={styles.title}>Regístrate</h1>
 
               <div className={styles.displayForm}>
-                <label htmlFor="user-name">Nombres
-                  <input type="text" id="user-name" placeholder="Hernán" required className={styles.inputRegister} />
-                </label>
+                <Input
+                  label="Nombres"
+                  type="text"
+                  placeholder="Hernán"
+                  className="inputPrimary"
+                  name=""
+                  value=""
+                  onChange=""
+                  required
+                />
 
-                <label htmlFor="user-lastname">Apellidos
-                  <input type="text" id="user-name" placeholder="Cortés" required className={styles.inputRegister} />
-                </label>
+                <Input
+                  label="Apellidos"
+                  type="text"
+                  placeholder="Cortés"
+                  className="inputPrimary"
+                  name=""
+                  value=""
+                  onChange=""
+                  required
+                />
 
-                <label htmlFor="user-number-document">N° de documento
-                  <input type="password" id="user-number-document" placeholder="**************" required className={styles.inputRegister} />
-                </label>
+                <Input
+                  label="N° de documento"
+                  type="password"
+                  placeholder=""
+                  className="inputPrimary"
+                  name=""
+                  value=""
+                  onChange=""
+                  required
+                />
 
-                <label htmlFor="user-type-document">Tipo
-                  <select id="user-type-document" className={styles.inputRegister}>
-                    <option value="">Cedula de Ciudadanía</option>
-                    <option value="">Cedula de Extranjería</option>
-                    <option value="">Pasaporte</option>
-                    <option value="">NIT</option>
-                  </select>
-                </label>
+                <InputSelect
+                  label="Tipo de documento"
+                  type="text"
+                  className="inputPrimary"
+                  placeholder=""
+                  onChange={handleInputChange}
+                  data={DOCUMENTS_TYPE}
+                />
 
-                <label htmlFor="user-birthdate">Fecha de Nacimiento
-                  <input type="date" id="user-birthdate" required className={styles.inputRegister} />
-                </label>
+                <Input
+                  label="Fecha de Nacimiento"
+                  type="date"
+                  placeholder=""
+                  className="inputPrimary"
+                  name=""
+                  value=""
+                  onChange=""
+                  required
+                />
 
-                <label htmlFor="user-email">Correo Electrónico
-                  <input type="email" id="user-email" placeholder="hernan.c@gmail.com" required className={styles.inputRegister} />
-                </label>
+                <Input
+                  label="Correo Electrónico"
+                  type="email"
+                  placeholder="hernan.c@gmail.com"
+                  className="inputPrimary"
+                  name=""
+                  value=""
+                  onChange=""
+                  required
+                />
 
+                <Input
+                  label="Contraseña"
+                  type="password"
+                  placeholder="**************"
+                  className="inputPrimary"
+                  name=""
+                  value=""
+                  onChange=""
+                  required
+                />
 
-                <label htmlFor="user-password">Contraseña
-                  <input type="password" id="user-password" placeholder="**************" required className={styles.inputRegister} />
-                </label>
-
-                <label htmlFor="user-confirm-password">Confirme Contraseña
-                  <input type="password" id="user-confirm-password" placeholder="**************" required className={styles.inputRegister} />
-                </label>
+                <Input
+                  label="Confirme Contraseña"
+                  type="password"
+                  placeholder="**************"
+                  className="inputPrimary"
+                  name=""
+                  value=""
+                  onChange=""
+                  required
+                />
 
               </div>
 
               <input type="checkbox" id="user-acept_terms" /><span className={styles.spanStyle}>  Al continuar, aceptas los <Link to="/" className={styles.link}>Términos y Condiciones</Link> y el <Link to="/" className={styles.link} >Aviso de Privacidad</Link></span>
-
-
-              <button type="submit" className={styles.buttonRegister}>Registrarse</button>
+              <Button className='btnRegister' text='Registrarse' type="submit" />
 
 
             </form>

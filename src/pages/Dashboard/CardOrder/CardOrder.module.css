@@ -50,21 +50,13 @@
   transition: 0.2s ease-in-out;
 }
 
-.labelCardItem {
-  color: black;
-  font-size: 0.7rem;
-  font-weight: bold;
-}
+
 
 .spanCardItem {
   font-size: 0.7rem;
 }
 
-.orderDescription {
-  width: 95%;
-  min-height: 40px;
-  margin-bottom: 7px;
-}
+
 
 .divActionsOrder {
   display: flex;

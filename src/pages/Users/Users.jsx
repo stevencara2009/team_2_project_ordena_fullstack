@@ -1,12 +1,22 @@
-import { ButtonAdd, ButtonAddUser, ButtonBack, ButtonDelete } from '../../components/Button/Button'
+import { Button } from '../../components/Button/Button'
+import { Input, InputSelect } from '../../components/Input/Input'
 import { UserItem } from './UserItem/UserItem'
 import styles from './Users.module.css'
 import { useEffect, useState } from 'react'
 
 export const Users = () => {
   const [users, setUsers] = useState([]);
+  const [userType, setUserType] = useState("Todos")
+  const [productType, setProductType] = useState("")
+  const [documentType, setDocumentType] = useState("")
 
-  const [filter, setFilter] = useState("Todos")
+  const USERS_TYPE = ["Todos", "Mesero", "Cocinero", "Administrador", "Cliente"]
+  const DOCUMENTS_TYPE = [
+    "Cedula de Ciudadanía",
+    "Cedula de Extranjería",
+    "Pasaporte",
+    "NIT",
+  ]
 
   useEffect(() => {
     fetch('/api/users.json')
@@ -18,13 +28,10 @@ export const Users = () => {
   }, [])
 
 
-  const handleSelectChange = (e) => {
-    setFilter(e.target.value)
-  }
 
   const usersFiltered = users.filter((user) => {
-    if (filter === "" || filter === "Todos") return true;
-    return user.role === filter;
+    if (userType === "" || userType === "Todos") return true;
+    return user.role === userType;
   })
 
 
@@ -34,77 +41,144 @@ export const Users = () => {
         <h1>Usuarios</h1>
 
         <form action="" className="formFlex">
-          <label htmlFor="order-id">
-            <input type="text" id="order-id" className={styles.inputTable} />
-          </label>
+          <Input
+            label="Buscar"
+            type="text"
+            placeholder=""
+            className="inputTable"
+            name=""
+            value=""
+            onChange=""
+            required
+          />
+
           <div className={styles.divSearch}>
             <button type='button' ><i className="fa-solid fa-magnifying-glass" style={{ width: 25, height: 25 }}></i></button>
           </div>
-          <label htmlFor="filter-orders">Filtrar por:
-            <select name="" id="filter-orders" className={styles.inputTable} onChange={handleSelectChange}>
-              <option value="Todos"  >Todos</option>
-              <option value="Mesero" >Meseros</option>
-              <option value="Cocinero" >Cocineros</option>
-              <option value="Administrador" >Administradores</option>
-              <option value="Cliente" >Clientes</option>
-            </select>
-          </label>
+
+          <InputSelect
+            label="Filtrar por:"
+            type="text"
+            className="inputTable"
+            placeholder=""
+            onChange={(e) => setUserType(e.target.value)}
+            data={USERS_TYPE}
+            value
+          />
         </form>
 
         <div className="contentFlex">
-          {/* Modulo Formulario Nuevo Pedido*/}
+          {/* Modulo Usuarios */}
           <div className="module">
             <UserItem users={usersFiltered} />
           </div>
 
-          {/* Modulo Formulario Nuevo Pedido*/}
+          {/* Modulo Formulario Nuevo Usuario*/}
           <div className="module">
             <form action="" >
 
               <h2>Usuario</h2>
               <div className={styles.displayForm}>
-                <label htmlFor="user-name">Nombres
-                  <input type="text" id="user-name" placeholder="Hernán" required className={styles.inputRegister} />
-                </label>
+                <Input
+                  label="Nombres"
+                  type="text"
+                  placeholder=""
+                  className="inputPrimary"
+                  name=""
+                  value=""
+                  onChange=""
+                  required
+                />
 
-                <label htmlFor="user-lastname">Apellidos
-                  <input type="text" id="user-name" placeholder="Cortés" required className={styles.inputRegister} />
-                </label>
+                <Input
+                  label="Apellidos"
+                  type="text"
+                  placeholder=""
+                  className="inputPrimary"
+                  name=""
+                  value=""
+                  onChange=""
+                  required
+                />
 
-                <label htmlFor="user-number-document">N° de documento
-                  <input type="password" id="user-number-document" placeholder="**************" required className={styles.inputRegister} />
-                </label>
+                <Input
+                  label="N° de documento"
+                  type="password"
+                  placeholder=""
+                  className="inputPrimary"
+                  name=""
+                  value=""
+                  onChange=""
+                  required
+                />
 
-                <label htmlFor="user-type-document">Tipo
-                  <select id="user-type-document" className={styles.inputRegister}>
-                    <option value="">Cedula de Ciudadanía</option>
-                    <option value="">Cedula de Extranjería</option>
-                    <option value="">Pasaporte</option>
-                    <option value="">NIT</option>
-                  </select>
-                </label>
+                <InputSelect
+                  label="Tipo de documento"
+                  type="text"
+                  className="inputPrimary"
+                  placeholder=""
+                  onChange={(e) => setDocumentType(e.target.value)}
+                  data={DOCUMENTS_TYPE}
+                />
 
-                <label htmlFor="user-birthdate">Fecha de Nacimiento
-                  <input type="date" id="user-birthdate" required className={styles.inputRegister} />
-                </label>
+                <Input
+                  label="N° de documento"
+                  type="password"
+                  placeholder=""
+                  className="inputPrimary"
+                  name=""
+                  value=""
+                  onChange=""
+                  required
+                />
 
-                <label htmlFor="user-email">Correo Electrónico
-                  <input type="email" id="user-email" placeholder="hernan.c@gmail.com" required className={styles.inputRegister} />
-                </label>
+                <Input
+                  label="Fecha de Nacimiento"
+                  type="date"
+                  placeholder=""
+                  className="inputPrimary"
+                  name=""
+                  value=""
+                  onChange=""
+                  required
+                />
 
+                <Input
+                  label="Correo Electrónico"
+                  type="email"
+                  placeholder="hernan.c@gmail.com"
+                  className="inputPrimary"
+                  name=""
+                  value=""
+                  onChange=""
+                  required
+                />
 
-                <label htmlFor="user-password">Contraseña
-                  <input type="password" id="user-password" placeholder="**************" required className={styles.inputRegister} />
-                </label>
+                <Input
+                  label="Contraseña"
+                  type="password"
+                  placeholder="**************"
+                  className="inputPrimary"
+                  name=""
+                  value=""
+                  onChange=""
+                  required
+                />
 
-                <label htmlFor="user-confirm-password">Confirme Contraseña
-                  <input type="password" id="user-confirm-password" placeholder="**************" required className={styles.inputRegister} />
-                </label>
+                <Input
+                  label="Confirme Contraseña"
+                  type="password"
+                  placeholder="**************"
+                  className="inputPrimary"
+                  name=""
+                  value=""
+                  onChange=""
+                  required
+                />
 
                 <div className={styles.divActionsOrder}>
-                  <ButtonDelete />
-                  <ButtonAdd />
-
+                  <Button text='Eliminar' className='btnDelete' />
+                  <Button text='Añadir' className='btnAdd' />
                 </div>
 
               </div>

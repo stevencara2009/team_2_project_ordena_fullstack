@@ -1,5 +1,4 @@
-
-.button {
+.btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,29 +15,38 @@
   border: 1px solid black;
 }
 
-.button:hover {
+.btn:hover {
   background-color: rgb(146, 70, 25);
   transition: 0.2s ease-in-out;
 }
 
-.buttonBack {
+.btnBack {
   background-color: black;
   color: white;
   outline: 1px white solid;
 }
 
-.buttonAdd {
+.btnAdd {
   background-color: rgb(217, 101, 35);
   color: black;
 }
 
-.buttonUpdate {
+.btnUpdate {
   background-color: rgb(191, 90, 18);
   color: black;
 }
 
-.buttonDelete {
+.btnDelete {
   background-color: white;
   color: black;
 }
 
+.btnLogin{
+  background-color:  rgb(217, 101, 35 );
+  color: white;
+}
+
+.btnRegister {
+  background-color: rgb(217, 101, 35);
+  color: white;
+}
