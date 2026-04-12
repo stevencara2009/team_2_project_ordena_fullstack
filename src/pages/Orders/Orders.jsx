@@ -1,9 +1,9 @@
-import styles from './CreateOrder.module.css'
+import styles from './Orders.module.css'
 import { CardOrder } from '../Dashboard/CardOrder/CardOrder'
 import { Link } from "react-router-dom"
 import { ButtonAdd, ButtonBack } from '../../components/Button/Button'
 
-export const CreateOrder = () => {
+export const Orders = () => {
   return (
     <div className="background">
       <div className="container">

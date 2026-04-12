@@ -1,9 +1,9 @@
 import { ButtonAdd, ButtonAddUser, ButtonBack, ButtonDelete } from '../../components/Button/Button'
 import { UserItem } from './UserItem/UserItem'
-import styles from './CreateUser.module.css'
+import styles from './Users.module.css'
 import { useEffect, useState } from 'react'
 
-export const CreateUser = () => {
+export const Users = () => {
   const [users, setUsers] = useState([]);
 
   const [filter, setFilter] = useState("Todos")

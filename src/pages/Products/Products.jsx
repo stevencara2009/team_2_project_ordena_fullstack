@@ -1,9 +1,9 @@
 import { ButtonAdd, ButtonAddUser, ButtonDelete } from '../../components/Button/Button'
-import styles from './Menu.module.css'
+import styles from './Products.module.css'
 import { ProductItem } from './ProductItem/ProductItem'
 import { useEffect, useState } from 'react'
 
-export const Menu = () => {
+export const Products = () => {
   const [products, setProducts] = useState([])
   const [filter, setFilter] = useState("Todos")
 

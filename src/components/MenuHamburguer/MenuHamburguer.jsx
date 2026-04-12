@@ -20,14 +20,12 @@ export const MenuHamburguer = () => {
           <i className={"fa-solid fa-xmark"} style={{ color: "white", fontSize: "24px", width: 32, height: 32 }} onClick={toggleMenu}></i>
         </div>
         <ul onClick={toggleMenu}>
-          <Link to="/login" ><li className={styles.menuItem}>Iniciar Sesión</li></Link>
-          <Link to="/register"  ><li className={styles.menuItem} >Regístrate</li></Link>
           <Link to="/dashboard"  ><li className={styles.menuItem} >Mesas</li></Link>
           <Link to="/view-orders"  ><li className={styles.menuItem} >Pedidos</li></Link>
-          <Link to="/create-order"  ><li className={styles.menuItem} >Crear pedido</li></Link>
-          <Link to="/create-user"  ><li className={styles.menuItem} >Usuarios</li></Link>
-          <Link to="/menu"  ><li className={styles.menuItem} >Menú</li></Link>
-
+          <Link to="/orders"  ><li className={styles.menuItem} >Crear pedido</li></Link>
+          <Link to="/users"  ><li className={styles.menuItem} >Usuarios</li></Link>
+          <Link to="/products"  ><li className={styles.menuItem} >Productos</li></Link>
+          <Link to="/login" ><li className={styles.menuItem}>Cerrar Sesión</li></Link>
         </ul>
       </div>
 
