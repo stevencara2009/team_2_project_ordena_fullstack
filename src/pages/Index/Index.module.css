@@ -1,0 +1,345 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+.corpus {
+    width: 100%;
+    height: 90vh;
+    padding: 0 10%;
+    display: flex;
+    justify-content: start;
+}
+
+.corpusTxt {
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.corpusTitle {
+    font-family: "Pacifico", cursive;
+    color: rgb(255, 174, 0);
+    font-size: 80px;
+    margin-bottom: 20px;
+    text-align: start;
+}
+
+.corpusParagraph {
+    color: white;
+    width: 500px;
+    font-size: 20px;
+}
+
+.corpusButton {
+    margin-top: 40px;
+    width: 200px;
+    padding: 10px;
+    background-color: rgb(255, 174, 0);
+    border: transparent;
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.corpusImg {
+    width: 50%;
+}
+
+
+/*DESARROLLO DE LOS PLATOS CLÁSICOS*/
+
+.menu {
+    width: 100%;
+    padding: 0 10%;
+    margin: 150px 0;
+    display: flex;
+    flex-direction: column;
+    background-color: brown;
+    align-items: center;
+}
+
+
+.menuTitle {
+    font-family: "Pacifico", cursive;
+    font-size: 50px;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.menuParagraph {
+    width: 600px;
+    text-align: center;
+    margin-bottom: 60px;
+    font-size: 20px;
+}
+
+.platillos {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.platilloTitle {}
+
+.platos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.platosTitle {
+    font-family: "Pacifico", cursive;
+    text-align: center;
+
+}
+
+.platosParagraph {
+    text-align: center;
+    justify-content: space-around;
+}
+
+.img1 {
+    background-image: url("../../assets/img1.jpg");
+    background-size: cover;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+}
+
+.img2 {
+    background-image: url("../../assets/img2.jpg");
+    background-size: cover;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+}
+
+.img3 {
+    background-image: url("../../assets/img3.jpg");
+    background-size: cover;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+}
+
+/* PLATOS EJECUTIVOS */
+
+.presentation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    padding: 70px 10%;
+    background-color: rgb(41, 41, 41);
+}
+
+.presentationTitle {
+    color: rgb(255, 174, 0);
+    font-family: "Pacifico", cursive;
+    font-size: 50px;
+    margin-bottom: 40px;
+}
+
+
+.presentationInterno {
+    display: flex;
+    width: 1200px;
+}
+
+.imgPresentation {
+    width: 50%;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+}
+
+.txtPresentation {
+    width: 50%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 500px;
+}
+
+.txtPresentationTitle {
+    font-family: "Pacifico", cursive;
+    line-height: 60px;
+    font-size: 50px;
+    color: rgb(255, 174, 0);
+    margin: 0;
+
+}
+
+.txtPresentationParagraph {
+    margin-top: 20px;
+    width: 500px;
+    color: white;
+}
+
+.txtPresentationButton {
+    font-size: 15px;
+    font-weight: 800;
+    border-color: transparent;
+    margin-top: 20px;
+    width: 200px;
+    padding: 20px;
+    color: black;
+    background-color: rgb(255, 174, 0);
+}
+
+.imgPlato {
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+}
+
+.uno {
+    background-image: url("../../assets/img4.jpg");
+}
+
+.dos {
+    background-image: url("../../assets/img5.jpg");
+}
+
+
+/* RESEÑAS */
+
+.dates {
+    background-color: rgb(41, 41, 41);
+    width: 100%;
+    height: auto;
+    padding: 0 10%;
+    padding-bottom: 50px;
+    display: flex;
+    justify-content: center;
+
+}
+
+.datesTotal {
+    width: 1000px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.datesTotalTitle {
+    font-family: "Pacifico", cursive;
+    color: rgb(255, 174, 0);
+    font-size: 50px;
+    text-align: center;
+    margin: 20px 0;
+
+}
+
+.datesTotalParagraph {
+    color: white;
+    width: 600px;
+    text-align: center;
+
+}
+
+.tips{
+    margin-top: 20px;
+    border: 1px solid white;
+    display: flex;
+    justify-content: space-around;
+    height: auto;
+
+
+}
+
+.circle{
+    border: 4px solid white;
+    border-radius: 50%;
+    margin: 0 30px;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.circleTitle2{
+color: rgb(255, 174, 0);
+font-size: 40px;
+}
+
+.circleTitle3{
+    color: white;
+}
+
+/* BANER DE PRESENTACION */
+
+.finalTxt{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 200px;
+    padding: 0 10%;
+    height: 700px;
+    background-image: linear-gradient(rgba(255, 251, 0, 0.9), rgba(255, 251, 0, 0.9)), url("../../assets/img5.jpg") ;
+    background-size: cover;
+    background-position: center;
+}
+
+.finalTxtParagraph{
+    width: 600px;
+    text-align: center;
+    font-size: 25px;
+}
+
+.finalTxtTitle{
+        font-family: "Pacifico", cursive;
+        text-align: center;
+        font-size: 50px;
+        color: black;
+}
+
+
+/* SUSCRIPCION */
+
+.suscription{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0 10%;
+    height: 700px;
+}
+
+.suscriptionTitle{
+    font-size: 50px;
+        font-family: "Pacifico", cursive;
+        color: black;
+}
+
+.suscriptionParagraph{
+    font-size: 20px;
+    text-align: center;
+    width: 800px;
+}
+
+.formText{
+    margin-top: 10px;
+}
+
+.formTextInput{
+    border: 1px solid rgb(179, 179, 179);
+    height: 30px;
+}
+
+.formTextButton{
+    height: 30px;
+    border: transparent;
+    background-color: rgb(255, 174, 0);
+    padding: 5px;
+    color: white;
+}
+

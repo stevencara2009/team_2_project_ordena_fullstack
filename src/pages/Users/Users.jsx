@@ -45,7 +45,7 @@ export const Users = () => {
             label="Buscar"
             type="text"
             placeholder=""
-            className="inputTable"
+            className="inputPrimary"
             name=""
             value=""
             onChange=""
@@ -59,7 +59,7 @@ export const Users = () => {
           <InputSelect
             label="Filtrar por:"
             type="text"
-            className="inputTable"
+            className="inputPrimary"
             placeholder=""
             onChange={(e) => setUserType(e.target.value)}
             data={USERS_TYPE}

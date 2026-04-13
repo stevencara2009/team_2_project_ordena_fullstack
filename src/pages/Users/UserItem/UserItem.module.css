@@ -1,7 +1,6 @@
 .userItem {
   width: 100%;
   min-height: 50px;
-  color: white;
   outline: 1px solid gray;
   border-radius: 7px;
   padding: 5px 0 5px 7px ;
@@ -12,6 +11,16 @@
 .userItem:hover {
   background-color: rgb(146, 70, 25);
   transition: 0.2s ease-in-out;
+}
+
+.userOrange{
+  background-color: rgb(146, 70, 25);
+  color: white;
+}
+
+.userDark{
+  background-color: transparent;
+  color: white;
 }
 
 .userItemTitle {

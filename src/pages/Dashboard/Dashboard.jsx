@@ -28,7 +28,7 @@ export const Dashboard = () => {
               <InputSelect
                 label="Tipo de comida"
                 type="text"
-                className="inputTable"
+                className="inputPrimary"
                 placeholder=""
                 onChange={(e) => setFilter(e.target.value)}
                 data={FILTERS_BY}

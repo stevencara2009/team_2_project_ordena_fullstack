@@ -29,7 +29,7 @@ export const ViewOrders = () => {
               <InputSelect
                 label="Filtrar por"
                 type="text"
-                className="inputTable"
+                className="inputPrimary"
                 placeholder=""
                 onChange={(e) => setFilter(e.target.value)}
                 data={FILTERS_BY}

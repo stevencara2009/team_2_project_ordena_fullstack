@@ -22,7 +22,7 @@ export const Tables = () => {
         <Input
           label="N° de mesa"
           type="number"
-          className="inputTable"
+          className="inputPrimary"
           placeholder=""
           name=""
           value=""
@@ -34,7 +34,7 @@ export const Tables = () => {
         <Input
           label="N° de pedido"
           type="number"
-          className="inputTable"
+          className="inputPrimary"
           placeholder=""
           name=""
           value=""

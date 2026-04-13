@@ -26,7 +26,7 @@ export const Orders = () => {
                 <Input
                   label="N° de mesa"
                   type="number"
-                  className="inputTable"
+                  className="inputPrimary"
                   placeholder=""
                   name=""
                   value=""
@@ -38,7 +38,7 @@ export const Orders = () => {
                 <Input
                   label="N° de pedido"
                   type="number"
-                  className="inputTable"
+                  className="inputPrimary"
                   placeholder=""
                   name=""
                   value=""
@@ -59,7 +59,7 @@ export const Orders = () => {
                 <InputSelect
                   label="Tipo de comida"
                   type="text"
-                  className="inputTable"
+                  className="inputPrimary"
                   placeholder=""
                   onChange={(e) => setPlateType(e.target.value)}
                   data={PLATES_TYPE}

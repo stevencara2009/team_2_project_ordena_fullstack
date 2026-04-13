@@ -1,13 +1,25 @@
+/* NUEVO FOOTER */
+
 .footer{
-  background-color: black;
+  width: 100%;
+  background-color: rgb(32, 32, 32);
   color: white;
-  text-align: center;
-  font-size: 0.7rem;
-  display: flex;
-  flex-direction: column;
+  padding: 30px 10%;
   width: 100%;
   padding-top: 15px;
   padding-bottom: 15px;
   position: static;
   bottom: 0;
+  text-align: center;
+  font-size: 0.7rem;
+}
+
+.footerContain{
+  width: 1000px;
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.footerContainDiv{
+  margin: 0 20px;
 }

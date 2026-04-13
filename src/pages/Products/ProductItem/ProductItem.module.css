@@ -1,7 +1,6 @@
 .productItem {
   width: 100%;
   min-height: 50px;
-  color: white;
   outline: 1px solid gray;
   border-radius: 7px;
   padding: 5px 0 5px 7px ;
@@ -14,24 +13,31 @@
   transition: 0.2s ease-in-out;
 }
 
+.productOrange {
+  background-color: rgb(217, 101, 35);
+  color: white;
+}
+
+.productDark {
+  background-color: transparent;
+  color: white;
+}
+
 .productItemTitle {
   font-size: 14px;
   font-weight: bold;
-  color: white;
   margin-bottom: 7px;
   margin-top: 7px;
 }
 
 .productItemDescription {
   font-size: 12px;
-  color: gray;
   margin-bottom: 7px;
 }
 
 .productItemPrice {
   font-size: 12px;
   font-weight: bold;
-  color: white;
   margin-bottom: 7px;
 }
 

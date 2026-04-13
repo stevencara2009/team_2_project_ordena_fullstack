@@ -42,7 +42,7 @@ export const Login = () => {
                 name="email"
                 type="email"
                 placeholder = "henan.c@gmail.com"
-                className="inputLogin"
+                className="inputPrimary"
                 required
                 value={formData.email}
                 onChange={handleChange}
@@ -53,7 +53,7 @@ export const Login = () => {
                 name="password"
                 type="password"
                 placeholder = "**************"
-                className="inputLogin"
+                className="inputPrimary"
                 required
                 value={formData.password}
                 onChange={handleChange}
@@ -63,8 +63,8 @@ export const Login = () => {
             </form>
 
             <div className={styles.countOptions}>
-              <p className={styles.inputParagragh}><Link to="/" className={styles.link}>Olvide mi contraseña</Link></p>
-              <p className={styles.inputParagragh}>¿No tienes cuenta? <span><Link to="/" className={styles.link}>Registrate</Link></span></p>
+              <p className={styles.paragragh}><Link to="/" className={styles.link}>Olvide mi contraseña</Link></p>
+              <p className={styles.paragragh}>¿No tienes cuenta? <span><Link to="/" className={styles.link}>Registrate</Link></span></p>
             </div>
 
           </div>
