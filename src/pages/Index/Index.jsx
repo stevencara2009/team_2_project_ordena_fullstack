@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react"
 import { Footer } from "../../layouts/Footer/Footer"
 import { SpecialPlates } from "./SpecialPlates/SpecialPlates"
 import styles from "./Index.module.css"

@@ -31,7 +31,7 @@ export const Hero = () => {
           Sabores auténticos, recetas tradicionales y el sazón de casa que
           nos caracteriza. Desde un buen ajiaco santafereño hasta una bandeja
           paisa bien servida, aquí encuentras el verdadero gusto de nuestra tierra.</p>
-        <Button text="Ver menú" className="btnLink" />
+        {/* <Button text="Ver menú" className="btnLink" /> */}
       </div>
       <div className={styles.corpusImg}>
       </div>
