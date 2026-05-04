@@ -4,10 +4,12 @@ import { useEffect, useState } from 'react'
 import img1 from "../../../assets/background.jpg"
 import img2 from "../../../assets/background2.jpg"
 import img3 from "../../../assets/background3.jpg"
+import { Navigate, useNavigate } from 'react-router-dom'
 
 export const Hero = () => {
   const imagesHero = [img1, img2, img3]
   const [imgHero, setImgHero] = useState(0)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const intervalo = setInterval(() => {
@@ -31,7 +33,7 @@ export const Hero = () => {
           Sabores auténticos, recetas tradicionales y el sazón de casa que
           nos caracteriza. Desde un buen ajiaco santafereño hasta una bandeja
           paisa bien servida, aquí encuentras el verdadero gusto de nuestra tierra.</p>
-        {/* <Button text="Ver menú" className="btnLink" /> */}
+        <Button text="Ver menú" className="btnLink" onClick={()=>navigate("/menu")} />
       </div>
       <div className={styles.corpusImg}>
       </div>

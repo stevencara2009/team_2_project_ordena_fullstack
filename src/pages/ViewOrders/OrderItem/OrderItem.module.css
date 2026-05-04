@@ -14,6 +14,16 @@
   transition: 0.2s ease-in-out;
 }
 
+.orderOrange{
+  background-color: rgb(146, 70, 25);
+  color: white;
+}
+
+.orderDark{
+  background-color: transparent;
+  color: white;
+}
+
 .orderItemTitle {
   font-size: 14px;
   font-weight: bold;

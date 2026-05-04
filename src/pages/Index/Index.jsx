@@ -7,12 +7,13 @@ import { Suscribing } from "./Suscribing/Suscribing"
 import { CommonPlates } from "./CommonPlates/CommonPlates"
 import { Hero } from "./Hero/Hero"
 import { Location } from "./Location/Location"
+import { FinalText } from "./FinalText/FinalText"
 
 
 export const Index = () => {
 
   return (
-    <main className={styles.hero}>
+    <main className={styles.main}>
 
       {/* Seccion Hero */}
       <Hero />
@@ -30,11 +31,7 @@ export const Index = () => {
       <Location />
 
       {/* Seccion Texto Final */}
-      <section className={styles.finalTxt}>
-        <p className={styles.finalTxtParagraph}> En Restaurante Avenida Las Palmas trabajamos cada día para llevar a tu mesa lo mejor de nuestra tradición culinaria. Cada plato es preparado con dedicación,
-          ingredientes frescos y ese toque casero que nos hace sentir como en familia.</p>
-        <h2 className={`${styles.title2} ${styles.finalTxtTitle}`} >El sabor de Colombia en cada bocado</h2>
-      </section>
+      <FinalText/>
 
       {/* Seccion Suscríbete */}
       <Suscribing />

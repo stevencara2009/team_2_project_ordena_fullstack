@@ -76,7 +76,7 @@ export const Products = () => {
   return (
     <div className="background">
       <div className="container">
-        <h1>Menú</h1>
+        <h1>Productos</h1>
 
         <form >
           <fieldset className="formFlex">

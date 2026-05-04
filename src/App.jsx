@@ -12,6 +12,7 @@ import { useAuth } from "./hooks/useAuth"
 import { ProtectedRoute } from "./routes/ProtectedRoutes"
 import { useEffect } from "react"
 import { AdminLayout } from "./layouts/Admin/Admin"
+import { Menu } from "./pages/Menu/Menu"
 
 function App() {
   const { user } = useAuth()
@@ -28,6 +29,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/index" element={<Index />} />
+        <Route path="/menu" element={<Menu />} />
 
         {/* Rutas protegidas */}
         <Route path="/" element={<AdminLayout />}>

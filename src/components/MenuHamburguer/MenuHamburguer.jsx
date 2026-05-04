@@ -36,7 +36,7 @@ export const MenuHamburguer = () => {
         {/* MENU OPCIONES CLIENTES */}
         <ul>
           <Link to="/index"  ><li className={styles.menuItem} onClick={toggleMenu}>Inicio</li></Link>
-          <Link to="/view-orders"  ><li className={styles.menuItem} onClick={toggleMenu} >Menú</li></Link>
+          <Link to="/menu"  ><li className={styles.menuItem} onClick={toggleMenu} >Menú</li></Link>
         </ul>
 
         {/* MENU OPCIONES PERSONAL ADMINISTRATIVO */}

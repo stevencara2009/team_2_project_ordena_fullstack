@@ -102,12 +102,6 @@ export const Login = () => {
             <p className={styles.paragragh}>¿No tienes cuenta? <span><Link to="/register" className={styles.link}>Regístrate</Link></span></p>
           </div>
 
-          <div>
-            <Button text="Admin" type="button" className="btnLogin" onClick={() => login('admin')} />
-            <Button text="Cocinero" type="button" className="btnLogin" onClick={() => login('cocinero')} />
-            <Button text="Cliente" type="button" className="btnLogin" onClick={() => login('cliente')} />
-          </div>
-
         </div>
       </div>
 

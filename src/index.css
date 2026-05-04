@@ -64,18 +64,21 @@ fieldset{
   margin: 0 15% 0 15%;
   padding: 30px 6% 4% 6%;
   border-radius: 20px;
+  min-height: 100vh;
 }
 
 .contentFlex {
   display: flex;
   flex-direction: row;
+  height: auto;
+  min-height: 100vh;
   justify-content: center;
   gap: 10px;
 }
 
 
 .module {
-  width: 50%;
+  width: 100%;
   height: 80vh;
   border: 1px solid black;
   background-color: black;

@@ -3,8 +3,7 @@ import { Input, InputSelect } from '../../components/Input/Input'
 import { UserItem } from './UserItem/UserItem'
 import styles from './Users.module.css'
 import { useEffect, useRef, useState } from 'react'
-import { COUNTRIES } from "../../data/data.js"
-import { useNavigate } from 'react-router-dom'
+import { COUNTRIES } from "../../data/countries.js"
 import { Loader } from '../../components/Loader/Loader.jsx'
 
 export const Users = () => {
@@ -38,7 +37,7 @@ export const Users = () => {
         setUsers(result)
       })
       .catch(error => console.log("Error cargando archivo: ", error))
-  }, [])
+  }, [users])
 
   // FILTRAR DATOS DE USUARIOS
   const usersFiltered = users.filter((user) => {
@@ -91,7 +90,7 @@ export const Users = () => {
 
     console.log(`El formulario enviado es: `, formData)
     alert("Usuario creado correctamente: ", formData.name)
-    
+
     setLoading(true)
     setTimeout(() => {
       setLoading(false)
@@ -144,8 +143,8 @@ export const Users = () => {
               label="Filtrar por:"
               type="text"
               className="inputPrimary"
-              name=""
-              value=""
+              name="userType"
+              value={userType}
               placeholder=""
               onChange={(e) => setUserType(e.target.value)}
               data={USERS_TYPE}
@@ -161,7 +160,7 @@ export const Users = () => {
 
           {/* Modulo Formulario Nuevo Usuario*/}
           <div className="module">
-            <form onSubmit={handleSubmit}>
+            {loading ? <Loader /> : (<form onSubmit={handleSubmit}>
               <fieldset>
                 <legend></legend>
 
@@ -293,9 +292,7 @@ export const Users = () => {
                 </div>
 
               </fieldset>
-            </form>
-
-            {loading && <Loader />}
+            </form>)}
           </div>
 
         </div>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { CardOrder } from '../Dashboard/CardOrder/CardOrder'
 import { Tables } from '../Dashboard/Tables/Tables'
 import { OrderItem } from './OrderItem/OrderItem'
@@ -7,8 +7,20 @@ import { InputSelect } from '../../components/Input/Input'
 
 export const ViewOrders = () => {
   const [filter, setFilter] = useState("")
+  const [orders, setOrders] = useState([])
 
   const FILTERS_BY = ["Más reciente", "Más antiguos", "Mayor precio", "Menor precio"]
+
+  // API GET: OBTENER DATOS DE USUARIOS
+  useEffect(() => {
+    fetch('/api/orders.json')
+      .then(response => response.json())
+      .then(result => {
+        setOrders(result)
+      })
+      .catch(error => console.log("Error cargando archivo: ", error))
+  }, [])
+
 
   return (
     <div className="background">
@@ -19,8 +31,7 @@ export const ViewOrders = () => {
 
           {/* Modulo mesas*/}
           <div className="module">
-            <OrderItem />
-
+            <OrderItem orders={orders} />
           </div>
 
           {/* Modulo pedidos asociados a mesa*/}

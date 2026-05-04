@@ -3,7 +3,7 @@ import { Input, InputSelect } from "../../components/Input/Input";
 import styles from "./Register.module.css"
 import { Link, useNavigate } from "react-router-dom"
 import { Button } from '../../components/Button/Button'
-import { COUNTRIES } from "../../data/data.js"
+import { COUNTRIES } from "../../data/countries.js"
 import { Loader } from "../../components/Loader/Loader.jsx";
 
 export const Register = () => {
