@@ -19,15 +19,15 @@
     }
   </style>
   <script type="module">
-    fetch('http://localhost:1234/movies')
+    fetch('http://localhost:1234/products')
       .then(res => res.json())
-      .then(movies => {
-        const html = movies.map(movie => {
+      .then(products => {
+        const html = products.map(product => {
           return `
-                <article data-id="${movie.id}">
-                    <h2>${movie.title}</h2>
-                    <img src="${movie.poster}" alt="${movie.title}">
-                    <p>${movie.year}</p>
+                <article data-id="${product.id}">
+                    <h2>${product.title}</h2>
+                    <img src="${product.poster}" alt="${product.title}">
+                    <p>${product.year}</p>
                     <button>Eliminar</button>
                 </article>
                 `
@@ -40,14 +40,14 @@
             const article = e.target.closest('article')
             const id = article.dataset.id
 
-            fetch(`http://localhost:1234/movies/${id}`, {
+            fetch(`http://localhost:1234/products/${id}`, {
               method: 'DELETE'
             })
               .then(res => {
                 if (res.ok) {
                   article.remove()
                 } else {
-                  console.error("Error al eliminar pelicula")
+                  console.error("Error al eliminar producto")
                 }
               })
           }

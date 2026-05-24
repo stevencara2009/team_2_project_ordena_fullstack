@@ -1,12 +1,11 @@
-// import { MovieModel } from "../models/local-file-system/movie.js"
-import { validateMovie, validatePartialMovie } from '../schemas/movies.js'
+import { validateClient, validatePartialClient } from '../schemas/clients.js'
 import { ALLOWED_ORIGINS } from "../config/cors.js"
 
 
-export class MovieController {
-  
-  constructor ({movieModel}){
-    this.movieModel = movieModel
+export class ClientController {
+
+  constructor({ clientModel }) {
+    this.clientModel = clientModel
   }
 
   getAll = async (req, res) => {
@@ -15,9 +14,9 @@ export class MovieController {
       res.header('Access-Control-Allow-Origin', origin)
     }
     try {
-      const { genre } = req.query
-      const movies = await this.movieModel.getAll({ genre })
-      res.json(movies)
+      const { category } = req.query
+      const clients = await this.clientModel.getAll({ category })
+      res.json(clients)
     } catch (error) {
       res.status(500).json({ message: error.message })
     }
@@ -26,9 +25,9 @@ export class MovieController {
   getById = async (req, res) => {
     try {
       const { id } = req.params
-      const movie = await this.movieModel.getById({ id })
-      if (movie) return res.json(movie)
-      res.status(404).json({ message: 'Movie not found' })
+      const client = await this.clientModel.getById({ id })
+      if (client) return res.json(client)
+      res.status(404).json({ message: 'Product not found' })
     } catch (error) {
       res.status(500).json({ message: error.message })
     }
@@ -36,10 +35,10 @@ export class MovieController {
 
   create = async (req, res) => {
     try {
-      const result = validateMovie(req.body)
+      const result = validateProduct(req.body)
       if (result.error) return res.status(400).json({ error: JSON.parse(result.error.message) })
-      const newMovie = await this.movieModel.create({ input: result.data })
-      res.status(201).json(newMovie)
+      const newProduct = await this.productModel.create({ input: result.data })
+      res.status(201).json(newProduct)
     } catch (error) {
       res.status(500).json({ message: error.message })
     }
@@ -47,11 +46,11 @@ export class MovieController {
 
   update = async (req, res) => {
     try {
-      const result = validatePartialMovie(req.body)
+      const result = validatePartialProduct(req.body)
       if (!result.success) return res.status(400).json({ error: result.error.message })
       const { id } = req.params
-      const updatedMovie = await this.movieModel.update({ id, input: result.data })
-      return res.status(200).json(updatedMovie)
+      const updatedProduct = await this.productModel.update({ id, input: result.data })
+      return res.status(200).json(updatedProduct)
     } catch (error) {
       res.status(500).json({ message: error.message })
     }
@@ -64,11 +63,11 @@ export class MovieController {
     }
     try {
       const { id } = req.params
-      const result = await this.movieModel.delete({ id })
+      const result = await this.productModel.delete({ id })
       if (result === false) {
-        return res.status(404).json({ message: 'Movie not found' })
+        return res.status(404).json({ message: 'Product not found' })
       }
-      return res.json({ message: 'Movie deleted' })
+      return res.json({ message: 'Product deleted' })
     } catch (error) {
       res.status(500).json({ message: error.message })
     }

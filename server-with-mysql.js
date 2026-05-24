@@ -1,4 +1,6 @@
 import { createApp } from "./app.js";
-import { MovieModel } from "./models/mysql/movie.js";
+import { ProductModel } from "./models/mysql/product.js";
+import { UserModel } from "./models/mysql/user.js";
+import { TableModel } from "./models/mysql/table.js";
 
-createApp({movieModel:MovieModel})
+createApp({productModel:ProductModel, userModel:UserModel, tableModel:TableModel })

@@ -1,34 +1,161 @@
-### Obtener películas
-GET http://localhost:1234/movies
+### Obtener productos
+GET http://localhost:1234/products
 
-### Obtener una película
-GET http://localhost:1234/movies/dcdd0fad-a94c-4810-8acc-5f108d3b18c3
+### Obtener un producto
+GET http://localhost:1234/products/3
 
-### Obtener películas según género
-GET http://localhost:1234/movies?genre=ACTION
+### Obtener productos según categoría
+GET http://localhost:1234/products?category=SOPA
 
-### Crear una película con POST
-POST http://localhost:1234/movies
+### Crear un producto con POST
+POST http://localhost:1234/products
 Content-Type: application/json
 
 {
-  "title": "Gladiator",
-  "year": 2000,
-  "director": "Ridley Scott",
-  "duration": 155,
-  "poster": "https://img.fruugo.com/product/0/60/14417600_max.jpg",
-  "genre": ["Action", "Adventure", "Drama"],
-  "rate": 8.5
+  "name": "Picada Compuesta",
+  "category": ["Entrada", "Comida colombiana"],
+  "price": 10000,
+  "image": "https://example.com/images/picada-compuesta.jpg"
 }
 
-### Actualizar una película
-PATCH http://localhost:1234/movies/c8a7d63f-3b04-44d3-9d95-8782fd7dcfaf
+### Actualizar un producto
+PATCH http://localhost:1234/products/3
 Content-Type: application/json
 
 {
-    "year": 2008
+  "name": "Sancocho de Gallina",
+  "price": 5000
 }
 
+### Eliminar un producto
+DELETE http://localhost:1234/products/2
 
-### Eliminar una pelicula
-DELETE http://localhost:1234/movies/c8a7d63f-3b04-44d3-9d95-8782fd7dcfaf
+
+
+
+
+
+
+### Obtener usuarios
+GET http://localhost:1234/users
+
+### Obtener un usuario
+GET http://localhost:1234/users/42
+
+### Obtener usuarios según categoría
+GET http://localhost:1234/users?role=COCINERO
+
+### Crear un usuario con POST
+POST http://localhost:1234/users
+Content-Type: application/json
+
+{
+  "name": "Manuel",
+  "lastname": "osted",
+  "email": "jorge@hotmail.com",
+  "password": "123456789dvk#",
+  "phone": "3124568596",
+  "role": "ADMINISTRADOR",
+  "nationality": "americano",
+  "image": "https://example.com/users/jorge.jpg",
+  "active": true
+ }
+
+### Actualizar un usuario
+PATCH http://localhost:1234/users/42
+Content-Type: application/json
+
+{
+  "name": "Josué",
+  "lastname": "Ortega"
+}
+
+### Eliminar un usuario
+DELETE http://localhost:1234/users/2
+
+
+
+
+
+
+
+
+
+
+
+
+### Obtener mesas
+GET http://localhost:1234/tables
+
+### Obtener un mesa
+GET http://localhost:1234/tables/3
+
+### Obtener mesas según categoría
+GET http://localhost:1234/tables?category=SOPA
+
+### Crear un mesa con POST
+POST http://localhost:1234/tables
+Content-Type: application/json
+
+{
+  "number": 21,
+  "capacity": 10,
+  "state": ["OCUPADA"]
+}
+
+### Actualizar un mesa
+PATCH http://localhost:1234/tables/3
+Content-Type: application/json
+
+{
+  "number": 2,
+  "state": ["OCUPADA"]
+}
+
+### Eliminar un mesa
+DELETE http://localhost:1234/tables/2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Obtener clientes
+GET http://localhost:1234/clients
+
+### Obtener un cliente
+GET http://localhost:1234/clients/3
+
+### Obtener clientes según categoría
+GET http://localhost:1234/clients?category=SOPA
+
+### Crear un cliente con POST
+POST http://localhost:1234/clients
+Content-Type: application/json
+
+{
+  "name": "Picada Compuesta",
+  "category": ["Entrada", "Comida colombiana"],
+  "price": 10000,
+  "image": "https://example.com/images/picada-compuesta.jpg"
+}
+
+### Actualizar un cliente
+PATCH http://localhost:1234/clients/3
+Content-Type: application/json
+
+{
+  "name": "Sancocho de Gallina",
+  "price": 5000
+}
+
+### Eliminar un cliente
+DELETE http://localhost:1234/clients/2

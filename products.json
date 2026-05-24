@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "name": "Bandeja Paisa",
+    "category": ["Plato fuerte"],
+    "availability": true,
+    "price": 28000,
+    "image": "https://example.com/images/bandeja-paisa.jpg",
+    "created_at": "2025-01-10T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "name": "Ajiaco Santafereño",
+    "category": ["Sopa"],
+    "availability": true,
+    "price": 24000,
+    "image": "https://example.com/images/ajiaco.jpg",
+    "created_at": "2025-01-10T12:05:00Z"
+  },
+  {
+    "id": 3,
+    "name": "Sancocho de Gallina",
+    "category": ["Sopa"],
+    "availability": true,
+    "price": 26000,
+    "image": "https://example.com/images/sancocho-gallina.jpg",
+    "created_at": "2025-01-10T12:10:00Z"
+  },
+  {
+    "id": 4,
+    "name": "Lechona Tolimense",
+    "category": ["Plato fuerte"],
+    "availability": true,
+    "price": 30000,
+    "image": "https://example.com/images/lechona.jpg",
+    "created_at": "2025-01-10T12:15:00Z"
+  },
+  {
+    "id": 5,
+    "name": "Tamales Colombianos",
+    "category": ["Plato fuerte"],
+    "availability": false,
+    "price": 18000,
+    "image": "https://example.com/images/tamal.jpg",
+    "created_at": "2025-01-10T12:20:00Z"
+  },
+  {
+    "id": 6,
+    "name": "Arepa de Huevo",
+    "category": ["Entrada"],
+    "availability": true,
+    "price": 8000,
+    "image": "https://example.com/images/arepa-huevo.jpg",
+    "created_at": "2025-01-10T12:25:00Z"
+  },
+  {
+    "id": 7,
+    "name": "Empanadas Colombianas",
+    "category": ["Entrada"],
+    "availability": true,
+    "price": 6000,
+    "image": "https://example.com/images/empanadas.jpg",
+    "created_at": "2025-01-10T12:30:00Z"
+  },
+  {
+    "id": 8,
+    "name": "Mondongo",
+    "category": ["Sopa"],
+    "availability": true,
+    "price": 22000,
+    "image": "https://example.com/images/mondongo.jpg",
+    "created_at": "2025-01-10T12:35:00Z"
+  },
+  {
+    "id": 9,
+    "name": "Carne en Bistec",
+    "category": ["Plato fuerte"],
+    "availability": true,
+    "price": 23000,
+    "image": "https://example.com/images/carne-bistec.jpg",
+    "created_at": "2025-01-10T12:40:00Z"
+  },
+  {
+    "id": 10,
+    "name": "Arroz con Pollo",
+    "category": ["Plato fuerte"],
+    "availability": true,
+    "price": 21000,
+    "image": "https://example.com/images/arroz-pollo.jpg",
+    "created_at": "2025-01-10T12:45:00Z"
+  },
+  {
+    "id": 11,
+    "name": "Changua",
+    "category": ["Sopa"],
+    "availability": false,
+    "price": 15000,
+    "image": "https://example.com/images/changua.jpg",
+    "created_at": "2025-01-10T12:50:00Z"
+  },
+  {
+    "id": 12,
+    "name": "Posta Negra Cartagenera",
+    "category": ["Plato fuerte"],
+    "availability": true,
+    "price": 32000,
+    "image": "https://example.com/images/posta-negra.jpg",
+    "created_at": "2025-01-10T12:55:00Z"
+  }
+]
