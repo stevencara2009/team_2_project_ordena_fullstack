@@ -15,11 +15,11 @@ export class TableModel {
   static async getAll({ state }) {
     if (state) {
       const lowerCaseState = state.toLowerCase()
-      const [state] = await connection.query(
+      const [states] = await connection.query(
         'SELECT * FROM tbl_tables WHERE LOWER(state) = ?;', [lowerCaseState]
       )
       // No state found
-      if (state.length === 0) return []
+      if (states.length === 0) return []
 
       // get the id from the first state result
       //const [{ id }] = state
@@ -28,7 +28,7 @@ export class TableModel {
       // query to table state
       // join 
       // return results
-      return state
+      return states
     }
 
     const [tables] = await connection.query(

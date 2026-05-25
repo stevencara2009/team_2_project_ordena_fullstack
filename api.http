@@ -91,7 +91,7 @@ GET http://localhost:1234/tables
 GET http://localhost:1234/tables/3
 
 ### Obtener mesas según categoría
-GET http://localhost:1234/tables?category=SOPA
+GET http://localhost:1234/tables?state=OCUPADA
 
 ### Crear un mesa con POST
 POST http://localhost:1234/tables
@@ -134,27 +134,28 @@ GET http://localhost:1234/clients
 ### Obtener un cliente
 GET http://localhost:1234/clients/3
 
-### Obtener clientes según categoría
-GET http://localhost:1234/clients?category=SOPA
-
 ### Crear un cliente con POST
 POST http://localhost:1234/clients
 Content-Type: application/json
 
 {
-  "name": "Picada Compuesta",
-  "category": ["Entrada", "Comida colombiana"],
-  "price": 10000,
-  "image": "https://example.com/images/picada-compuesta.jpg"
-}
+  "name": "Alejandra",
+  "lastname": "Sanchez",
+  "email": "a.s@hotmail.com",
+  "password": "123456789dvk#",
+  "phone": "3124568596",
+  "nationality": "americano",
+  "image": "https://example.com/clients/jorge.jpg",
+  "active": true
+ }
 
 ### Actualizar un cliente
 PATCH http://localhost:1234/clients/3
 Content-Type: application/json
 
 {
-  "name": "Sancocho de Gallina",
-  "price": 5000
+  "name": "Jota Mario",
+  "lastname": "Mendoza"
 }
 
 ### Eliminar un cliente

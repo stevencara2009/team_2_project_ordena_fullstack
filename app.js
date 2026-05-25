@@ -2,9 +2,10 @@ import express, { json } from 'express'
 import { createProductRouter } from './routes/products.js'
 import { createUserRouter } from './routes/users.js'
 import { createTableRouter } from './routes/table.js'
+import { createClientRouter } from './routes/clients.js'
 import 'dotenv/config'
 
-export const createApp = ({ productModel, userModel, tableModel }) => {
+export const createApp = ({ productModel, userModel, tableModel, clientModel }) => {
   const app = express()
   app.use(json())
   app.disable('x-powered-by')
@@ -14,8 +15,9 @@ export const createApp = ({ productModel, userModel, tableModel }) => {
   })
 
   app.use('/products', createProductRouter({ productModel }))
-  app.use('/users', createUserRouter({ userModel }))
-  app.use('/tables', createTableRouter({ tableModel }))
+  app.use('/users', createUserRouter({ userModel }));
+  app.use('/tables', createTableRouter({ tableModel }));
+  app.use('/clients', createClientRouter({ clientModel }));
 
   const PORT = process.env.PORT ?? 1234
 

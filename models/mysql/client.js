@@ -20,14 +20,16 @@ export class ClientModel {
         return clients
     }
 
+
     static async getById({ id }) {
         const [clients] = await connection.query(
-            `SELECT * WHERE id = ?;`, [id]
+            `SELECT * FROM tbl_clients WHERE id = ?;`, [id]
         )
 
         if (clients.length === 0) return null
         return clients
     }
+
 
     static async create({ input }) {
         const {
@@ -48,7 +50,7 @@ export class ClientModel {
 
         try {
             const [result] = await connection.query(
-                `INSERT INTO tbl_users (name, lastname, email, password, phone, nationality, image, created_at) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?);`,
+                `INSERT INTO tbl_clients (name, lastname, email, password, phone, nationality, image, created_at) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?);`,
                 [name, lastname, email, password, phone, nationality, image, created_at]
             )
             insertId = result.insertId
@@ -60,7 +62,7 @@ export class ClientModel {
 
 
         const [clients] = await connection.query(
-            `SELECT id, name, category, availability, price, image, created_at FROM tbl_clients WHERE id = ? ;`, [insertId]
+            `SELECT * FROM tbl_clients WHERE id = ? ;`, [insertId]
         )
         return clients[0]
     }
