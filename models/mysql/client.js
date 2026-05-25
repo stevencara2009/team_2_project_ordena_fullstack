@@ -12,6 +12,9 @@ const connection = await mysql.createConnection(config)
 
 export class ClientModel {
 
+    // =========================================
+    // OBTENER CLIENTES
+    // =========================================
     static async getAll() {
 
         const [clients] = await connection.query(
@@ -30,7 +33,9 @@ export class ClientModel {
         return clients
     }
 
-
+    // =========================================
+    // CREAR CLIENTE
+    // =========================================
     static async create({ input }) {
         const {
             name,
@@ -67,7 +72,9 @@ export class ClientModel {
         return clients[0]
     }
 
-
+    // =========================================
+    // ACTUALIZAR CLIENTE
+    // =========================================
     static async update({ id, input }) {
         const fields = []
         const values = []
@@ -128,6 +135,9 @@ export class ClientModel {
     }
 
 
+    // =========================================
+    // ELIMINAR CLIENTE
+    // =========================================
     static async delete({ id }) {
         const [client] = await connection.query(
             `DELETE FROM tbl_clients WHERE id = ?;`, [id]

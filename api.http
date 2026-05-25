@@ -98,8 +98,8 @@ POST http://localhost:1234/tables
 Content-Type: application/json
 
 {
-  "number": 21,
-  "capacity": 10,
+  "number": 2,
+  "capacity": 5,
   "state": ["OCUPADA"]
 }
 
@@ -160,3 +160,48 @@ Content-Type: application/json
 
 ### Eliminar un cliente
 DELETE http://localhost:1234/clients/2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Obtener ordenes
+GET http://localhost:1234/orders
+
+### Obtener un orden
+GET http://localhost:1234/orders/268
+
+### Obtener ordenes según categoría
+GET http://localhost:1234/orders?category=SOPA
+
+### Crear un orden con POST
+POST http://localhost:1234/orders
+Content-Type: application/json
+
+{
+  "table_id": 7,
+  "client_id": 8,
+  "user_id": 35
+}
+
+### Actualizar un orden
+PATCH http://localhost:1234/orders/268
+Content-Type: application/json
+
+{
+  "state": "ENTREGADO"
+}
+
+### Eliminar un orden
+DELETE http://localhost:1234/orders/288

@@ -38,6 +38,7 @@ export class ClientController {
     try {
       const result = validateClient(req.body)
       if (result.error) return res.status(400).json({ error: JSON.parse(result.error.message) })
+      
       const newClient = await this.clientModel.create({ input: result.data })
       res.status(201).json(newClient)
     } catch (error) {
@@ -58,6 +59,8 @@ export class ClientController {
     }
   }
 
+
+  
   delete = async (req, res) => {
     const origin = req.header('origin')
     if (ALLOWED_ORIGINS.includes(origin) || !origin) {
