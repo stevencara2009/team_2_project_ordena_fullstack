@@ -1,9 +1,9 @@
 import z from 'zod'
 
 const orderSchema = z.object({
-    table_id: z.number({
-        invalid_type_error: 'Table id must be a number',
-        required_error: 'Table id is required'
+    table_number: z.number({
+        invalid_type_error: 'Table number must be a number',
+        required_error: 'Table number is required'
     }).int().positive(),
 
     client_id: z.number({

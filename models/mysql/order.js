@@ -11,40 +11,47 @@ const config = {
 const connection = await mysql.createConnection(config)
 
 export class OrderModel {
-
+    
+    // =========================================
+    // OBTENER ORDENES
+    // =========================================
     static async getAll() {
         const [orders] = await connection.query(`
-      SELECT
-        o.id,
-        o.state,
-        o.created_at,
+        SELECT
+            o.id,
+            o.state,
+            o.created_at,
 
-        t.number AS table_number,
+            t.number AS table_number,
 
-        c.name AS client_name,
-        c.lastname AS client_lastname,
+            c.name AS client_name,
+            c.lastname AS client_lastname,
 
-        u.name AS user_name,
-        u.lastname AS user_lastname
+            u.name AS user_name,
+            u.lastname AS user_lastname
 
-      FROM tbl_orders o
+        FROM tbl_orders o
 
-      INNER JOIN TBL_TABLES t
-        ON o.table_id = t.id
+        INNER JOIN TBL_TABLES t
+            ON o.table_number = t.number
 
-      LEFT JOIN TBL_CLIENTS c
-        ON o.client_id = c.id
+        LEFT JOIN TBL_CLIENTS c
+            ON o.client_id = c.id
 
-      INNER JOIN TBL_USERS u
-        ON o.user_id = u.id
+        INNER JOIN TBL_USERS u
+            ON o.user_id = u.id
 
-      ORDER BY o.id DESC
-    `)
+        ORDER BY o.id DESC
+        `)
 
         return orders
     }
 
 
+
+    // =========================================
+    // OBTENER ORDEN POR ID
+    // =========================================
     static async getById({ id }) {
 
         const [orders] = await connection.query(`
@@ -58,17 +65,18 @@ export class OrderModel {
     }
 
 
+
     // =========================================
     // CREAR ORDEN
     // =========================================
-
     static async create({ input }) {
 
         const {
-            table_id,
+            table_number,
             client_id,
             user_id
         } = input
+
 
         // INICIAR TRANSACCION
         const pool = mysql.createPool(config)
@@ -79,10 +87,10 @@ export class OrderModel {
 
             // VALIDAR QUE LA MESA EXISTA
             const [tables] = await conn.query(`
-        SELECT *
-        FROM TBL_TABLES
-        WHERE id = ?
-      `, [table_id])
+            SELECT *
+            FROM TBL_TABLES
+            WHERE number = ?
+            `, [table_number])
 
             const table = tables[0]
 
@@ -97,34 +105,34 @@ export class OrderModel {
 
             // CREAR ORDEN
             const [result] = await conn.query(`
-        INSERT INTO tbl_orders
-        (
-          table_id,
-          client_id,
-          user_id
-        )
-        VALUES (?, ?, ?)
-      `, [
-                table_id,
-                client_id ?? null,
-                user_id
-            ])
+            INSERT INTO tbl_orders
+            (
+            table_number,
+            client_id,
+            user_id
+            )
+            VALUES (?, ?, ?)
+            `, [
+                    table_number,
+                    client_id ?? null,
+                    user_id
+                ])
 
 
             // CAMBIAR ESTADO MESA
             await conn.query(`
-        UPDATE TBL_TABLES
-        SET state = 'OCUPADA'
-        WHERE id = ?
-      `, [table_id])
+            UPDATE TBL_TABLES
+            SET state = 'OCUPADA'
+            WHERE number = ?
+            `, [table_number])
 
             await conn.commit()
 
             const [orders] = await conn.query(`
-        SELECT *
-        FROM tbl_orders
-        WHERE id = ?
-      `, [result.insertId])
+            SELECT *
+            FROM tbl_orders
+            WHERE id = ?
+            `, [result.insertId])
 
             return orders[0]
 
@@ -139,7 +147,6 @@ export class OrderModel {
 
         }
     }
-
 
 
 

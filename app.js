@@ -4,9 +4,11 @@ import { createUserRouter } from './routes/users.js'
 import { createTableRouter } from './routes/table.js'
 import { createClientRouter } from './routes/clients.js'
 import { createOrderRouter } from './routes/orders.js'
+import { createOrderProductRouter } from './routes/orderProducts.js'
 import 'dotenv/config'
+import { createBillRouter } from './routes/bills.js'
 
-export const createApp = ({ productModel, userModel, tableModel, clientModel, orderModel }) => {
+export const createApp = ({ productModel, userModel, tableModel, clientModel, orderModel, orderProductModel, billModel }) => {
   const app = express()
   app.use(json())
   app.disable('x-powered-by')
@@ -20,6 +22,8 @@ export const createApp = ({ productModel, userModel, tableModel, clientModel, or
   app.use('/tables', createTableRouter({ tableModel }));
   app.use('/clients', createClientRouter({ clientModel }));
   app.use('/orders', createOrderRouter({ orderModel }))
+  app.use('/order-products', createOrderProductRouter({ orderProductModel }))
+  app.use('/bills', createBillRouter({ billModel }))
 
   const PORT = process.env.PORT ?? 1234
 

@@ -8,6 +8,7 @@ export class ProductController {
     this.productModel = productModel
   }
 
+
   getAll = async (req, res) => {
     const origin = req.header('origin')
     if (ALLOWED_ORIGINS.includes(origin) || !origin) {
@@ -22,6 +23,7 @@ export class ProductController {
     }
   }
 
+
   getById = async (req, res) => {
     try {
       const { id } = req.params
@@ -33,6 +35,7 @@ export class ProductController {
     }
   }
 
+
   create = async (req, res) => {
     try {
       const result = validateProduct(req.body)
@@ -43,6 +46,7 @@ export class ProductController {
       res.status(500).json({ message: error.message })
     }
   }
+
 
   update = async (req, res) => {
     try {
@@ -56,6 +60,7 @@ export class ProductController {
     }
   }
 
+  
   delete = async (req, res) => {
     const origin = req.header('origin')
     if (ALLOWED_ORIGINS.includes(origin) || !origin) {

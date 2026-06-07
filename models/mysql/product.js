@@ -37,6 +37,9 @@ export class ProductModel {
     return products
   }
 
+
+
+
   static async getById({ id }) {
     const [products] = await connection.query(
       `SELECT id, name, category, availability, price, image, created_at  FROM tbl_products WHERE id = ?;`, [id]
@@ -45,6 +48,8 @@ export class ProductModel {
     if (products.length === 0) return null
     return products
   }
+
+
 
   static async create({ input }) {
     const {
@@ -78,6 +83,8 @@ export class ProductModel {
     )
     return products[0]
   }
+
+
 
   static async update({ id, input }) {
     const fields = []
@@ -123,6 +130,8 @@ export class ProductModel {
     return products[0]
   }
 
+
+  
   static async delete({ id }) {
     const [product] = await connection.query(
       `DELETE FROM tbl_products WHERE id = ?;`, [id]

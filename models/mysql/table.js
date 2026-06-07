@@ -40,7 +40,7 @@ export class TableModel {
 
   static async getById({ id }) {
     const [tables] = await connection.query(
-      `SELECT *  FROM tbl_tables WHERE id = ?;`, [id]
+      `SELECT *  FROM tbl_tables WHERE number = ?;`, [id]
     )
 
     if (tables.length === 0) return null
@@ -102,13 +102,13 @@ export class TableModel {
     await connection.query(
       `UPDATE tbl_tables SET 
         ${fields.join(',')}
-      WHERE id = ?;`, [...values, id]
+      WHERE number = ?;`, [...values, id]
     )
 
     if (fields.length === 0) return null
 
     const [tables] = await connection.query(
-      `SELECT * FROM tbl_tables WHERE id = ?;`, [id]
+      `SELECT * FROM tbl_tables WHERE number = ?;`, [id]
     )
 
     return tables[0]
@@ -116,7 +116,7 @@ export class TableModel {
 
   static async delete({ id }) {
     const [table] = await connection.query(
-      `DELETE FROM tbl_tables WHERE id = ?;`, [id]
+      `DELETE FROM tbl_tables WHERE number = ?;`, [id]
     )
   }
 
