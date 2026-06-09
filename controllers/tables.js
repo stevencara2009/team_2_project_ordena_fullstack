@@ -1,5 +1,4 @@
 import { validateTable, validatePartialTable } from '../schemas/tables.js'
-import { ALLOWED_ORIGINS } from "../config/cors.js"
 
 
 export class TableController {
@@ -9,10 +8,6 @@ export class TableController {
   }
 
   getAll = async (req, res) => {
-    const origin = req.header('origin')
-    if (ALLOWED_ORIGINS.includes(origin) || !origin) {
-      res.header('Access-Control-Allow-Origin', origin)
-    }
     try {
       const { state } = req.query
       const tables = await this.tableModel.getAll({ state })
@@ -57,10 +52,6 @@ export class TableController {
   }
 
   delete = async (req, res) => {
-    const origin = req.header('origin')
-    if (ALLOWED_ORIGINS.includes(origin) || !origin) {
-      res.header('Access-Control-Allow-Origin', origin)
-    }
     try {
       const { id } = req.params
       const result = await this.tableModel.delete({ id })

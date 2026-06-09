@@ -19,6 +19,23 @@ const userSchema = z.object({
     .max(50, "Lastname cannot exceed 50 characters")
     .trim(),
 
+  dni: z
+    .string({
+      invalid_type_error: "dni must be a string",
+      required_error: "dni is required",
+    })
+    .min(6, "dni must have at least 6 characters")
+    .max(30, "dni cannot exceed 30 characters")
+    .trim(),
+
+  typeDocument: z.enum(
+    ["CEDULA DE CIUDADANIA", "CEDULA DE EXTRANJERIA", "PASAPORTE", "NIT", "TARJETA DE IDENTIDAD"],
+    {
+      required_error: "Type document is required",
+      invalid_type_error: "Invalid type document",
+    }
+  ),
+
   email: z
     .string({
       invalid_type_error: "Email must be a string",
@@ -65,10 +82,15 @@ const userSchema = z.object({
 
   image: z
     .string()
-    .url({ message: "Image must be a valid URL" })
     .optional(),
 
   active: z.boolean().default(true),
+
+  birthdate: z
+    .coerce // Convierte el string del input/JSON a un objeto Date de JS
+    .date({
+      invalid_type_error: "Invalid Birthdate format",
+    }).nullable()
 });
 
 export function validateUser(input) {

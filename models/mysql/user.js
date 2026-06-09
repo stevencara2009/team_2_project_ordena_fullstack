@@ -1,4 +1,5 @@
 import mysql from 'mysql2/promise'
+import { toUpperCase } from 'zod'
 
 const config = {
   host: process.env.DB_HOST,
@@ -38,6 +39,8 @@ export class UserModel {
     return users
   }
 
+
+
   static async getById({ id }) {
     const [users] = await connection.query(
       `SELECT * FROM tbl_users WHERE id = ?;`, [id]
@@ -47,18 +50,26 @@ export class UserModel {
     return users
   }
 
+
+
   static async create({ input }) {
+
     const {
       name,
       lastname,
+      dni,
+      typeDocument,
       email,
       password,
       phone,
       role,
       nationality,
       image,
-      created_at
+      created_at,
+      active,
+      birthdate
     } = input
+
 
     /* const [uuidResult] = await connection.query(`SELECT UUID() uuid;`)
     const [{ uuid }] = uuidResult */
@@ -67,8 +78,8 @@ export class UserModel {
 
     try {
       const [result] = await connection.query(
-        `INSERT INTO tbl_users (name, lastname, email, password, phone, role, nationality, image, created_at) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?);`,
-        [name, lastname, email, password, phone, role, nationality, image, created_at]
+        `INSERT INTO tbl_users (name, lastname, dni, typeDocument, email, password, phone, role, nationality, image, created_at, active, birthdate) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
+        [name, lastname, dni, typeDocument, email, password, phone, role, nationality, image, created_at, active, birthdate]
       )
       insertId = result.insertId
     } catch (e) {
@@ -97,6 +108,11 @@ export class UserModel {
     if (input.lastname !== undefined) {
       fields.push('lastname = ?')
       values.push(input.lastname)
+    }
+
+    if (input.dni !== undefined) {
+      fields.push('dni = ?')
+      values.push(input.dni)
     }
 
     if (input.email !== undefined) {
@@ -128,7 +144,7 @@ export class UserModel {
       fields.push('image = ?')
       values.push(input.image)
     }
-    
+
     if (input.created_at !== undefined) {
       fields.push('created_at = ?')
       values.push(input.created_at)
@@ -148,6 +164,7 @@ export class UserModel {
 
     return users[0]
   }
+
 
   static async delete({ id }) {
     const [users] = await connection.query(

@@ -1,5 +1,4 @@
 import { validateClient, validatePartialClient } from '../schemas/clients.js'
-import { ALLOWED_ORIGINS } from "../config/cors.js"
 
 
 export class ClientController {
@@ -9,10 +8,6 @@ export class ClientController {
   }
 
   getAll = async (req, res) => {
-    const origin = req.header('origin')
-    if (ALLOWED_ORIGINS.includes(origin) || !origin) {
-      res.header('Access-Control-Allow-Origin', origin)
-    }
     try {
       const clients = await this.clientModel.getAll()
       res.json(clients)
@@ -62,10 +57,6 @@ export class ClientController {
 
   
   delete = async (req, res) => {
-    const origin = req.header('origin')
-    if (ALLOWED_ORIGINS.includes(origin) || !origin) {
-      res.header('Access-Control-Allow-Origin', origin)
-    }
     try {
       const { id } = req.params
       const result = await this.clientModel.delete({ id })

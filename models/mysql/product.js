@@ -32,7 +32,7 @@ export class ProductModel {
     }
 
     const [products] = await connection.query(
-      'SELECT id, name, category, availability, price, image, created_at FROM tbl_products;'
+      'SELECT * FROM tbl_products;'
     )
     return products
   }
@@ -57,9 +57,11 @@ export class ProductModel {
       category,
       availability,
       price,
-      image
+      image,
+      description
     } = input
 
+    console.log(input)
     /* const [uuidResult] = await connection.query(`SELECT UUID() uuid;`)
     const [{ uuid }] = uuidResult */
 
@@ -67,8 +69,8 @@ export class ProductModel {
 
     try {
       const [result] = await connection.query(
-        `INSERT INTO tbl_products (name, category, availability, price, image) VALUES ( ?, ?, ?, ?, ?);`,
-        [name, category[0], availability, price, image]
+        `INSERT INTO tbl_products (name, category, availability, price, image, description) VALUES ( ?, ?, ?, ?, ?, ?);`,
+        [name, category[0], availability, price, image, description]
       )
       insertId = result.insertId
     } catch (e) {
@@ -79,7 +81,7 @@ export class ProductModel {
 
 
     const [products] = await connection.query(
-      `SELECT id, name, category, availability, price, image, created_at FROM tbl_products WHERE id = ? ;`, [insertId]
+      `SELECT id, name, category, availability, price, image, description, created_at FROM tbl_products WHERE id = ? ;`, [insertId]
     )
     return products[0]
   }

@@ -2,7 +2,7 @@
 GET http://localhost:1234/products
 
 ### Obtener un producto
-GET http://localhost:1234/products/3
+GET http://localhost:1234/products/42
 
 ### Obtener productos según categoría
 GET http://localhost:1234/products?category=SOPA
@@ -12,10 +12,11 @@ POST http://localhost:1234/products
 Content-Type: application/json
 
 {
-  "name": "Picada Compuesta",
-  "category": ["Entrada", "Comida colombiana"],
-  "price": 10000,
-  "image": "https://example.com/images/picada-compuesta.jpg"
+  "name": "Hamburguesa triple",
+  "category": ["Hamburguesas"],
+  "price": 19900,
+  "image": "https://example.com/images/picada-compuesta.jpg",
+  "description": "sadas"
 }
 
 ### Actualizar un producto
@@ -40,7 +41,7 @@ DELETE http://localhost:1234/products/2
 GET http://localhost:1234/users
 
 ### Obtener un usuario
-GET http://localhost:1234/users/2
+GET http://localhost:1234/users/24
 
 ### Obtener usuarios según categoría
 GET http://localhost:1234/users?role=COCINERO
@@ -52,13 +53,16 @@ Content-Type: application/json
 {
   "name": "Manuel",
   "lastname": "osted",
-  "email": "jorge@hotmail.com",
+  "dni": "123456",
+  "typeDocument": "CEDULA DE CIUDADANIA",
+  "email": "jorge7@hotmail.com",
   "password": "123456789dvk#",
   "phone": "3124568596",
   "role": "ADMINISTRADOR",
   "nationality": "americano",
   "image": "https://example.com/users/jorge.jpg",
-  "active": true
+  "active": true,
+  "birthdate": "2016-05-15"
  }
 
 ### Actualizar un usuario

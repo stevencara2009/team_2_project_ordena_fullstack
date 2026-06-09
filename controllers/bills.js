@@ -1,5 +1,4 @@
 import { validateBill } from "../schemas/bills.js"
-import { ALLOWED_ORIGINS } from "../config/cors.js"
 
 export class BillController {
 
@@ -9,10 +8,6 @@ export class BillController {
 
 
   getAll = async (req, res) => {
-    const origin = req.header('origin')
-    if (ALLOWED_ORIGINS.includes(origin) || !origin) {
-      res.header('Access-Control-Allow-Origin', origin)
-    }
     const rows = await this.billModel.getAll()
     res.json(rows)
   }

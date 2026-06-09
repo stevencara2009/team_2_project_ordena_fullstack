@@ -1,5 +1,4 @@
 import { validateOrder, validatePartialOrder } from '../schemas/orders.js'
-import { ALLOWED_ORIGINS } from "../config/cors.js"
 
 export class OrderController {
 
@@ -10,10 +9,6 @@ export class OrderController {
   
 
   getAll = async (req, res) => {
-    const origin = req.header('origin')
-    if (ALLOWED_ORIGINS.includes(origin) || !origin) {
-      res.header('Access-Control-Allow-Origin', origin)
-    }
     try {
       const orders = await this.orderModel.getAll()
       res.json(orders)
@@ -93,11 +88,6 @@ export class OrderController {
 
 
   delete = async (req, res) => {
-    const origin = req.header('origin')
-    if (ALLOWED_ORIGINS.includes(origin) || !origin) {
-      res.header('Access-Control-Allow-Origin', origin)
-    }
-
     try {
       const { id } = req.params
 

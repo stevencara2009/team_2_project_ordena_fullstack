@@ -1,5 +1,4 @@
 import { validateUser, validatePartialUser } from '../schemas/users.js'
-import { ALLOWED_ORIGINS } from "../config/cors.js"
 
 
 export class UserController {
@@ -9,10 +8,6 @@ export class UserController {
   }
 
   getAll = async (req, res) => {
-    const origin = req.header('origin')
-    if (ALLOWED_ORIGINS.includes(origin) || !origin) {
-      res.header('Access-Control-Allow-Origin', origin)
-    }
     try {
       const { role } = req.query
       const users = await this.userModel.getAll({ role })
@@ -57,10 +52,6 @@ export class UserController {
   }
 
   delete = async (req, res) => {
-    const origin = req.header('origin')
-    if (ALLOWED_ORIGINS.includes(origin) || !origin) {
-      res.header('Access-Control-Allow-Origin', origin)
-    }
     try {
       const { id } = req.params
       const result = await this.userModel.delete({ id })

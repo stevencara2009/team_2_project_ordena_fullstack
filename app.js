@@ -1,4 +1,5 @@
-import express, { json } from 'express'
+import express, { json } from 'express';
+import cors from 'cors';
 import { createProductRouter } from './routes/products.js'
 import { createUserRouter } from './routes/users.js'
 import { createTableRouter } from './routes/table.js'
@@ -11,6 +12,7 @@ import { createBillRouter } from './routes/bills.js'
 export const createApp = ({ productModel, userModel, tableModel, clientModel, orderModel, orderProductModel, billModel }) => {
   const app = express()
   app.use(json())
+  app.use(cors({ origin: 'http://localhost:5173' }));
   app.disable('x-powered-by')
 
   app.get('/', (req, res) => {
@@ -25,6 +27,7 @@ export const createApp = ({ productModel, userModel, tableModel, clientModel, or
   app.use('/order-products', createOrderProductRouter({ orderProductModel }))
   app.use('/bills', createBillRouter({ billModel }))
 
+  
   const PORT = process.env.PORT ?? 1234
 
   app.listen(PORT, () => {

@@ -1,6 +1,5 @@
 import { Router } from 'express'
 import {  BillController } from '../controllers/bills.js'
-import { ALLOWED_ORIGINS } from "../config/cors.js";
 
 export const createBillRouter = ({ billModel }) => {
 
@@ -14,7 +13,7 @@ export const createBillRouter = ({ billModel }) => {
   billRouter.post('/', billController.create)
 
 
-  billRouter.options('/:id', (req, res) => {
+  /* billRouter.options('/:id', (req, res) => {
     const origin = req.header('origin')
     if (ALLOWED_ORIGINS.includes(origin) || !origin) {
       res.header('Access-Control-Allow-Origin', origin)
@@ -22,7 +21,7 @@ export const createBillRouter = ({ billModel }) => {
       res.header('Access-Control-Allow-Headers', 'Content-Type')
     }
     res.status(200).end()
-  })
+  })*/
 
   return billRouter
 }

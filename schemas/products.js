@@ -5,12 +5,13 @@ const productSchema = z.object({
     invalid_type_error: "Product title must be a string",
     required_error: "Product title is required",
   }),
+    description: z.string({
+    invalid_type_error: "Description must be a string",
+    required_error: "Description is required",
+  }).optional(),
   category: z.array(
     z.enum([
-      "Entrada",
-      "Plato fuerte",
-      "Sopa",
-      "Comida colombiana"
+      "Todos", "Hamburguesas", "Pizzas", "Ensaladas", "Mexicana", "Japonesa", "Pastas", "Bebidas", "Saludable", "Carnes", "Postres", "Niños", "Acompañamientos", "Entradas", "Internacional"
     ]),
     {
       required_error: "Product category is required",
@@ -18,7 +19,7 @@ const productSchema = z.object({
     }
   ),
   price: z.number().int().positive(),
-  image: z.string().url({ message: "poster must be a valid url" }),
+  image: z.string().optional(),
   availability: z.boolean().default(true)
 });
 
