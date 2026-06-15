@@ -4,7 +4,7 @@ const tableSchema = z.object({
 
   number: z.number().int().positive(),
   capacity: z.number().int().positive(),
-  state: z.array(
+  state: z.string(
     z.enum([
       "LIBRE",
       "OCUPADA",

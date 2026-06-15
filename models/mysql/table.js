@@ -96,8 +96,10 @@ export class TableModel {
 
     if (input.state !== undefined) {
       fields.push('state = ?')
-      values.push(input.state[0] ?? input.category)
+      values.push(input.state)
     }
+
+    if (fields.length === 0) return null
 
     await connection.query(
       `UPDATE tbl_tables SET 
@@ -105,14 +107,14 @@ export class TableModel {
       WHERE number = ?;`, [...values, id]
     )
 
-    if (fields.length === 0) return null
-
     const [tables] = await connection.query(
       `SELECT * FROM tbl_tables WHERE number = ?;`, [id]
     )
 
     return tables[0]
   }
+
+
 
   static async delete({ id }) {
     const [table] = await connection.query(

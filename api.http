@@ -92,7 +92,7 @@ DELETE http://localhost:1234/users/2
 GET http://localhost:1234/tables
 
 ### Obtener un mesa
-GET http://localhost:1234/tables/3
+GET http://localhost:1234/tables/54
 
 ### Obtener mesas según categoría
 GET http://localhost:1234/tables?state=OCUPADA
@@ -102,18 +102,18 @@ POST http://localhost:1234/tables
 Content-Type: application/json
 
 {
-  "number": 3,
-  "capacity": 4,
-  "state": ["LIBRE"]
+  "number": 41,
+  "capacity": 8,
+  "state": "LIBRE"
 }
 
 ### Actualizar un mesa
-PATCH http://localhost:1234/tables/3
+PATCH http://localhost:1234/tables/55
 Content-Type: application/json
 
 {
-  "number": 3,
-  "state": ["OCUPADA"]
+  "capacity": 10,
+  "state": "OCUPADA"
 }
 
 ### Eliminar un mesa
