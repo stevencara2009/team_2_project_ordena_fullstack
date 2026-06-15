@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 export const CardOrder = ({ products, setProducts, orders=[] }) => {
 
   useEffect(() => {
-    console.log("Productos se ha actualizado", products)
+    // console.log("Productos se ha actualizado", products)
   }, [products])
 
   const totalResumen = products?.reduce((acc, product) => {

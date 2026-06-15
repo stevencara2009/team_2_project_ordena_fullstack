@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { CardOrder } from '../Dashboard/CardOrder/CardOrder'
-import { Tables } from '../Dashboard/Tables/Tables'
+import { Tables } from '../Tables/Tables'
 import { OrderItem } from './OrderItem/OrderItem'
 import styles from './ViewOrders.module.css'
 import { InputSelect } from '../../components/Input/Input'

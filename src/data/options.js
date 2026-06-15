@@ -4,6 +4,13 @@ export const DOCUMENTS_TYPE = ["CEDULA DE CIUDADANIA", "CEDULA DE EXTRANJERIA", 
 
 export const USERS_TYPE = ["TODOS", "MESERO", "COCINERO", "ADMINISTRADOR", "CLIENTE"]
 
+export const TABLES_STATE = [
+    "Todos",
+    "LIBRE",
+    "OCUPADA",
+    "RESERVADA"
+];
+
 export const COUNTRIES = [
     'Afghanistan',
     'Åland Islands',
@@ -256,3 +263,5 @@ export const COUNTRIES = [
     'Zambia',
     'Zimbabwe'
 ];
+
+export const FILTERS_BY = ["Más reciente", "Más antiguos", "Mayor precio", "Menor precio"]
