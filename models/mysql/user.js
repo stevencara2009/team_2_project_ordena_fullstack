@@ -51,7 +51,9 @@ export class UserModel {
   }
 
 
-
+  // =========================================
+  // CREAR USUARIO
+  // =========================================
   static async create({ input }) {
 
     const {
@@ -65,7 +67,6 @@ export class UserModel {
       role,
       nationality,
       image,
-      created_at,
       active,
       birthdate
     } = input
@@ -78,8 +79,8 @@ export class UserModel {
 
     try {
       const [result] = await connection.query(
-        `INSERT INTO tbl_users (name, lastname, dni, typeDocument, email, password, phone, role, nationality, image, created_at, active, birthdate) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
-        [name, lastname, dni, typeDocument, email, password, phone, role, nationality, image, created_at, active, birthdate]
+        `INSERT INTO tbl_users (name, lastname, dni, typeDocument, email, password, phone, role, nationality, image, active, birthdate) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
+        [name, lastname, dni, typeDocument, email, password, phone, role, nationality, image, active, birthdate]
       )
       insertId = result.insertId
     } catch (e) {
@@ -95,7 +96,9 @@ export class UserModel {
     return users[0]
   }
 
-
+  // =========================================
+  // ACTUALIZAR USUARIO
+  // =========================================
   static async update({ id, input }) {
     const fields = []
     const values = []
@@ -166,6 +169,9 @@ export class UserModel {
   }
 
 
+  // =========================================
+  // ELIMINAR USUARIO
+  // =========================================
   static async delete({ id }) {
     const [users] = await connection.query(
       `DELETE FROM tbl_users WHERE id = ?;`, [id]

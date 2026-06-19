@@ -51,11 +51,11 @@ POST http://localhost:1234/users
 Content-Type: application/json
 
 {
-  "name": "Manuel",
-  "lastname": "osted",
+  "name": "Manuela",
+  "lastname": "osteda",
   "dni": "123456",
   "typeDocument": "CEDULA DE CIUDADANIA",
-  "email": "jorge7@hotmail.com",
+  "email": "jorge7aa@hotmail.com",
   "password": "123456789dvk#",
   "phone": "3124568596",
   "role": "ADMINISTRADOR",
@@ -136,34 +136,37 @@ DELETE http://localhost:1234/tables/3
 GET http://localhost:1234/clients
 
 ### Obtener un cliente
-GET http://localhost:1234/clients/1
+GET http://localhost:1234/clients/22
 
 ### Crear un cliente con POST
 POST http://localhost:1234/clients
 Content-Type: application/json
 
 {
-  "name": "Alejandra",
-  "lastname": "Sanchez",
-  "email": "a.s@hotmail.com",
+  "name": "Alejo",
+  "lastname": "Vergel",
+  "email": "als@tmaisal.com",
+  "dni": "5214259632",
+  "typeDocument": "CEDULA DE EXTRANJERIA",
   "password": "123456789dvk#",
   "phone": "3124568596",
   "nationality": "americano",
   "image": "https://example.com/clients/jorge.jpg",
-  "active": true
+  "active": true,
+  "birthdate":"2008-04-01T00:00:00.000Z"
  }
 
 ### Actualizar un cliente
-PATCH http://localhost:1234/clients/3
+PATCH http://localhost:1234/clients/22
 Content-Type: application/json
 
 {
-  "name": "Jota Mario",
+  "name": "Alejo",
   "lastname": "Mendoza"
 }
 
 ### Eliminar un cliente
-DELETE http://localhost:1234/clients/2
+DELETE http://localhost:1234/clients/23
 
 
 
