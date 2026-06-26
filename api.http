@@ -92,7 +92,7 @@ DELETE http://localhost:1234/users/2
 GET http://localhost:1234/tables
 
 ### Obtener un mesa
-GET http://localhost:1234/tables/54
+GET http://localhost:1234/tables/5
 
 ### Obtener mesas según categoría
 GET http://localhost:1234/tables?state=OCUPADA
@@ -108,12 +108,12 @@ Content-Type: application/json
 }
 
 ### Actualizar un mesa
-PATCH http://localhost:1234/tables/55
+PATCH http://localhost:1234/tables/5
 Content-Type: application/json
 
 {
-  "capacity": 10,
-  "state": "OCUPADA"
+  "capacity": 6,
+  "state": "LIBRE"
 }
 
 ### Eliminar un mesa
@@ -136,7 +136,7 @@ DELETE http://localhost:1234/tables/3
 GET http://localhost:1234/clients
 
 ### Obtener un cliente
-GET http://localhost:1234/clients/22
+GET http://localhost:1234/clients/1
 
 ### Crear un cliente con POST
 POST http://localhost:1234/clients
@@ -187,7 +187,7 @@ DELETE http://localhost:1234/clients/23
 GET http://localhost:1234/orders
 
 ### Obtener un orden
-GET http://localhost:1234/orders/270
+GET http://localhost:1234/orders/280
 
 ### Obtener ordenes según categoría
 GET http://localhost:1234/orders?category=SOPA
@@ -234,7 +234,7 @@ DELETE http://localhost:1234/orders/295
 GET http://localhost:1234/order-products/
 
 ### Ver productos de orden
-GET http://localhost:1234/order-products/270
+GET http://localhost:1234/order-products/301
 
 ### Obtener ordenes según categoría
 GET http://localhost:1234/orders?category=SOPA
@@ -258,7 +258,7 @@ Content-Type: application/json
 }
 
 ### Eliminar un orden
-DELETE http://localhost:1234/order-products/280/6
+DELETE http://localhost:1234/order-products/300/52
 
 
 

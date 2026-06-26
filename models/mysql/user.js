@@ -13,6 +13,9 @@ const connection = await mysql.createConnection(config)
 
 export class UserModel {
 
+  // =========================================
+  // OBTENER USUARIOS
+  // =========================================
   static async getAll({ role }) {
     if (role) {
       const lowerCaseRole = role.toLowerCase()
@@ -39,8 +42,9 @@ export class UserModel {
     return users
   }
 
-
-
+  // =========================================
+  // OBTENER USUARIO POR ID
+  // =========================================
   static async getById({ id }) {
     const [users] = await connection.query(
       `SELECT * FROM tbl_users WHERE id = ?;`, [id]
@@ -49,7 +53,6 @@ export class UserModel {
     if (users.length === 0) return null
     return users
   }
-
 
   // =========================================
   // CREAR USUARIO
@@ -177,5 +180,17 @@ export class UserModel {
       `DELETE FROM tbl_users WHERE id = ?;`, [id]
     )
   }
+
+  // =========================================
+  // LOGUEARSE
+  // ========================================= 
+  static async usernameLogin({ email }) {
+    const [users] = await connection.query(
+      'SELECT * FROM tbl_users WHERE email = ?;',
+      [email]
+    );
+    return users[0]
+  }
+
 
 }

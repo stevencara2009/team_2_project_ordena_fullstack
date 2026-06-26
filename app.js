@@ -8,6 +8,7 @@ import { createOrderRouter } from './routes/orders.js'
 import { createOrderProductRouter } from './routes/orderProducts.js'
 import 'dotenv/config'
 import { createBillRouter } from './routes/bills.js'
+import { createAuthRouter } from './routes/auth.js';
 
 export const createApp = ({ productModel, userModel, tableModel, clientModel, orderModel, orderProductModel, billModel }) => {
   const app = express()
@@ -26,6 +27,7 @@ export const createApp = ({ productModel, userModel, tableModel, clientModel, or
   app.use('/orders', createOrderRouter({ orderModel }))
   app.use('/order-products', createOrderProductRouter({ orderProductModel }))
   app.use('/bills', createBillRouter({ billModel }))
+  app.use('/api/auth', createAuthRouter({ userModel }))
 
   
   const PORT = process.env.PORT ?? 1234
