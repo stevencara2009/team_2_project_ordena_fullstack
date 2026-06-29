@@ -11,7 +11,7 @@ const productSchema = z.object({
   }).optional(),
   category: z.array(
     z.enum([
-      "Todos", "Hamburguesas", "Pizzas", "Ensaladas", "Mexicana", "Japonesa", "Pastas", "Bebidas", "Saludable", "Carnes", "Postres", "Niños", "Acompañamientos", "Entradas", "Internacional"
+      "Todos", "Sopas", "Hamburguesas", "Pizzas", "Ensaladas", "Mexicana", "Japonesa", "Pastas", "Bebidas", "Saludable", "Carnes", "Postres", "Niños", "Acompañamientos", "Entradas", "Internacional"
     ]),
     {
       required_error: "Product category is required",

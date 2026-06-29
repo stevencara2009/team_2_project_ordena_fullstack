@@ -6,7 +6,6 @@ import { createTableRouter } from './routes/table.js'
 import { createClientRouter } from './routes/clients.js'
 import { createOrderRouter } from './routes/orders.js'
 import { createOrderProductRouter } from './routes/orderProducts.js'
-import 'dotenv/config'
 import { createBillRouter } from './routes/bills.js'
 import { createAuthRouter } from './routes/auth.js';
 
