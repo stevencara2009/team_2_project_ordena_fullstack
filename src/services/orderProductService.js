@@ -13,6 +13,7 @@ export const getOrderProducts = async (orderId) => {
 
 // Agregar producto a una orden
 export const addProduct = async (payload) => {
+
   const response = await fetch(`${API_URL}/order-products`, {
     method: "POST",
     headers: {
@@ -66,3 +67,12 @@ export const deleteProduct = async (
 
   return response.json();
 };
+
+// Eliminar todos los productos de una orden
+export const deleteAllProducts = async (orderId) => {
+    const response = await fetch(`${API_URL}/order-products/${orderId}/all`, {
+        method: "DELETE"
+    })
+    if (!response.ok) throw new Error("Error eliminando productos de la orden")
+    return response.json()
+}

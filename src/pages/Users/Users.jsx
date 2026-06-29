@@ -220,7 +220,7 @@ export const Users = () => {
       alert("Seleccione su país de orígen")
       return
     }
-    if (!formData.role || formData.role === "TODOS" || formData.role === "") {
+    if (!formData.role || formData.role === "Todos" || formData.role === "") {
       alert("Seleccione un tipo de usuario")
       return
     }

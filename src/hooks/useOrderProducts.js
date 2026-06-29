@@ -21,17 +21,27 @@ export const useOrderProducts = () => {
     await orderProductService.updateProduct(orderId, productId, payload)
   }
 
+  const clearOrderDetails = () => {
+    setOrderDetails([])
+  }
 
   const deleteProduct = async (orderId, productId) => {
     await orderProductService.deleteProduct(orderId, productId)
   }
 
 
+  const deleteAllProducts = async (orderId) => {
+    await orderProductService.deleteAllProducts(orderId)
+    setOrderDetails([])
+  }
+
   return {
     orderDetails,
     loadOrderDetails,
     addProduct,
     updateProduct,
-    deleteProduct
+    clearOrderDetails,
+    deleteProduct,
+    deleteAllProducts
   }
 }

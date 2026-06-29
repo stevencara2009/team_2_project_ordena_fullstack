@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import styles from './MenuHamburguer.module.css'
 import { Link, useNavigate } from "react-router-dom";
 import { Modal } from "../../components/Modal/Modal";
@@ -13,6 +13,8 @@ export const MenuHamburguer = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const navigate = useNavigate()
 
+  const menuRef = useRef(null);
+
   const toggleMenu = () => {
     setIsOpen(!isOpen)
   }
@@ -22,9 +24,25 @@ export const MenuHamburguer = () => {
     setIsOpenModal(true)
   }
 
+  // 3. Efecto para detectar clics fuera del contenedor
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isOpen && menuRef.current && !menuRef.current.contains(event.target)) {
+        if (!isOpenModal) {
+          setIsOpen(false);
+        }
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen, isOpenModal]);
 
   return (
-    <div style={{ display: "flex", width: "100%", height: "100%" }}>
+    <div style={{ display: "flex", width: "100%", height: "100%" }} ref={menuRef}>
       <div className={styles.icon}>
         <i className={`fa-solid fa-bars `}
           onClick={toggleMenu}
@@ -44,10 +62,11 @@ export const MenuHamburguer = () => {
         {/* MENU OPCIONES PERSONAL ADMINISTRATIVO */}
         {user && <ul>
           <Link to="/dashboard"  ><li className={styles.menuItem} onClick={toggleMenu} >Mesas</li></Link>
-          <Link to="/view-orders"  ><li className={styles.menuItem} onClick={toggleMenu} >Pedidos</li></Link>
+          <Link to="/view-orders"  ><li className={styles.menuItem} onClick={toggleMenu} >Ver Pedidos</li></Link>
           <Link to="/orders"  ><li className={styles.menuItem} onClick={toggleMenu} >Crear pedido</li></Link>
           <Link to="/users"  ><li className={styles.menuItem} onClick={toggleMenu} >Usuarios</li></Link>
           <Link to="/products"  ><li className={styles.menuItem} onClick={toggleMenu} >Productos</li></Link>
+          <Link to="/bills"  ><li className={styles.menuItem} onClick={toggleMenu} >Facturas</li></Link>
           <li className={styles.menuItem} onClick={toggleModal} >Cerrar Sesión</li>
 
           <Modal

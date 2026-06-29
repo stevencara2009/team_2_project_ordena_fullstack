@@ -1,5 +1,5 @@
 import styles from './Orders.module.css'
-import { CardOrder } from '../Dashboard/CardOrder/CardOrder'
+import { CardOrder } from '../../components/Card/CardCreateOrder'
 import { Button } from '../../components/Button/Button'
 import { Input, InputSelect } from '../../components/Input/Input'
 import { useState } from 'react'
@@ -14,10 +14,10 @@ import { useOrderProducts } from '../../hooks/useOrderProducts'
 export const Orders = () => {
   const { user } = useAuth()
 
-  const { currentOrder, createOrder } = useOrders()
+  const { currentOrder, createOrder, updateOrder, clearOrder } = useOrders()
   const { products: apiProducts } = useProducts()
   const { tables } = useTables()
-  const { orderDetails, loadOrderDetails, addProduct, deleteProduct} = useOrderProducts();
+  const { orderDetails, loadOrderDetails, addProduct, deleteProduct, clearOrderDetails, deleteAllProducts } = useOrderProducts();
 
   const [loading, setLoading] = useState(false)
   const [table, setTable] = useState("")
@@ -25,7 +25,7 @@ export const Orders = () => {
     category: "",
     productId: "",
     quantity: 1,
-    description: "",
+    notes: "",
   })
 
   const filteredProducts = apiProducts.filter(
@@ -89,19 +89,15 @@ export const Orders = () => {
       await addProduct({
         order_id: currentOrder.id,
         product_id: Number(formData.productId),
-        quantity: Number(formData.quantity)
+        quantity: Number(formData.quantity),
+        notes: formData.notes || null
       })
 
       // Refrescar el detalle de la orden tras agregar
       await loadOrderDetails(currentOrder.id)
 
       // Limpiar solo los campos de producto, no la categoría
-      setFormData(prev => ({
-        ...prev,
-        productId: "",
-        quantity: 1,
-        description: ""
-      }))
+      setFormData({ category: "", productId: "", quantity: 1, notes: "" })
 
     } catch (error) {
       console.error(error)
@@ -112,11 +108,36 @@ export const Orders = () => {
 
   }
 
+  // Agregar producto a la orden existente
+  const handleConfirmOrder = async () => {
+    if (!currentOrder) return
+
+    if (orderDetails.length === 0) {
+      alert("Agregue al menos un producto antes de confirmar")
+      return
+    }
+
+    setLoading(true)
+    try {
+      await updateOrder(currentOrder.id, { state: 'EN PREPARACION' })
+      alert(`Pedido #${currentOrder.id} enviado a cocina`)
+
+      // Limpiar el formulario para un nuevo pedido
+      clearOrder()
+      if (clearOrderDetails) clearOrderDetails()
+      setTable("")
+      setFormData({ category: "", productId: "", quantity: 1, notes: "" })
+    } catch (error) {
+      console.error(error)
+      alert("No fue posible confirmar el pedido")
+    } finally {
+      setLoading(false)
+    }
+  }
 
   // Eliminar producto de la orden
   const handleDeleteProduct = async (productId) => {
     if (!currentOrder) return
-    console.log(productId)
 
     setLoading(true)
     try {
@@ -130,6 +151,39 @@ export const Orders = () => {
     }
   }
 
+  // Cancelar / eliminar pedido completo
+  const handleCancelOrder = async () => {
+    if (!currentOrder) return
+
+    const confirmar = window.confirm(
+      `¿Eliminar el pedido #${currentOrder.id} y todos sus productos?`
+    )
+    if (!confirmar) return
+
+    setLoading(true)
+    try {
+      // 1. Eliminar productos de la orden
+      await deleteAllProducts(currentOrder.id)
+
+      // 2. Eliminar la orden
+      await fetch(`${import.meta.env.VITE_API_URL}/orders/${currentOrder.id}`, {
+        method: 'DELETE'
+      })
+
+      // 3. Limpiar estado
+      clearOrder()
+      if (clearOrderDetails) clearOrderDetails()
+
+      setTable("")
+      setFormData({ category: "", productId: "", quantity: 1, notes: "" })
+
+    } catch (error) {
+      console.error(error)
+      alert("No fue posible eliminar el pedido")
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <div className="background">
@@ -141,10 +195,7 @@ export const Orders = () => {
             <div className="module">
 
               {/* SELECCIÓN DE MESA Y CREACIÓN DE ORDEN */}
-              <form >
-                <fieldset className="form-flex">
-                  <legend></legend>
-
+              <div >
                   <InputSelect
                     label="Mesa"
                     className="inputPrimary"
@@ -160,24 +211,18 @@ export const Orders = () => {
                       }))
                     }
                     variant='dark'
+                    disabled={currentOrder?.id }
                     required
                   />
 
                   <Button
-                    text={currentOrder ? `Pedido #${currentOrder.id} activo` : "Crear pedido"}
+                    text={currentOrder?.id ? `Pedido #${currentOrder.id} activo` : "Crear pedido"}
                     className="btnPrimary"
                     type="button"
                     onClick={handleCreateOrder}
-                    // Deshabilitar si ya hay una orden activa
-                    disabled={!!currentOrder}
+                    disabled={currentOrder?.id }
                   />
-
-                  {/*<div className="divSearch">
-                    <button type='button' ><i className="fa-solid fa-magnifying-glass" style={{ width: 25, height: 25 }}></i></button>
-                  </div> */}
-
-                </fieldset>
-              </form>
+              </div>
 
               {/* FORMULARIO PARA AGREGAR PRODUCTOS */}
               <form onSubmit={handleSubmit} >
@@ -225,15 +270,14 @@ export const Orders = () => {
                       type="text"
                       className="inputPrimary"
                       placeholder="Ingrese alguna nota relevante..."
-                      name="description"
-                      value={formData.description}
+                      name="notes"
+                      value={formData.notes}
                       onChange={handleChange}
                       variant='dark'
                     />
 
 
                     <div className={styles.divActionsOrder}>
-                      <Button text="Atrás" className="btnBack" />
                       <Button text='Añadir' className='btnAdd' type='submit' />
                     </div>
 
@@ -250,8 +294,9 @@ export const Orders = () => {
               <CardOrder
                 orderDetails={orderDetails}
                 currentOrder={currentOrder}
-                handleCreateOrder={handleCreateOrder}
+                handleConfirmOrder={handleConfirmOrder}
                 handleDeleteProduct={handleDeleteProduct}
+                handleCancelOrder={handleCancelOrder}
               />
             </div>
 

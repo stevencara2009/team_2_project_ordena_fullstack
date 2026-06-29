@@ -1,18 +1,25 @@
-import styles from './OrderItem.module.css'
-import { getNextState, getStateColor } from '../../../utils/orderUtils'
+import styles from './BillItem.module.css'
+import { getStateColor } from '../../../utils/orderUtils'
 
-export const OrderItem = ({
+export const BillItem = ({
   ordersFiltered,
   selectedOrder,
   setSelectedOrder,
-  onUpdateState
+  onCreateBill
 }) => {
+
+  if (ordersFiltered.length === 0) {
+    return (
+      <p className={styles.emptyMessage}>
+        No hay órdenes entregadas pendientes de facturar.
+      </p>
+    )
+  }
+
 
   return (
     <div className={styles.ordersContainer}>
       {ordersFiltered.map((order) => {
-
-        const nextState = getNextState(order.state)
         const isSelected = selectedOrder?.id === order.id
 
         return (
@@ -27,16 +34,17 @@ export const OrderItem = ({
               <span className={styles.tableBadge}>{`Mesa: ${order.table_number}`}</span>
             </div>
 
-            {/* Fila Central: Info de control y estado */}
+            {/* Fila Central */}
             <div className={styles.bodyRow}>
               <div className={styles.metaInfo}>
                 <p><span>Mesero:</span> {order.user_name} {order.user_lastname}</p>
-                <p><span>Items:</span> {order.total_items || 5} u.</p>
-                <p className={styles.time}>{order.created_at}</p>
+                <p className={styles.time}>
+                  {new Date(order.created_at).toLocaleString()}
+                </p>
               </div>
 
               <div>
-                <p>Estado Actual:</p>
+                <p>Estado:</p>
                 <div
                   className={styles.stateBadge}
                   style={{ backgroundColor: getStateColor(order.state) }}
@@ -45,29 +53,31 @@ export const OrderItem = ({
                 </div>
               </div>
 
-              {/* BOTÓN AVANZAR ESTADO — solo si hay siguiente */}
-              {nextState && (
+              {order.state === "ENTREGADO" && (
                 <div
                   className={styles.btnNextState}
                   onClick={(e) => {
                     e.stopPropagation()
-                    onUpdateState(order.id, nextState)
+                    onCreateBill(order)
                   }}
                 >
-                  → {nextState}
+                  Generar factura
                 </div>
               )}
-
             </div>
 
-            {/* Fila Inferior: Total */}
+            {/* Fila Inferior */}
             <div className={styles.footerRow}>
               <span className={styles.totalLabel}>Total:</span>
-              <span className={styles.totalAmount}>$ {order.total || '28,000'}</span>
+              <span className={styles.totalAmount}>
+                $ {order.total
+                  ? Number(order.total).toLocaleString()
+                  : '---'}
+              </span>
             </div>
           </div>
         )
       })}
-    </div>
+    </div >
   )
 }

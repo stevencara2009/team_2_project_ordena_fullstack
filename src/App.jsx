@@ -13,6 +13,7 @@ import { ProtectedRoute } from "./routes/ProtectedRoutes"
 import { useEffect } from "react"
 import { AdminLayout } from "./layouts/Admin/Admin"
 import { Menu } from "./pages/Menu/Menu"
+import { Bills } from "./pages/Bills/Bills"
 
 function App() {
   const { user } = useAuth()
@@ -66,6 +67,13 @@ function App() {
           <Route path="view-orders" element={
             <ProtectedRoute allowedRoles={["ADMINISTRADOR", "COCINERO", "MESERO"]}>
               <ViewOrders />
+            </ProtectedRoute>
+          }
+          />
+
+          <Route path="bills" element={
+            <ProtectedRoute allowedRoles={["ADMINISTRADOR", "COCINERO", "MESERO"]}>
+              <Bills />
             </ProtectedRoute>
           }
           />

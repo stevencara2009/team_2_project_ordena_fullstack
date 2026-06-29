@@ -43,6 +43,10 @@
   border: 1px solid black;
 }
 
+.btnDisable {
+  display: none;
+}
+
 .btnLogin,
 .btnRegister,
 .btnSignOut {

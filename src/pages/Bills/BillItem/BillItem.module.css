@@ -121,3 +121,34 @@
 .orderOrange .totalAmount {
   color: white;
 }
+
+
+/* ============================================
+   AGREGADO PARA BillItem — al final de OrderItem.module.css
+   ============================================ */
+.btnNextState {
+  background-color: var(--color-primary);
+  color: white;
+  padding: 6px 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  align-self: flex-end;
+  white-space: nowrap;
+}
+
+.btnNextState:hover {
+  background-color: var(--color-secondary);
+}
+
+.emptyMessage {
+  text-align: center;
+  color: #888;
+  font-size: var(--font-size-sm);
+  margin-top: var(--space-8);
+}

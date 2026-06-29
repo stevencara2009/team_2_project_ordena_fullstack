@@ -1,25 +1,70 @@
 import { useEffect, useState } from 'react'
-import { CardOrder } from '../Dashboard/CardOrder/CardOrder'
-import { Tables } from '../Tables/Tables'
+import { CardOrder } from '../../components/Card/CardViewOrder'
 import { OrderItem } from './OrderItem/OrderItem'
-import styles from './ViewOrders.module.css'
-import { InputSelect } from '../../components/Input/Input'
+import { useOrders } from '../../hooks/useOrders'
+import { Input, InputSelect } from '../../components/Input/Input'
+import { ORDERS_STATE } from '../../data/options'
 
 export const ViewOrders = () => {
-  const [filter, setFilter] = useState("")
-  const [orders, setOrders] = useState([])
+  const [selectedOrder, setSelectedOrder] = useState(null)
+  const [orderSearch, setOrderSearch] = useState("");
+  const [tableSearch, setOrderTable] = useState("");
+  const [orderState, setOrderState] = useState("Todos");
+  const [loading, setLoading] = useState(true)
+
+  const { orders, loadOrders, updateOrder } = useOrders();
 
   const FILTERS_BY = ["Más reciente", "Más antiguos", "Mayor precio", "Menor precio"]
 
-  // API GET: OBTENER DATOS DE USUARIOS
+  const fetchOrders = async () => {
+    try {
+      setLoading(true);
+      loadOrders();
+    } catch (error) {
+      console.error("Error cargando órdenes: ", error);
+    } finally {
+      setLoading(false)
+    }
+  };
+
+  // Cargar todas las ordenes
   useEffect(() => {
-    fetch('/api/orders.json')
-      .then(response => response.json())
-      .then(result => {
-        setOrders(result)
-      })
-      .catch(error => console.log("Error cargando archivo: ", error))
-  }, [])
+    fetchOrders();
+  }, []);
+
+
+  // Avanzar estado de una orden
+  const handleUpdateState = async (orderId, nextState) => {
+    try {
+      console.log(nextState)
+      await updateOrder(orderId, { state: nextState })
+
+      // Si la orden seleccionada es la que se actualizó, sincronizar
+      if (selectedOrder?.id === orderId) {
+        setSelectedOrder(prev => ({ ...prev, state: nextState }))
+      }
+    } catch (error) {
+      console.error("Error actualizando estado:", error)
+      alert("No fue posible actualizar el estado")
+    }
+  }
+
+  
+  const ordersFiltered = orders.filter(order => {
+    const matchesSearchByOrder = order.id
+      ? order.id.toString().includes(orderSearch)
+      : false
+
+    const matchesSearchByTable = order.table_number
+      ? order.table_number.toString().includes(tableSearch)
+      : false
+
+    const matchesState =
+      orderState === "Todos" || order.state === orderState
+
+    return matchesSearchByOrder && matchesSearchByTable && matchesState
+  })
+
 
 
   return (
@@ -28,18 +73,74 @@ export const ViewOrders = () => {
       <div className="container">
         <div className='container-form'>
           <h1>Ver pedidos</h1>
-          
+
           <div className="container-flex">
 
-            {/* Modulo mesas*/}
+            {/* Modulo pedidos*/}
             <div className="module">
-              <OrderItem orders={orders} />
+
+              {/* Formulario filtro */}
+              <form>
+                <fieldset className="form-flex">
+                  <legend>Filtro</legend>
+
+                  <Input
+                    label="N° de orden"
+                    type="number"
+                    className="inputPrimary"
+                    placeholder=""
+                    name=""
+                    value={orderSearch}
+                    onChange={(e) => setOrderSearch(e.target.value)}
+                    variant='dark'
+                  />
+
+                  <Input
+                    label="N° de mesa"
+                    type="number"
+                    className="inputPrimary"
+                    placeholder=""
+                    name=""
+                    value={tableSearch}
+                    onChange={(e) => setOrderTable(e.target.value)}
+                    variant='dark'
+                  />
+
+                  <InputSelect
+                    label="Estado"
+                    className="inputPrimary"
+                    value={orderState}
+                    onChange={(e) =>
+                      setOrderState(e.target.value)
+                    }
+                    data={ORDERS_STATE}
+                    variant='dark'
+                  />
+
+                </fieldset>
+              </form>
+
+              <OrderItem
+                ordersFiltered={ordersFiltered}
+                setSelectedOrder={setSelectedOrder}
+                selectedOrder={selectedOrder}
+                onUpdateState={handleUpdateState}
+              />
+
             </div>
 
             {/* Modulo pedidos asociados a mesa*/}
             <div className="module">
 
-              <CardOrder />
+              {selectedOrder ? (
+                <CardOrder
+                  key={selectedOrder.id}
+                  currentOrder={selectedOrder}
+                />
+              ) : (
+                <p><em>No hay órdenes o no se ha seleccionado ninguna.</em></p>
+              )
+              }
             </div>
 
           </div>

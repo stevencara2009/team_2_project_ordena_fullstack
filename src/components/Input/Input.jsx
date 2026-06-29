@@ -45,7 +45,8 @@ export const InputSelect = ({
   value,
   onChange,
   data = [],
-  variant = "dark"
+  variant = "dark",
+  disabled = false
 }) => {
 
   const labelStyle = variant === "dark" ? styles.labelLight : styles.labelDark
@@ -59,6 +60,7 @@ export const InputSelect = ({
           value={value}
           onChange={onChange}
           id={label}
+          disabled={disabled}
         >
           <option value="">Seleccione una opción</option>
           {data.map((d, index) => {

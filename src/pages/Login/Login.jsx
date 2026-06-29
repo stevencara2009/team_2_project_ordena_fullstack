@@ -17,10 +17,6 @@ export const Login = () => {
   const [error, setError] = useState("");
   const [email, setEmail] = useState("")
 
-  useEffect(() => {
-    console.error(error)
-  }, [error])
-
   const [form, setForm] = useState({
     email: "",
     password: ""

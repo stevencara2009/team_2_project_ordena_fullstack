@@ -1,14 +1,23 @@
-export const PLATES_TYPE = ["Todos", "Hamburguesas", "Pizzas", "Ensaladas", "Mexicana", "Japonesa", "Pastas", "Bebidas", "Saludable", "Carnes", "Postres", "Niños", "Acompañamientos", "Entradas", "Internacional"]
+export const PLATES_TYPE = ["Todos", "Hamburguesas",  "Ensaladas", "Mexicana", "Japonesa", "Pastas", "Bebidas", "Saludable", "Carnes", "Postres", "Niños", "Entradas", "Internacional", "Comida Rápida", "Desayuno", "Sopas"]
 
 export const DOCUMENTS_TYPE = ["CEDULA DE CIUDADANIA", "CEDULA DE EXTRANJERIA", "PASAPORTE", "NIT"]
 
-export const USERS_TYPE = ["TODOS", "MESERO", "COCINERO", "ADMINISTRADOR", "CLIENTE"]
+export const USERS_TYPE = ["Todos", "MESERO", "COCINERO", "ADMINISTRADOR", "CLIENTE"]
 
 export const TABLES_STATE = [
     "Todos",
     "LIBRE",
     "OCUPADA",
     "RESERVADA"
+];
+
+export const ORDERS_STATE = [
+    "Todos",
+    "PENDIENTE",
+    "EN PREPARACION",
+    "LISTO",
+    "ENTREGADO",
+    "FACTURADO"
 ];
 
 export const COUNTRIES = [

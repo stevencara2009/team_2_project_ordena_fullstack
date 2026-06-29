@@ -1,11 +1,21 @@
 import styles from './CardOrder.module.css'
-import { Button } from '../../../components/Button/Button'
+import { useAuth } from '../../hooks/useAuth'
+import { Button } from '../../components/Button/Button'
 
-export const CardOrder = ({ orderDetails = [], currentOrder, handleCreateOrder, handleDeleteProduct }) => {
+export const CardOrder = ({ 
+  orderDetails = [],
+  currentOrder,
+  handleConfirmOrder,
+  handleDeleteProduct,
+  handleCancelOrder
+ }) => {
+  
+  const { user } = useAuth()
 
+  const safeDetails = orderDetails || [];
 
   const totalResumen =
-    orderDetails?.reduce(
+    safeDetails?.reduce(
       (acc, product) => acc + (Number(product.price) * product.quantity),
       0
     )
@@ -16,7 +26,7 @@ export const CardOrder = ({ orderDetails = [], currentOrder, handleCreateOrder, 
       {/* ENCABEZADO */}
       <h2 className={styles.cardTitle}>
         {currentOrder
-          ? `Mesa ${currentOrder.table_number} - Pedido #${currentOrder.id}`
+          ? `Mesa ${currentOrder.table_number ? currentOrder.table_number : "00" } - Pedido #${currentOrder.id ? currentOrder.id : "0000"}`
           : 'Pedido sin crear'}
       </h2>
 
@@ -25,7 +35,7 @@ export const CardOrder = ({ orderDetails = [], currentOrder, handleCreateOrder, 
       </div>
 
       <label className={styles.labelCardItem}>Mesero: </label>
-      <span className={styles.spanCardItem}>Maria Isabel Perez</span>
+      <span className={styles.spanCardItem}>{user.name + " " + user.lastname}</span>
       <br />
 
       <label className={styles.labelCardItem}>Fecha: </label>
@@ -47,29 +57,31 @@ export const CardOrder = ({ orderDetails = [], currentOrder, handleCreateOrder, 
           </tr>
         </thead>
         <tbody>
-          {orderDetails.length === 0
+          {safeDetails && safeDetails.length > 0
             ? (
+              safeDetails.map((product) => (
+                <tr key={product.product_id}>
+                  <td>{product.name}</td>
+                  <td>{product.quantity}</td>
+                  <td>${Number(product.price).toLocaleString()}</td>
+                  <td>${(Number(product.price) * product.quantity).toLocaleString()}</td>
+                  <td>
+                    <i
+                      className="fa-solid fa-trash-can"
+                      style={{ color: "red", cursor: "pointer" }}
+                      onClick={() => handleDeleteProduct(product.product_id)}
+                    />
+                  </td>
+                </tr>
+              ))
+            )
+            : (
               <tr>
                 <td colSpan="5" style={{ textAlign: 'center' }}>
                   Sin productos agregados
                 </td>
               </tr>
             )
-            : orderDetails.map((product) => (
-              <tr key={product.product_id}>
-                <td>{product.name}</td>
-                <td>{product.quantity}</td>
-                <td>${Number(product.price).toLocaleString()}</td>
-                <td>${(Number(product.price) * product.quantity).toLocaleString()}</td>
-                <td>
-                  <i
-                    className="fa-solid fa-trash-can"
-                    style={{ color: "red", cursor: "pointer" }}
-                    onClick={() => handleDeleteProduct(product.product_id)}
-                  />
-                </td>
-              </tr>
-            ))
           }
         </tbody>
         <tfoot>
@@ -81,15 +93,15 @@ export const CardOrder = ({ orderDetails = [], currentOrder, handleCreateOrder, 
       </table>
 
       {/* OBSERVACIONES: solo mostrar las que tengan descripción */}
-      {orderDetails.some(p => p.description) && (
+      {safeDetails.some(p => p.description) && (
         <>
           <p>Observaciones</p>
           <ul className={styles.description}>
-            {orderDetails
+            {safeDetails
               .filter(p => p.description)
               .map((product) => (
                 <li key={product.product_id}>
-                  <strong>{product.name}:</strong> {product.description}
+                  <strong>{product.name}:</strong> {product.notes}
                 </li>
               ))}
           </ul>
@@ -98,11 +110,16 @@ export const CardOrder = ({ orderDetails = [], currentOrder, handleCreateOrder, 
 
       {/* ACCIONES */}
       <div className={styles.divActionsOrder}>
-        <Button className='btnDelete' text='Eliminar pedido' />
         <Button
-          className='btnUpdate'
-          text={currentOrder ? 'Actualizar' : 'Crear pedido'}
-          onClick={handleCreateOrder}
+          className={!currentOrder || safeDetails.length === 0 ? 'btnDisable' : 'btnDelete'}
+          text='Eliminar pedido'
+          onClick={handleCancelOrder}
+          disabled={!currentOrder} />
+        <Button
+          className={!currentOrder || safeDetails.length === 0 ? 'btnDisable' : 'btnUpdate'}
+          text="Enviar a cocina"
+          onClick={handleConfirmOrder}
+          disabled={!currentOrder || safeDetails.length === 0}
         />
       </div>
 

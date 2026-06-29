@@ -1,0 +1,136 @@
+/* ============================================
+   CARD PRINCIPAL
+   ============================================ */
+.billCard {
+  background-color: white;
+  width: 100%;
+  min-height: 200px;
+  padding: 0 10px 10px 10px;
+  border-radius: 7px;
+  margin-bottom: 10px;
+}
+
+/* ============================================
+   ENCABEZADO
+   ============================================ */
+.billTitle {
+  font-size: var(--font-size-base);
+  text-align: center;
+  padding: 12px 0 0 0;
+  color: black;
+  margin-bottom: var(--space-2);
+}
+
+.billDate {
+  text-align: center;
+  font-size: var(--font-size-xs);
+  color: #888;
+  margin-bottom: var(--space-4);
+}
+
+/* ============================================
+   BADGE DE ESTADO (reutiliza patrón de CardOrder)
+   ============================================ */
+.stateBadge {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: var(--color-primary);
+  color: white;
+  margin: 0 auto var(--space-4) auto;
+  width: 50%;
+  min-height: 30px;
+  font-size: var(--font-size-xs);
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--radius-lg);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ============================================
+   SECCIÓN DE INFO (mesa, mesero, cliente)
+   ============================================ */
+.section {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-4);
+  background-color: #f9f9f9;
+}
+
+.section p {
+  color: black;
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--space-1);
+  display: flex;
+  justify-content: space-between;
+}
+
+.section p:last-child {
+  margin-bottom: 0;
+}
+
+.section p span {
+  font-weight: bold;
+  color: #555;
+}
+
+/* ============================================
+   TABLA DE PRODUCTOS
+   ============================================ */
+.productsTable {
+  width: 100%;
+  font-size: var(--font-size-xs);
+  border-collapse: collapse;
+  margin-bottom: var(--space-4);
+  text-align: left;
+}
+
+.productsTable th {
+  color: #555;
+  font-weight: 600;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  padding: var(--space-2) var(--space-1);
+}
+
+.productsTable td {
+  color: black;
+  padding: var(--space-2) var(--space-1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* Fila hover en la tabla */
+.productsTable tbody tr:hover {
+  background-color: rgba(217, 101, 35, 0.05);
+}
+
+/* Footer — Total */
+.productsTable tfoot td {
+  border-top: 2px solid rgba(0, 0, 0, 0.15);
+  border-bottom: none;
+  padding-top: var(--space-3);
+  font-size: var(--font-size-sm);
+  color: black;
+}
+
+/* ============================================
+   BOTÓN IMPRIMIR (opcional, para después)
+   ============================================ */
+.btnPrint {
+  width: 100%;
+  height: 35px;
+  background-color: var(--color-primary);
+  color: white;
+  font-size: var(--font-size-sm);
+  font-weight: bold;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  margin-top: var(--space-2);
+}
+
+.btnPrint:hover {
+  background-color: var(--color-secondary);
+}

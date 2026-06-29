@@ -1,17 +1,12 @@
 import styles from './Tables.module.css'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Input, InputSelect } from '../../components/Input/Input';
 import { TableItem } from './TableItem/TableItem';
 import { useTables } from "../../hooks/useTables";
 import { Modal } from '../../components/Modal/Modal';
 import { Button } from '../../components/Button/Button'
-import { FILTERS_BY, TABLES_STATE } from '../../data/options';
-import { Products } from '../Products/Products'
-import { Users } from '../Users/Users'
-import { ViewOrders } from '../ViewOrders/ViewOrders'
-import { Register } from '../Register/Register'
-import { Orders } from '../Orders/Orders'
-import { Index } from '../Index/Index'
+import {  TABLES_STATE } from '../../data/options';
+
 
 export const Tables = ({ selectedTable, setSelectedTable }) => {
 
@@ -53,9 +48,9 @@ export const Tables = ({ selectedTable, setSelectedTable }) => {
       table.state === tableState;
 
     return matchesSearch && matchesState;
-
   });
 
+  
   // HANDLERS PARA SELECCIONAR MESA
   const handleSelectTable = (table) => {
 
@@ -341,9 +336,6 @@ export const Tables = ({ selectedTable, setSelectedTable }) => {
       </Modal>
 
 
-      {/* {orders.map((order) => (
-        <CardOrder orders={orders} key={order.id} />
-      ))} */}
 
     </div>
   )
