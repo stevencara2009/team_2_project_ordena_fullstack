@@ -43,9 +43,6 @@ GET http://localhost:1234/users
 ### Obtener un usuario
 GET http://localhost:1234/users/24
 
-### Obtener usuarios según categoría
-GET http://localhost:1234/users?role=COCINERO
-
 ### Crear un usuario con POST
 POST http://localhost:1234/users
 Content-Type: application/json
@@ -93,9 +90,6 @@ GET http://localhost:1234/tables
 
 ### Obtener un mesa
 GET http://localhost:1234/tables/5
-
-### Obtener mesas según categoría
-GET http://localhost:1234/tables?state=OCUPADA
 
 ### Crear un mesa con POST
 POST http://localhost:1234/tables
@@ -186,17 +180,17 @@ DELETE http://localhost:1234/clients/23
 ### Obtener ordenes
 GET http://localhost:1234/orders
 
-### Obtener un orden
-GET http://localhost:1234/orders/280
+### Obtener ordenes según mesa
+GET http://localhost:1234/orders/table/1
 
-### Obtener ordenes según categoría
-GET http://localhost:1234/orders?category=SOPA
+### Obtener un orden
+GET http://localhost:1234/orders/308
 
 ### Crear un orden con POST
 POST http://localhost:1234/orders
 Content-Type: application/json
 
-{
+{ 
   "table_number": 2,
   "client_id": 1,
   "user_id": 22
@@ -234,10 +228,7 @@ DELETE http://localhost:1234/orders/295
 GET http://localhost:1234/order-products/
 
 ### Ver productos de orden
-GET http://localhost:1234/order-products/301
-
-### Obtener ordenes según categoría
-GET http://localhost:1234/orders?category=SOPA
+GET http://localhost:1234/order-products/308
 
 ### Agregar producto
 POST http://localhost:1234/order-products
@@ -275,15 +266,12 @@ GET http://localhost:1234/bills/5/details
 ### Ver factura por ID
 GET http://localhost:1234/bills/5
 
-### Obtener facturas según categoría
-GET http://localhost:1234/orders?category=SOPA
-
 ### Agregar factura
 POST http://localhost:1234/bills
 Content-Type: application/json
 
 {
-  "order_id": 270,
+  "order_id": 271,
   "user_id": 22,
   "client_id": 1
 }

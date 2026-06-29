@@ -24,6 +24,7 @@ export class OrderProductController {
 
   create = async (req, res) => {
     const result = validateOrderProduct(req.body)
+    console.log(result)
 
     if (!result.success) {
       return res.status(400).json({
@@ -88,4 +89,18 @@ export class OrderProductController {
     })
   }
 
+
+  deleteByOrder = async (req, res) => {
+    const { order_id } = req.params
+
+    const deleted = await this.orderProductModel.deleteByOrder({ order_id })
+
+    if (!deleted) {
+      return res.status(404).json({
+        message: 'No products found for this order'
+      })
+    }
+
+    res.json({ message: 'All products removed from order' })
+  }
 }

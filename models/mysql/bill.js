@@ -110,12 +110,12 @@ export class BillModel {
             },
 
             client: bill.client_id
-            ? {
-                id: bill.client_id,
-                name: bill.client_name,
-                lastname: bill.client_lastname
+                ? {
+                    id: bill.client_id,
+                    name: bill.client_name,
+                    lastname: bill.client_lastname
                 }
-            : null,
+                : null,
 
             user: {
                 id: bill.user_id,
@@ -143,7 +143,7 @@ export class BillModel {
 
         try {
             await conn.beginTransaction()
-            
+
             const {
                 order_id,
                 user_id,
@@ -162,7 +162,7 @@ export class BillModel {
             if (!order) {
                 throw new Error('Order not found')
             }
-            
+
             // Paso 2: Validar estado unicamente cuando la orden esté entregada
             if (order.state !== 'ENTREGADO') {
                 throw new Error(
@@ -179,7 +179,11 @@ export class BillModel {
             `, [order_id])
 
             const total = totals[0].total
-            
+
+            if (!total || total === null) {
+                throw new Error('Order has no products to bill')
+            }
+
             // PASO 4: Crear Factura
             const [result] = await conn.query(`
                 INSERT INTO TBL_BILLS
@@ -203,16 +207,16 @@ export class BillModel {
                 SET state = 'FACTURADO'
                 WHERE id = ?
             `, [order_id])
-            
+
             // Paso 6: Liberar mesa
             await conn.query(`
                 UPDATE TBL_TABLES
                 SET state = 'LIBRE'
                 WHERE id = ?
-            `, [order.table_id])
+            `, [order.table_number])
 
             await conn.commit()
-            
+
             // Paso 7: Mostrar factura
             const [bill] = await conn.query(`
                 SELECT *

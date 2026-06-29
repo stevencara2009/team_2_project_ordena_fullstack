@@ -6,7 +6,7 @@ export class OrderController {
     this.orderModel = orderModel
   }
 
-  
+
 
   getAll = async (req, res) => {
     try {
@@ -30,6 +30,23 @@ export class OrderController {
         })
       }
       res.json(order)
+    } catch (error) {
+      res.status(500).json({ message: error.message })
+    }
+
+  }
+
+
+  getByTable = async (req, res) => {
+    try {
+      const { id } = req.params
+      const orders = await this.orderModel.getByTable({ id })
+      if (!orders) {
+        return res.status(404).json({
+          message: 'There are not orders asocciated that table'
+        })
+      }
+      res.json(orders)
     } catch (error) {
       res.status(500).json({ message: error.message })
     }

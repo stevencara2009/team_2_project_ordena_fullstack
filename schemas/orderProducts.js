@@ -18,7 +18,9 @@ const orderProductSchema = z.object({
   })
     .int()
     .positive()
-    .min(1)
+    .min(1),
+
+  notes: z.string().max(255).optional().nullable()
 })
 
 export function validateOrderProduct(input) {

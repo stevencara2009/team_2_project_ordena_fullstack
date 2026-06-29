@@ -11,7 +11,7 @@ const config = {
 const connection = await mysql.createConnection(config)
 
 export class OrderModel {
-    
+
     // =========================================
     // OBTENER ORDENES
     // =========================================
@@ -21,8 +21,13 @@ export class OrderModel {
             o.id,
             o.state,
             o.created_at,
+            o.table_number,
 
-            t.number AS table_number,
+            (
+                SELECT SUM(op.quantity * op.price)
+                FROM TBL_ORDER_PRODUCTS op
+                WHERE op.order_id = o.id
+            ) AS total,
 
             c.name AS client_name,
             c.lastname AS client_lastname,
@@ -62,6 +67,21 @@ export class OrderModel {
 
         if (orders.length === 0) return null
         return orders[0]
+    }
+
+    // =========================================
+    // OBTENER ORDENES POR MESA
+    // =========================================
+    static async getByTable({ id }) {
+        console.log(id)
+        const [orders] = await connection.query(`
+            SELECT *
+            FROM tbl_orders
+            WHERE table_number = ?
+        `, [id])
+
+        if (orders.length === 0) return null
+        return orders
     }
 
 
@@ -113,10 +133,10 @@ export class OrderModel {
             )
             VALUES (?, ?, ?)
             `, [
-                    table_number,
-                    client_id ?? null,
-                    user_id
-                ])
+                table_number,
+                client_id ?? null,
+                user_id
+            ])
 
 
             // CAMBIAR ESTADO MESA
@@ -159,9 +179,9 @@ export class OrderModel {
         const fields = []
         const values = []
 
-        if (input.table_id !== undefined) {
-            fields.push('table_id = ?')
-            values.push(input.table_id)
+        if (input.table_number !== undefined) {
+            fields.push('table_number = ?')
+            values.push(input.table_number)
         }
 
         if (input.client_id !== undefined) {
@@ -179,22 +199,20 @@ export class OrderModel {
             values.push(input.state)
         }
 
-        console.log(fields)
-        console.log(values)
         if (fields.length === 0) return null
 
 
         await connection.query(`
-      UPDATE tbl_orders
-      SET ${fields.join(', ')}
-      WHERE id = ?
-    `, [...values, id])
+            UPDATE tbl_orders
+            SET ${fields.join(', ')}
+            WHERE id = ?
+        `, [...values, id])
 
         const [orders] = await connection.query(`
-      SELECT *
-      FROM tbl_orders
-      WHERE id = ?
-    `, [id])
+            SELECT *
+            FROM tbl_orders
+            WHERE id = ?
+        `, [id])
 
         return orders[0]
     }

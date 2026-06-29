@@ -11,6 +11,7 @@ export const createOrderProductRouter = ({ orderProductModel }) => {
   router.get('/:orderId', controller.getByOrder)
   router.post('/', controller.create)
   router.patch('/:order_id/:product_id', controller.update)
+  router.delete('/:order_id/all', controller.deleteByOrder)
   router.delete('/:order_id/:product_id', controller.delete)
 
 

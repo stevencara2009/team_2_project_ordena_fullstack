@@ -91,7 +91,8 @@ CREATE TABLE IF NOT EXISTS TBL_ORDER_PRODUCTS(
     product_id INT NOT NULL,
     quantity INT NOT NULL DEFAULT 1,
     price DECIMAL (10,2) NOT NULL,
-
+    notes TEXT NULL;
+    
     PRIMARY KEY(order_id, product_id),
 
     FOREIGN KEY (order_id) REFERENCES TBL_ORDERS(id),

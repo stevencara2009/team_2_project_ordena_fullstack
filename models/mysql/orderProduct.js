@@ -52,7 +52,7 @@ export class OrderProductModel {
             op.product_id,
             op.quantity,
             op.price,
-
+            op.notes,
             p.name,
             p.description,
             p.image
@@ -77,12 +77,14 @@ export class OrderProductModel {
         const {
             order_id,
             product_id,
-            quantity
+            quantity,
+            notes = null
         } = input
 
         const conn = await pool.getConnection()
-        
+
         try {
+            
             await conn.beginTransaction()
 
             // VALIDAR ORDEN
@@ -117,15 +119,17 @@ export class OrderProductModel {
                 AND product_id = ?
             `, [order_id, product_id])
 
-            // SI EXISTE -> SUMAR CANTIDAD
+
             if (existing.length > 0) {
+                // SI EXISTE -> SUMAR CANTIDAD Y ACTUALIZAR NOTES
                 await conn.query(`
                 UPDATE TBL_ORDER_PRODUCTS
-                SET quantity = quantity + ?
+                SET quantity = quantity + ?, notes + ?
                 WHERE order_id = ?
                 AND product_id = ?
                 `, [
                     quantity,
+                    notes,
                     order_id,
                     product_id
                 ])
@@ -138,23 +142,33 @@ export class OrderProductModel {
                     order_id,
                     product_id,
                     quantity,
-                    price
+                    price,
+                    notes
                 )
-                VALUES (?, ?, ?, ?)
+                VALUES (?, ?, ?, ?, ?)
                 `, [
                     order_id,
                     product_id,
                     quantity,
-                    product.price
+                    product.price,
+                    notes
                 ])
             }
 
             await conn.commit()
 
             const [rows] = await conn.query(`
-                SELECT *
-                FROM TBL_ORDER_PRODUCTS
-                WHERE order_id = ?
+                SELECT 
+                    op.order_id,
+                    op.product_id,
+                    op.quantity,
+                    op.price,
+                    op.notes,
+                    p.name,
+                    p.image
+                FROM TBL_ORDER_PRODUCTS op
+                INNER JOIN TBL_PRODUCTS p ON op.product_id = p.id
+                WHERE op.order_id = ?
             `, [order_id])
 
             return rows
@@ -221,4 +235,16 @@ export class OrderProductModel {
 
         return result.affectedRows > 0
     }
+
+    // =========================================
+    // ELIMINAR TODOS LOS PRODUCTOS DE UNA ORDEN
+    // =========================================
+    static async deleteByOrder({ order_id }) {
+    const [result] = await pool.query(`
+        DELETE FROM TBL_ORDER_PRODUCTS
+        WHERE order_id = ?
+    `, [order_id])
+
+    return result.affectedRows > 0
+}
 }
