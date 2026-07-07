@@ -1,0 +1,42 @@
+.input {
+  font-size: 0.7rem;
+  width: 100%;
+  height: 35px;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 0 0 0 5px;
+  margin: 5px 0 10px 0;
+}
+
+.inputPrimary {
+  background-color: rgb(30, 25, 25);
+  color: white;
+
+}
+
+.inputContainer{
+  width: 100%;
+}
+
+.label {
+  font-size: var(--font-size-xs);
+  font-family: var(--font-family-base);
+  margin-bottom: var(--space-8);
+}
+
+.labelLight { color: white }
+.labelDark { color: black }
+
+
+.inputDescription {
+  color: black;
+  width: 95%;
+  min-height: 40px;
+  margin-bottom: 7px;
+}
+
+.divActionsOrder {
+  display: flex;
+  flex-direction: row;
+  gap: 7px;
+}

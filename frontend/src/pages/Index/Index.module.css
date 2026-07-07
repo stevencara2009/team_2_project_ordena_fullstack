@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+.main {
+  width: 100%;
+  height: auto;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding-top: 40px;
+}
+

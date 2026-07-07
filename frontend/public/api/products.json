@@ -1,0 +1,302 @@
+[
+  {
+    "id": 1,
+    "name": "Hamburguesa Clásica",
+    "category": "Hamburguesas",
+    "availability": true,
+    "price": 12.50,
+    "image": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd",
+    "description": "Carne de res 200g, queso cheddar, lechuga, tomate y salsa especial de la casa.",
+    "created_at": "2023-10-01T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "name": "Pizza Margherita",
+    "category": "Pizzas",
+    "availability": true,
+    "price": 15.00,
+    "image": "https://images.unsplash.com/photo-1574071318508-1cdbad80ad38",
+    "description": "Masa artesanal con salsa de tomate pomodoro, mozzarella fresca y albahaca.",
+    "created_at": "2023-10-01T12:05:00Z"
+  },
+  {
+    "id": 3,
+    "name": "Ensalada César",
+    "category": "Ensaladas",
+    "availability": true,
+    "price": 9.90,
+    "image": "https://images.unsplash.com/photo-1550304943-4f24f54ddde9",
+    "description": "Lechuga romana, crutones, queso parmesano y nuestro aderezo César cremoso.",
+    "created_at": "2023-10-02T10:30:00Z"
+  },
+  {
+    "id": 4,
+    "name": "Tacos al Pastor",
+    "category": "Mexicana",
+    "availability": true,
+    "price": 8.00,
+    "image": "https://images.unsplash.com/photo-1551504734-5ee1c4a1479b",
+    "description": "Tres tacos de cerdo marinado con piña, cilantro, cebolla y salsa picante.",
+    "created_at": "2023-10-02T11:00:00Z"
+  },
+  {
+    "id": 5,
+    "name": "Sushi Variado (12 piezas)",
+    "category": "Japonesa",
+    "availability": false,
+    "price": 22.00,
+    "image": "https://images.unsplash.com/photo-1579871494447-9811cf80d66c",
+    "description": "Combinación premium de nigiris, rolls de salmón y atún fresco.",
+    "created_at": "2023-10-02T11:15:00Z"
+  },
+  {
+    "id": 6,
+    "name": "Pasta Carbonara",
+    "category": "Pastas",
+    "availability": true,
+    "price": 13.50,
+    "image": "https://images.unsplash.com/photo-1612874742237-6526221588e3",
+    "description": "Receta tradicional italiana con guanciale, huevo, pecorino romano y pimienta.",
+    "created_at": "2023-10-03T14:20:00Z"
+  },
+  {
+    "id": 7,
+    "name": "Cerveza Artesanal",
+    "category": "Bebidas",
+    "availability": true,
+    "price": 5.50,
+    "image": "https://images.unsplash.com/photo-1535958636474-b021ee887b13",
+    "description": "Cerveza tipo IPA local con notas cítricas y amargor equilibrado.",
+    "created_at": "2023-10-03T15:00:00Z"
+  },
+  {
+    "id": 8,
+    "name": "Limonada Natural",
+    "category": "Bebidas",
+    "availability": true,
+    "price": 3.50,
+    "image": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd",
+    "description": "Zumo de limón recién exprimido, menta fresca y un toque de endulzante.",
+    "created_at": "2023-10-03T15:05:00Z"
+  },
+  {
+    "id": 9,
+    "name": "Bowl de Salmón",
+    "category": "Saludable",
+    "availability": true,
+    "price": 14.90,
+    "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c",
+    "description": "Base de quinoa con salmón a la plancha, aguacate, edamame y pepino.",
+    "created_at": "2023-10-04T09:00:00Z"
+  },
+  {
+    "id": 10,
+    "name": "Costillas BBQ",
+    "category": "Carnes",
+    "availability": true,
+    "price": 18.50,
+    "image": "https://images.unsplash.com/photo-1544025162-d76694265947",
+    "description": "Costillas de cerdo cocción lenta bañadas en salsa barbacoa ahumada.",
+    "created_at": "2023-10-04T13:45:00Z"
+  },
+  {
+    "id": 11,
+    "name": "Risotto de Setas",
+    "category": "Pastas",
+    "availability": true,
+    "price": 16.00,
+    "image": "https://images.unsplash.com/photo-1476124369491-e7addf5db371",
+    "description": "Arroz arborio cremoso con selección de hongos silvestres y aceite de trufa.",
+    "created_at": "2023-10-05T12:00:00Z"
+  },
+  {
+    "id": 12,
+    "name": "Burrito de Pollo",
+    "category": "Mexicana",
+    "availability": true,
+    "price": 10.50,
+    "image": "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b",
+    "description": "Tortilla de trigo rellena de pollo asado, frijoles, arroz y queso fundido.",
+    "created_at": "2023-10-05T12:30:00Z"
+  },
+  {
+    "id": 13,
+    "name": "Cheesecake de Fresa",
+    "category": "Postres",
+    "availability": true,
+    "price": 6.50,
+    "image": "https://images.unsplash.com/photo-1533134242443-d4fd215305ad",
+    "description": "Tarta de queso cremosa sobre base de galleta con coulis de fresas naturales.",
+    "created_at": "2023-10-05T13:00:00Z"
+  },
+  {
+    "id": 14,
+    "name": "Brownie con Helado",
+    "category": "Postres",
+    "availability": true,
+    "price": 7.00,
+    "image": "https://images.unsplash.com/photo-1564355808539-22fda35bed7e",
+    "description": "Brownie tibio de chocolate amargo con nueces y una bola de helado de vainilla.",
+    "created_at": "2023-10-05T13:10:00Z"
+  },
+  {
+    "id": 15,
+    "name": "Nuggets de Pollo",
+    "category": "Niños",
+    "availability": true,
+    "price": 8.50,
+    "image": "https://images.unsplash.com/photo-1562967914-608f82629710",
+    "description": "Seis piezas de pechuga de pollo empanizadas, acompañadas de miel y mostaza.",
+    "created_at": "2023-10-06T11:00:00Z"
+  },
+  {
+    "id": 16,
+    "name": "Vino Tinto (Copa)",
+    "category": "Bebidas",
+    "availability": true,
+    "price": 4.50,
+    "image": "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3",
+    "description": "Copa de vino de la casa con notas de frutos rojos y madera.",
+    "created_at": "2023-10-06T19:00:00Z"
+  },
+  {
+    "id": 17,
+    "name": "Papas Fritas Grandes",
+    "category": "Acompañamientos",
+    "availability": true,
+    "price": 4.00,
+    "image": "https://images.unsplash.com/photo-1573080496219-bb080dd4f877",
+    "description": "Corte rústico, doble cocción para máxima crocancia, con sal marina.",
+    "created_at": "2023-10-07T12:00:00Z"
+  },
+  {
+    "id": 18,
+    "name": "Aros de Cebolla",
+    "category": "Acompañamientos",
+    "availability": true,
+    "price": 5.00,
+    "image": "https://images.unsplash.com/photo-1639024471283-035188835118",
+    "description": "Cebollas dulces rebozadas en tempura de cerveza y especias.",
+    "created_at": "2023-10-07T12:15:00Z"
+  },
+  {
+    "id": 19,
+    "name": "Sopa de Cebolla",
+    "category": "Entradas",
+    "availability": true,
+    "price": 7.50,
+    "image": "https://images.unsplash.com/photo-1547592166-23ac45744acd",
+    "description": "Estilo francés, gratinada con queso gruyere y pan de masa madre.",
+    "created_at": "2023-10-08T13:00:00Z"
+  },
+  {
+    "id": 20,
+    "name": "Nachos con Guacamole",
+    "category": "Entradas",
+    "availability": true,
+    "price": 11.00,
+    "image": "https://images.unsplash.com/photo-1513456852971-30c0b8199d4d",
+    "description": "Totopos de maíz con queso fundido, jalapeños y guacamole artesanal.",
+    "created_at": "2023-10-08T13:30:00Z"
+  },
+  {
+    "id": 21,
+    "name": "Filete Mignon",
+    "category": "Carnes",
+    "availability": true,
+    "price": 28.00,
+    "image": "https://images.unsplash.com/photo-1546241072-48010ad28c2c",
+    "description": "Medallón de solomillo envuelto en tocino, servido con reducción de vino tinto.",
+    "created_at": "2023-10-09T20:00:00Z"
+  },
+  {
+    "id": 22,
+    "name": "Pollo al Curry",
+    "category": "Internacional",
+    "availability": true,
+    "price": 14.50,
+    "image": "https://images.unsplash.com/photo-1565557623262-b51c2513a641",
+    "description": "Trozos de pechuga en salsa de curry amarillo y leche de coco.",
+    "created_at": "2023-10-10T14:00:00Z"
+  },
+  {
+    "id": 23,
+    "name": "Paella de Mariscos",
+    "category": "Internacional",
+    "availability": false,
+    "price": 25.00,
+    "image": "https://images.unsplash.com/photo-1534080564607-c98752441051",
+    "description": "Arroz bomba con azafrán, langostinos, calamares y mejillones frescos.",
+    "created_at": "2023-10-10T14:30:00Z"
+  },
+  {
+    "id": 24,
+    "name": "Crema de Verduras",
+    "category": "Entradas",
+    "availability": true,
+    "price": 6.00,
+    "image": "https://images.unsplash.com/photo-1547592116-3399b76ff2fe",
+    "description": "Mezcla de vegetales de temporada, suave y reconfortante.",
+    "created_at": "2023-10-11T12:00:00Z"
+  },
+  {
+    "id": 25,
+    "name": "Café Espresso",
+    "category": "Bebidas",
+    "availability": true,
+    "price": 2.50,
+    "image": "https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04",
+    "description": "Grano de altura con tueste medio, sabor intenso y cuerpo denso.",
+    "created_at": "2023-10-11T16:00:00Z"
+  },
+  {
+    "id": 26,
+    "name": "Hamburguesa Vegana",
+    "category": "Hamburguesas",
+    "availability": true,
+    "price": 13.00,
+    "image": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd",
+    "description": "Medallón de lentejas y champiñones, mayonesa vegana y brotes verdes.",
+    "created_at": "2023-10-12T12:00:00Z"
+  },
+  {
+    "id": 27,
+    "name": "Pizza Pepperoni",
+    "category": "Pizzas",
+    "availability": true,
+    "price": 16.50,
+    "image": "https://images.unsplash.com/photo-1628840042765-356cda07504e",
+    "description": "Clásica americana con abundante pepperoni y doble queso mozzarella.",
+    "created_at": "2023-10-12T13:00:00Z"
+  },
+  {
+    "id": 28,
+    "name": "Milanesa de Ternera",
+    "category": "Carnes",
+    "availability": true,
+    "price": 15.50,
+    "image": "https://images.unsplash.com/photo-1599923480796-ca75df70844f",
+    "description": "Filete de ternera empanizado, servido con puré de papas o ensalada.",
+    "created_at": "2023-10-13T14:00:00Z"
+  },
+  {
+    "id": 29,
+    "name": "Tiramisú",
+    "category": "Postres",
+    "availability": true,
+    "price": 7.50,
+    "image": "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9",
+    "description": "Capas de bizcocho café-licor, crema de mascarpone y cacao en polvo.",
+    "created_at": "2023-10-14T15:00:00Z"
+  },
+  {
+    "id": 30,
+    "name": "Agua Mineral",
+    "category": "Bebidas",
+    "availability": true,
+    "price": 2.00,
+    "image": "https://images.unsplash.com/photo-1523362622747-093a837db2d8",
+    "description": "Agua de manantial con o sin gas, servida con rodaja de limón.",
+    "created_at": "2023-10-14T15:30:00Z"
+  }
+]

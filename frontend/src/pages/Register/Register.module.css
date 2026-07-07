@@ -1,0 +1,38 @@
+
+.title {
+  text-align: start;
+}
+
+.spanStyle {
+  color: white;
+  font-size: 0.7rem;
+}
+
+.link {
+  color: rgb(217, 101, 35);
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+
+
+.countOptions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 15px 0 15px 0;
+}
+
+
+.icon {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: end;
+  color: white;
+  width: 28px;
+  height: auto;
+  font-size: var(--font-size-2xl);
+  cursor: pointer;
+  margin-left: 3px;
+  padding-bottom: var(--space-4);
+}

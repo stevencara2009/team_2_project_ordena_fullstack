@@ -1,0 +1,26 @@
+.divButton {
+    width: 150px;
+    height: 25px;
+    margin: 0 auto;
+}
+
+.navItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    list-style-type: none;
+    color: white;
+    font-size: 0.8rem;
+    cursor: pointer;
+    width: 150px;
+    height: 100%;
+    border-radius: 5px;
+    background-color: rgb(217, 101, 35);
+}
+
+.navItem:hover {
+    background-color: rgb(146, 70, 25);
+    transition: 0.2s ease-in-out;
+}
