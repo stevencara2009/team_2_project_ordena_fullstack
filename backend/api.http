@@ -1,0 +1,277 @@
+### Obtener productos
+GET http://localhost:1234/products
+
+### Obtener un producto
+GET http://localhost:1234/products/42
+
+### Obtener productos según categoría
+GET http://localhost:1234/products?category=SOPA
+
+### Crear un producto con POST
+POST http://localhost:1234/products
+Content-Type: application/json
+
+{
+  "name": "Hamburguesa triple",
+  "category": ["Hamburguesas"],
+  "price": 19900,
+  "image": "https://example.com/images/picada-compuesta.jpg",
+  "description": "sadas"
+}
+
+### Actualizar un producto
+PATCH http://localhost:1234/products/3
+Content-Type: application/json
+
+{
+  "name": "Sancocho de Gallina",
+  "price": 5000
+}
+
+### Eliminar un producto
+DELETE http://localhost:1234/products/2
+
+
+
+
+
+
+
+### Obtener usuarios
+GET http://localhost:1234/users
+
+### Obtener un usuario
+GET http://localhost:1234/users/24
+
+### Crear un usuario con POST
+POST http://localhost:1234/users
+Content-Type: application/json
+
+{
+  "name": "Manuela",
+  "lastname": "osteda",
+  "dni": "123456",
+  "typeDocument": "CEDULA DE CIUDADANIA",
+  "email": "jorge7aa@hotmail.com",
+  "password": "123456789dvk#",
+  "phone": "3124568596",
+  "role": "ADMINISTRADOR",
+  "nationality": "americano",
+  "image": "https://example.com/users/jorge.jpg",
+  "active": true,
+  "birthdate": "2016-05-15"
+ }
+
+### Actualizar un usuario
+PATCH http://localhost:1234/users/42
+Content-Type: application/json
+
+{
+  "name": "Josué",
+  "lastname": "Ortega"
+}
+
+### Eliminar un usuario
+DELETE http://localhost:1234/users/2
+
+
+
+
+
+
+
+
+
+
+
+
+### Obtener mesas
+GET http://localhost:1234/tables
+
+### Obtener un mesa
+GET http://localhost:1234/tables/5
+
+### Crear un mesa con POST
+POST http://localhost:1234/tables
+Content-Type: application/json
+
+{
+  "number": 41,
+  "capacity": 8,
+  "state": "LIBRE"
+}
+
+### Actualizar un mesa
+PATCH http://localhost:1234/tables/5
+Content-Type: application/json
+
+{
+  "capacity": 6,
+  "state": "LIBRE"
+}
+
+### Eliminar un mesa
+DELETE http://localhost:1234/tables/3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Obtener clientes
+GET http://localhost:1234/clients
+
+### Obtener un cliente
+GET http://localhost:1234/clients/1
+
+### Crear un cliente con POST
+POST http://localhost:1234/clients
+Content-Type: application/json
+
+{
+  "name": "Alejo",
+  "lastname": "Vergel",
+  "email": "als@tmaisal.com",
+  "dni": "5214259632",
+  "typeDocument": "CEDULA DE EXTRANJERIA",
+  "password": "123456789dvk#",
+  "phone": "3124568596",
+  "nationality": "americano",
+  "image": "https://example.com/clients/jorge.jpg",
+  "active": true,
+  "birthdate":"2008-04-01T00:00:00.000Z"
+ }
+
+### Actualizar un cliente
+PATCH http://localhost:1234/clients/22
+Content-Type: application/json
+
+{
+  "name": "Alejo",
+  "lastname": "Mendoza"
+}
+
+### Eliminar un cliente
+DELETE http://localhost:1234/clients/23
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Obtener ordenes
+GET http://localhost:1234/orders
+
+### Obtener ordenes según mesa
+GET http://localhost:1234/orders/table/1
+
+### Obtener un orden
+GET http://localhost:1234/orders/308
+
+### Crear un orden con POST
+POST http://localhost:1234/orders
+Content-Type: application/json
+
+{ 
+  "table_number": 2,
+  "client_id": 1,
+  "user_id": 22
+}
+
+### Actualizar un orden
+PATCH http://localhost:1234/orders/270
+Content-Type: application/json
+
+{
+  "state": "ENTREGADO"
+}
+
+### Eliminar un orden
+DELETE http://localhost:1234/orders/295
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Ver productos de ordenes
+GET http://localhost:1234/order-products/
+
+### Ver productos de orden
+GET http://localhost:1234/order-products/308
+
+### Agregar producto
+POST http://localhost:1234/order-products
+Content-Type: application/json
+
+{
+  "order_id": 270,
+  "product_id": 6,
+  "quantity": 1
+}
+
+### Actualizar un orden
+PATCH http://localhost:1234/order-products/287/5
+Content-Type: application/json
+
+{
+  "quantity": 10
+}
+
+### Eliminar un orden
+DELETE http://localhost:1234/order-products/300/52
+
+
+
+
+
+
+
+### Ver facturas
+GET http://localhost:1234/bills/
+
+### Ver Detalle de factura
+GET http://localhost:1234/bills/5/details
+
+### Ver factura por ID
+GET http://localhost:1234/bills/5
+
+### Agregar factura
+POST http://localhost:1234/bills
+Content-Type: application/json
+
+{
+  "order_id": 271,
+  "user_id": 22,
+  "client_id": 1
+}

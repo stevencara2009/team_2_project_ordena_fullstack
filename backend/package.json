@@ -1,0 +1,26 @@
+{
+  "name": "clase_4_cors_api_rest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:mysql": "node --watch server-with-mysql.js",
+    "start:local": "node --watch server-with-local.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cloudinary": "^1.41.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.2.3",
+    "express": "5.2.1",
+    "multer": "^2.2.0",
+    "multer-storage-cloudinary": "^4.0.0",
+    "mysql2": "^3.16.1",
+    "zod": "4.3.5"
+  }
+}

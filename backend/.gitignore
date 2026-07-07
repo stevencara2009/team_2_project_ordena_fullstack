@@ -1,0 +1,35 @@
+# --- Archivos de Sistema ---
+.DS_Store
+Thumbs.db
+*.tmp
+
+# --- Dependencias ---
+node_modules/
+jspm_packages/
+vendor/
+
+# --- Configuraciones de IDE/Editor ---
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# --- Variables de entorno y secretos (IMPORTANTE) ---
+.env
+.env.local
+.env.development.local
+.env.production.local
+secrets.json
+
+# --- Compilación y Logs ---
+dist/
+build/
+*.log
+*.o
+*.pyc
+
+# --- Ignorar una carpeta específica excepto un archivo ---
+# /logs/
+# !/logs/.keep
