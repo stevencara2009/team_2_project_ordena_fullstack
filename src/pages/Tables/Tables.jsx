@@ -34,7 +34,6 @@ export const Tables = ({ selectedTable, setSelectedTable }) => {
     state: "LIBRE"
   });   // Formulario creación
 
-
   // Filtro por mesa
   const tablesFiltered = tables.filter((table) => {
 
@@ -50,7 +49,6 @@ export const Tables = ({ selectedTable, setSelectedTable }) => {
     return matchesSearch && matchesState;
   });
 
-  
   // HANDLERS PARA SELECCIONAR MESA
   const handleSelectTable = (table) => {
 
@@ -78,7 +76,6 @@ export const Tables = ({ selectedTable, setSelectedTable }) => {
     }));
 
   };
-
 
   // HANDLER CAPTURAR DATOS
   const handleChangeCreate = (e) => {

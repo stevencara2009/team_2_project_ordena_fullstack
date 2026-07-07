@@ -49,7 +49,6 @@ export const ViewOrders = () => {
     }
   }
 
-  
   const ordersFiltered = orders.filter(order => {
     const matchesSearchByOrder = order.id
       ? order.id.toString().includes(orderSearch)
@@ -64,8 +63,6 @@ export const ViewOrders = () => {
 
     return matchesSearchByOrder && matchesSearchByTable && matchesState
   })
-
-
 
   return (
     <div className="background">

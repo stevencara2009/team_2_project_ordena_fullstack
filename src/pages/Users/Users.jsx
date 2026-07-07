@@ -9,7 +9,6 @@ import { UserCreateModal } from "./UserCreateModal.jsx";
 import { UserDeleteModal } from "./UserDeleteModal.jsx";
 
 
-
 export const Users = () => {
 
   const [userSearch, setUserSearch] = useState("")

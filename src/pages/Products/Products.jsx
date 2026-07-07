@@ -25,7 +25,6 @@ export const Products = () => {
   } = useProducts();
 
 
-
   // ESTADO FORMULARIO DETALLE / EDICIÓN (PATCH)
   const [formData, setFormData] = useState({
     id: "",
@@ -44,7 +43,6 @@ export const Products = () => {
     description: "",
     image: ""
   });
-
 
 
   // Combinar filtro de categoría y el de búsqueda por nombre

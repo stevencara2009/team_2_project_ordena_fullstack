@@ -10,8 +10,6 @@ import { useClients } from "../../hooks/useClients.js";
 import { ClientCreateForm } from "./ClientCreateForm.jsx";
 
 
-
-
 export const Register = () => {
 
   const [openModal, setOpenModal] = useState(false)
@@ -48,8 +46,6 @@ export const Register = () => {
       [name]: type === 'checkbox' ? checked : value
     }))
   }
-
-
 
   // ENVIAR DATOS DE FORMULARIO CREACION DE USUARIO
   const handleSubmitCreate = async (e) => {
