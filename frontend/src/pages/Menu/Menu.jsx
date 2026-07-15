@@ -1,10 +1,11 @@
 import styles from "./Menu.module.css";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Input, InputSelect } from "../../components/Input/Input";
 import { MenuItem } from "./MenuItem/MenuItem";
 import { PLATES_TYPE } from "../../data/options";
 import { Loader } from "../../components/Loader/Loader";
 import { useProducts } from "../../hooks/useProducts";
+import { Pagination } from "../../components/Pagination/Pagination";
 
 const ScrollMenu = ({ onSetPlateType }) => {
   const [selectedType, setSelectedType] = useState(null);
@@ -51,6 +52,8 @@ export const Menu = () => {
   const [plateType, setPlateType] = useState("Todos");
   const [productSearched, setProductSearched] = useState("");
   const { products, loading } = useProducts();
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 12; // Muestra el número de productos a mostrar por página
 
   // Combinar filtro de categoría y el de búsqueda por nombre
   const productsFiltered = products.filter((p) => {
@@ -62,6 +65,22 @@ export const Menu = () => {
       .includes(productSearched.toLowerCase());
     return matchesCategory && matchesSearch;
   });
+
+  // Si el usuario busca un producto o cambia de categoría, se devolverá a la página 1
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [plateType, productSearched]);
+
+  // LÓGICA DE PAGINACIÓN (Slicing)
+  const totalPages = Math.ceil(productsFiltered.length / productsPerPage);
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+
+  // Estos son los productos recortados que finalmente se renderizan en pantalla
+  const currentProducts = productsFiltered.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct,
+  );
 
   // ENVIAR DATOS DE FORMULARIO CREACION DE PRODUCTO
   const handleSubmit = (e) => {
@@ -113,9 +132,18 @@ export const Menu = () => {
             <Loader />
           ) : (
             <div className="container-flex">
-              {/* Modulo Platillos*/}
-              <div className={styles.gridPlates}>
-                <MenuItem products={productsFiltered} />
+              <div styles={{ display: "flex" }}>
+                {/* Modulo Platillos*/}
+                <div className={styles.gridPlates}>
+                  <MenuItem products={currentProducts} />
+                </div>
+
+                {/* Paginador */}
+                <Pagination
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={setCurrentPage}
+                />
               </div>
             </div>
           )}
