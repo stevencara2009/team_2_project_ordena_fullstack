@@ -8,7 +8,9 @@ const tableSchema = z.object({
     z.enum([
       "LIBRE",
       "OCUPADA",
-      "RESERVADA"]),
+      "RESERVADA",
+      "DESHABILITADA"
+    ]),
     {
       required_error: "Table category is required",
       invalid_type_error: "Table category must be an array of enum category"

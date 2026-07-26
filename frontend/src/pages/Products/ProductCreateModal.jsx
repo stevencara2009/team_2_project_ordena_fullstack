@@ -1,10 +1,10 @@
-import styles from './Products.module.css'
-import { Input, InputSelect } from '../../components/Input/Input'
-import { Button } from '../../components/Button/Button'
-import { Modal } from '../../components/Modal/Modal'
-import { PLATES_TYPE } from '../../data/options'
-import { uploadProductImage } from '../../services/productService'
-import { useEffect, useState } from 'react'
+import styles from "./Products.module.css";
+import { Input, InputSelect } from "../../components/Input/Input";
+import { Button } from "../../components/Button/Button";
+import { Modal } from "../../components/Modal/Modal";
+import { PLATES_TYPE } from "../../data/options";
+import { uploadProductImage } from "../../services/productService";
+import { useEffect, useState } from "react";
 
 export const ProductCreateModal = ({
   openModal,
@@ -12,66 +12,74 @@ export const ProductCreateModal = ({
   createFormData,
   handleChangeCreate,
   handleCreate,
-  setCreateFormData
+  setCreateFormData,
 }) => {
-
-  const [preview, setPreview] = useState(null)
-  const [uploading, setUploading] = useState(false)
-  const [uploadError, setUploadError] = useState(null)
-  const [submitted, setSubmitted] = useState(false)
+  const [preview, setPreview] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState(null);
+  const [submitted, setSubmitted] = useState(false);
 
   // Si se cierra el modal entonces se reinicia el preview de la imagen
   useEffect(() => {
     if (!openModal) {
-      setPreview(null)
-      setUploadError(null)
+      setPreview(null);
+      setUploadError(null);
     }
-  }, [openModal])
+  }, [openModal]);
 
   useEffect(() => {
     if (submitted) {
-      setPreview(null)
-      setUploadError(null)
-      setSubmitted(false)
+      setPreview(null);
+      setUploadError(null);
+      setSubmitted(false);
     }
-  }, [submitted])
+  }, [submitted]);
 
   const handleFileChange = async (e) => {
-    const file = e.target.files[0]
-    if (!file) return
+    const file = e.target.files[0];
+    if (!file) return;
 
     // Vista previa local inmediata sin esperar a Cloudinary
-    setPreview(URL.createObjectURL(file))
-    setUploadError(null)
-    setUploading(true)
+    setPreview(URL.createObjectURL(file));
+    setUploadError(null);
+    setUploading(true);
 
     try {
-      const { imageUrl } = await uploadProductImage(file)
+      const { imageUrl } = await uploadProductImage(file);
       // Inyecta la URL de Cloudinary en createFormData.image
-      handleChangeCreate({ target: { name: 'image', value: imageUrl } })
+      handleChangeCreate({ target: { name: "image", value: imageUrl } });
     } catch (error) {
-      setUploadError('Error al subir la imagen. Intenta de nuevo.')
-      setPreview(null)
+      setUploadError("Formato de archivo no permitido. Deber ser: .jpeg .png .webp .avif", error);
+      setPreview(null);
     } finally {
-      setUploading(false)
+      setUploading(false);
     }
-  }
-
+  };
 
   const handleClear = () => {
-    setCreateFormData({ name: '', category: '', price: 0, description: '', image: '' })
-    setPreview(null)
-    setUploadError(null)
-  }
+    setCreateFormData({
+      name: "",
+      category: "",
+      price: 0,
+      description: "",
+      image: "",
+    });
+    setPreview(null);
+    setUploadError(null);
+  };
 
   const handleSubmitCreate = async (e) => {
-    const success = await handleCreate(e)
-    if (success)  setSubmitted(true)
-  }
+    const success = await handleCreate(e);
+    if (success) setSubmitted(true);
+  };
 
   return (
-    <Modal isOpenModal={openModal} onCloseModal={() => setOpenModal(false)} onAccept={() => { }} >
-      <div style={{ width: "100%", height: "100%", }}>
+    <Modal
+      isOpenModal={openModal}
+      onCloseModal={() => setOpenModal(false)}
+      onAccept={() => {}}
+    >
+      <div style={{ width: "100%", height: "100%" }}>
         <h2 style={{ color: "black" }}>Crear producto</h2>
         <form onSubmit={handleSubmitCreate}>
           <fieldset>
@@ -95,7 +103,7 @@ export const ProductCreateModal = ({
                 name="category"
                 value={createFormData.category}
                 onChange={handleChangeCreate}
-                data={PLATES_TYPE}
+                data={PLATES_TYPE.slice(1)}
                 variant="Light"
               />
 
@@ -123,14 +131,23 @@ export const ProductCreateModal = ({
                 variant="Light"
               />
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <label style={{ fontWeight: "bold" }}>Imagen del producto (opcional)</label>
+              <div
+                style={{ display: "flex", flexDirection: "column", gap: "8px" }}
+              >
+                <label style={{ fontWeight: "bold" }}>
+                  Imagen del producto (opcional)
+                </label>
 
                 {preview && (
                   <img
                     src={preview}
                     alt="Vista previa"
-                    style={{ width: '100%', maxHeight: '160px', objectFit: 'cover', borderRadius: '8px' }}
+                    style={{
+                      width: "100%",
+                      maxHeight: "160px",
+                      objectFit: "cover",
+                      borderRadius: "8px",
+                    }}
                   />
                 )}
 
@@ -139,12 +156,19 @@ export const ProductCreateModal = ({
                   accept="image/jpeg,image/png,image/webp,image/avif"
                   onChange={handleFileChange}
                   disabled={uploading}
-                  style={{ cursor: 'pointer', fontSize: '9px' }}
+                  style={{ cursor: "pointer", fontSize: "9px" }}
                 />
 
-                {uploading && <span style={{ color: '#888', fontSize: '0.85rem' }}>Subiendo imagen…</span>}
-                {uploadError && <span style={{ color: 'red', fontSize: '0.85rem' }}>{uploadError}</span>}
-
+                {uploading && (
+                  <span style={{ color: "#888", fontSize: "0.85rem" }}>
+                    Subiendo imagen…
+                  </span>
+                )}
+                {uploadError && (
+                  <span style={{ color: "red", fontSize: "0.85rem" }}>
+                    {uploadError}
+                  </span>
+                )}
 
                 <Input
                   label="…o pega una URL"
@@ -155,20 +179,26 @@ export const ProductCreateModal = ({
                   onChange={handleChangeCreate}
                   variant="Light"
                 />
-
+                
               </div>
-
-
 
               <div className={styles.divActionsOrder}>
-                <Button className='btnDelete' text='Borrar' onClick={handleClear} />
-                <Button className='btnAdd' text='Añadir' type='submit' disabled={uploading} />
+                <Button
+                  className="btnDelete"
+                  text="Limpiar"
+                  onClick={handleClear}
+                />
+                <Button
+                  className="btnAdd"
+                  text="Crear"
+                  type="submit"
+                  disabled={uploading}
+                />
               </div>
-
             </div>
           </fieldset>
         </form>
       </div>
     </Modal>
-  )
-} 
+  );
+};

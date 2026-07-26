@@ -58,6 +58,8 @@ export class OrderController {
   create = async (req, res) => {
     try {
       const result = validateOrder(req.body)
+
+
       if (result.error) {
         return res.status(400).json({ error: JSON.parse(result.error.message) })
       }
@@ -65,6 +67,7 @@ export class OrderController {
       const newOrder = await this.orderModel.create({
         input: result.data
       })
+
 
       res.status(201).json(newOrder)
     } catch (error) {

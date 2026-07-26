@@ -126,7 +126,7 @@ export const UserEditForm = ({
                   type="date"
                   className="inputPrimary"
                   name="birthdate"
-                  value={formData.birthdate}
+                  value={formData.birthdate ? formData.birthdate.split("T")[0] : ""}
                   min="1936-04-26"
                   max="2008-04-26"
                   onChange={handleChangeEdit}
@@ -164,7 +164,7 @@ export const UserEditForm = ({
                 name="nationality"
                 value={formData.nationality}
                 onChange={handleChangeEdit}
-                data={COUNTRIES}
+                data={COUNTRIES.slice(1)}
               />
 
               <InputSelect
@@ -173,11 +173,11 @@ export const UserEditForm = ({
                 name="role"
                 value={formData.role}
                 onChange={handleChangeEdit}
-                data={USERS_TYPE}
+                data={USERS_TYPE.slice(1)}
               />
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <label style={{ color: "white", fontSize: '12px' }}>Imagen del producto (opcional)</label>
+                <label style={{ color: "white", fontSize: '12px' }}>Foto de perfil (opcional)</label>
 
                 {preview ? (
                   <img

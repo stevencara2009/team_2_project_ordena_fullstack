@@ -32,7 +32,16 @@ const productSchema = z.object({
   ),
   price: z.number().int().positive(),
   image: z.string().optional(),
-  availability: z.boolean().default(true)
+  availability: z.preprocess(
+    (val) => {
+      if (typeof val === 'number') return val === 1;
+      if (typeof val === 'string') return val === '1' || val === 'true';
+      return val;
+    },
+    z.boolean({
+      invalid_type_error: 'Availability debe ser un booleano (true/false)'
+    })
+  )
 });
 
 export function validateProduct(input) {

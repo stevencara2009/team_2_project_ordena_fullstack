@@ -1,6 +1,6 @@
 import styles from "./Register.module.css"
 import { Input, InputSelect } from '../../components/Input/Input'
-import { USERS_TYPE, DOCUMENTS_TYPE, COUNTRIES } from "../../data/options.js"
+import { DOCUMENTS_TYPE, COUNTRIES } from "../../data/options.js"
 import { Button } from '../../components/Button/Button'
 import { useRef, useState } from 'react'
 import { Link, useNavigate } from "react-router-dom"
@@ -40,6 +40,15 @@ export const ClientCreateForm = ({ createFormData, handleChangeCreate, handleSub
             required
           />
 
+          <InputSelect
+            label="Tipo de documento"
+            className="inputPrimary"
+            name="typeDocument"
+            value={createFormData.typeDocument}
+            onChange={handleChangeCreate}
+            data={DOCUMENTS_TYPE.slice(1)}
+          />
+
           <Input
             label="N° de documento"
             type="text"
@@ -49,15 +58,6 @@ export const ClientCreateForm = ({ createFormData, handleChangeCreate, handleSub
             value={createFormData.dni}
             onChange={handleChangeCreate}
             required
-          />
-
-          <InputSelect
-            label="Tipo de documento"
-            className="inputPrimary"
-            name="typeDocument"
-            value={createFormData.typeDocument}
-            onChange={handleChangeCreate}
-            data={DOCUMENTS_TYPE}
           />
 
           <div style={{ display: "flex" }}>
@@ -108,7 +108,7 @@ export const ClientCreateForm = ({ createFormData, handleChangeCreate, handleSub
             name="nationality"
             value={createFormData.nationality}
             onChange={handleChangeCreate}
-            data={COUNTRIES}
+            data={COUNTRIES.slice(1)}
           />
 
           <div style={{ display: "flex" }}>

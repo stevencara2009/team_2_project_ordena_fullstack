@@ -1,27 +1,46 @@
-import { Link,useNavigate } from 'react-router-dom'
-import { Button } from '../../components/Button/Button'
-import styles from './NotFound.module.css'
+import { useNavigate } from 'react-router-dom';
+import { Button } from '../../components/Button/Button'; // Importamos tu componente Button
+import styles from './NotFound.module.css';
 
 export const NotFound = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-
-  const handleClic = (e) => {
+  // Función simplificada para manejar el clic y navegar a inicio
+  const handleGoHome = (e) => {
     e.stopPropagation();
-    navigate('/');
-  }
+    navigate('/index'); // Navega a la raíz, que suele ser tu página de inicio
+  };
 
   return (
-    <div className="" style={{backgroundColor: "black"}}>
-      <br />
-      <br />
-      <br />
-      <br />
-      <h1>Pagina no encontrada</h1>
-      <div className={styles.divButton} onClick={handleClic} >
-        <Link to="/index"><li className={styles.navItem}>Ir a inicio</li></Link>
+    <div className={styles.notFoundContainer}>
+      <div className={styles.content}>
+        
+        {/* Icono visual grande */}
+        <div className={styles.iconArea}>
+          <i className="fa-solid fa-circle-exclamation fa-7x"></i>
+        </div>
+
+        {/* Título y Mensaje */}
+        <div className={styles.textArea}>
+          <h1 className={styles.title}>404</h1>
+          <h2 className={styles.subtitle}>¡Ups! Página no encontrada.</h2>
+          <p className={styles.message}>
+            Parece que el enlace que seguiste está roto o la página ha sido movida.
+          </p>
+        </div>
+
+        {/* Botón Principal (Reutilizando tu componente Button) */}
+        <div className={styles.buttonArea}>
+          <Button 
+            variant="orange" // Asumimos que "orange" es una de las variantes de tu Button
+            onClick={handleGoHome}
+            text="Ir a inicio" // Asumimos que tu Button acepta 'text'
+          >
+            Regresar a Inicio
+          </Button>
+        </div>
+
       </div>
-      <br />
     </div>
-  )
-}
+  );
+};

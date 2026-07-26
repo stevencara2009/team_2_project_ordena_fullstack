@@ -1,3 +1,5 @@
+
+/*
 const API_URL = import.meta.env.VITE_API_URL;
 
 
@@ -18,7 +20,7 @@ export const getClients = async () => {
 
 // Servicio para crear un cliente
 export const createClient = async (product) => {
-  const response = await fetch(`${API_URL}/clients`, {
+  const response = await fetch(`${API_URL}/users`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -63,3 +65,5 @@ export const deleteClient = async (id) => {
     throw new Error("Error eliminando cliente");
   }
 }
+
+*/

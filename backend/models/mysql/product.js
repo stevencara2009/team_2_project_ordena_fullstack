@@ -42,10 +42,11 @@ export class ProductModel {
 
   static async getById({ id }) {
     const [products] = await connection.query(
-      `SELECT id, name, category, availability, price, image, created_at  FROM tbl_products WHERE id = ?;`, [id]
+      `SELECT * FROM tbl_products WHERE id = ?;`, [id]
     )
 
     if (products.length === 0) return null
+
     return products
   }
 

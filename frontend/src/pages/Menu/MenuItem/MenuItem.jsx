@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import styles from './MenuItem.module.css'
-import no_img from '../../../assets/no_image.png'
+import noPhoto from "../../../assets/without_photo_product.jpg"
 
 export const MenuItem = ({ products }) => {
 
@@ -10,9 +10,9 @@ export const MenuItem = ({ products }) => {
     <>
       {products.map((p) => (
         <div className={`${styles.productItem} ${selectedProduct === p.id ? styles.productOrange : styles.productItem}`} key={p.id} onClick={() => setSelectedProduct(p.id)}  >
-          <img src={p.image || no_img } alt={p.name} className={styles.productItemImg} onError={(e) => {
+          <img src={p.image || noPhoto } alt={p.name} className={styles.productItemImg} onError={(e) => {
             e.target.onError = null;
-            e.target.src = no_img;
+            e.target.src = noPhoto;
           }}/>
           <h4 className={styles.productItemTitle}>{p.name}</h4>
           <p className={styles.productItemDescription}>{p.description} </p>

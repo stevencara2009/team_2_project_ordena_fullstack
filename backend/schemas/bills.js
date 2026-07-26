@@ -1,26 +1,27 @@
-import z from 'zod'
+import z from "zod";
 
 const billSchema = z.object({
-
-  order_id: z.number({
-    required_error: 'Order id is required'
-  })
+  order_id: z
+    .number({
+      required_error: "Order id is required",
+    })
     .int()
     .positive(),
 
-  user_id: z.number({
-    required_error: 'User id is required'
-  })
+  user_id: z
+    .number({
+      required_error: "User id is required",
+    })
     .int()
     .positive(),
 
-  client_id: z.number()
-    .int()
-    .positive()
-    .optional()
+  client_id: z.number().optional().nullable(),
 
-})
+  order_id: z.number().int().positive().optional(),
+
+  cashier_id: z.number().int().positive().optional(),
+});
 
 export function validateBill(input) {
-  return billSchema.safeParse(input)
+  return billSchema.safeParse(input);
 }

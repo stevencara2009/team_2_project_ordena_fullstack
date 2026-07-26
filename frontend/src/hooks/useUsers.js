@@ -4,14 +4,13 @@ import {
   getUsers,
   createUser,
   updateUser,
-  deleteUser
+  deleteUser,
 } from "../services/userService";
 
-
 export const useUsers = () => {
-
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   // FUNCIÓN PARA CARGAR USUARIOS
   const loadUsers = async () => {
@@ -30,20 +29,21 @@ export const useUsers = () => {
     loadUsers();
   }, []);
 
-
   // METODO PARA AGREGAR UN USUARIO
   const addUser = async (user) => {
     try {
       setLoading(true);
+      setError(null);
       await createUser(user);
       await loadUsers();
-    } catch (error) {
-      console.error(error);
+      return true;
+    } catch (err) {
+      setError(err.message || "Error al agregar el usuario");
+      return false;
     } finally {
       setLoading(false);
     }
   };
-
 
   // METODO PARA EDITAR UN USUARIO
   const editUser = async (id, user) => {
@@ -58,7 +58,6 @@ export const useUsers = () => {
     }
   };
 
-
   // METODO PARA ELIMINAR UN USUARIO
   const removeUser = async (id) => {
     try {
@@ -72,13 +71,14 @@ export const useUsers = () => {
     }
   };
 
-
   return {
     users,
     loading,
+    error,
+    setError,
     addUser,
     editUser,
     removeUser,
-    loadUsers
+    loadUsers,
   };
 };

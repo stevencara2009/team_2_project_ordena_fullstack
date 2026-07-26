@@ -1,0 +1,143 @@
+/* ============================================
+   COMPONENTE: ACCESO DENEGADO
+   ============================================ */
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 50px);
+  padding: var(--space-4);
+  width: 100%;
+}
+
+.card {
+  background-color: rgba(0, 0, 0, 0.90);
+  border: 1px solid rgb(166, 43, 15); /* Borde acentuado con el rojo borgoña */
+  border-radius: 12px;
+  padding: var(--space-8) var(--space-6);
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Ilustración / Icono temático de Gastronomía / Bloqueo */
+.iconContainer {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: rgba(166, 43, 15, 0.15);
+  border: 2px solid rgb(166, 43, 15);
+  color: rgb(217, 101, 35); /* Tu naranja principal */
+  margin-bottom: var(--space-4);
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  stroke: rgb(217, 101, 35);
+}
+
+.badge {
+  display: inline-block;
+  background-color: rgb(115, 31, 13);
+  color: rgb(242, 242, 235);
+  font-size: var(--font-size-xs);
+  font-weight: bold;
+  letter-spacing: 1px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: var(--space-3);
+  text-transform: uppercase;
+}
+
+.title {
+  color: rgb(242, 242, 235);
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--space-2);
+}
+
+.description {
+  color: rgba(242, 242, 235, 0.8);
+  font-size: var(--font-size-base);
+  margin-bottom: var(--space-6);
+  line-height: 1.5;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.btnPrimary,
+.btnSecondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--font-size-sm);
+  font-weight: bold;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border: none;
+  width: 100%;
+}
+
+/* Botón Principal (Volver al inicio) */
+.btnPrimary {
+  background-color: rgb(217, 101, 35);
+  color: rgb(242, 242, 235);
+}
+
+.btnPrimary:hover {
+  background-color: rgb(166, 43, 15);
+}
+
+/* Botón Secundario (Regresar) */
+.btnSecondary {
+  background-color: transparent;
+  color: rgb(242, 242, 235);
+  border: 1px solid rgb(89, 34, 14);
+}
+
+.btnSecondary:hover {
+  background-color: rgba(89, 34, 14, 0.4);
+  border-color: rgb(166, 43, 15);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   RESPONSIVE: Pantallas Medianas y Grandes
+   ============================================ */
+@media (min-width: 640px) {
+  .card {
+    padding: var(--space-12) var(--space-8);
+  }
+
+  .title {
+    font-size: var(--font-size-3xl);
+  }
+
+  .actions {
+    flex-direction: row;
+  }
+}

@@ -1,9 +1,10 @@
 import styles from './Modal.module.css';
+import { createPortal } from 'react-dom';
 
 export function Modal({ isOpenModal, onCloseModal, children }) {
   if (!isOpenModal) return null;
 
-  return (
+  return createPortal(
     <div className={styles.modalOverlay} onClick={onCloseModal}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}  >
 
@@ -17,6 +18,6 @@ export function Modal({ isOpenModal, onCloseModal, children }) {
         {children}
       </div>
     </div>
-  );
+  , document.body);
 }
 

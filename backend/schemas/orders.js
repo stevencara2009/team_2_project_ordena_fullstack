@@ -8,7 +8,7 @@ const orderSchema = z.object({
 
     client_id: z.number({
         invalid_type_error: 'Client id must be a number'
-    }).int().positive().optional(),
+    }).int().positive().optional().nullable(),
 
     user_id: z.number({
         invalid_type_error: 'User id must be a number',

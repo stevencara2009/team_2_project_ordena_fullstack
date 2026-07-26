@@ -43,3 +43,7 @@
 .reserved {
   background: #f39c12;
 }
+
+.disabled {
+  background: black;
+}

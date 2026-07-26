@@ -124,7 +124,7 @@ export class OrderProductModel {
                 // SI EXISTE -> SUMAR CANTIDAD Y ACTUALIZAR NOTES
                 await conn.query(`
                 UPDATE TBL_ORDER_PRODUCTS
-                SET quantity = quantity + ?, notes + ?
+                SET quantity = quantity + ?, notes = ?
                 WHERE order_id = ?
                 AND product_id = ?
                 `, [

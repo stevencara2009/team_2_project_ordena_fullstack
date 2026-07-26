@@ -63,7 +63,8 @@ export const Menu = () => {
     const matchesSearch = p.name
       .toLowerCase()
       .includes(productSearched.toLowerCase());
-    return matchesCategory && matchesSearch;
+    const availableProducts = p.availability === 1
+    return matchesCategory && matchesSearch && availableProducts
   });
 
   // Si el usuario busca un producto o cambia de categoría, se devolverá a la página 1
@@ -87,6 +88,7 @@ export const Menu = () => {
     e.preventDefault();
   };
 
+      console.log(productsFiltered[0])
   return (
     <div className="background">
       <div className="container">

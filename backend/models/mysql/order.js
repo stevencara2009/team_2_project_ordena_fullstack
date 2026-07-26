@@ -40,11 +40,11 @@ export class OrderModel {
         INNER JOIN TBL_TABLES t
             ON o.table_number = t.number
 
-        LEFT JOIN TBL_CLIENTS c
+        LEFT JOIN TBL_USERS c
             ON o.client_id = c.id
 
         INNER JOIN TBL_USERS u
-            ON o.user_id = u.id
+            ON o.waiter_id = u.id
 
         ORDER BY o.id DESC
         `)
@@ -91,13 +91,14 @@ export class OrderModel {
     // =========================================
     static async create({ input }) {
 
+
         const {
             table_number,
             client_id,
             user_id
         } = input
-
-
+        console.log(input)
+        
         // INICIAR TRANSACCION
         const pool = mysql.createPool(config)
         const conn = await pool.getConnection()
@@ -114,6 +115,7 @@ export class OrderModel {
 
             const table = tables[0]
 
+
             if (!table) {
                 throw new Error('Table not found')
             }
@@ -129,7 +131,7 @@ export class OrderModel {
             (
             table_number,
             client_id,
-            user_id
+            waiter_id
             )
             VALUES (?, ?, ?)
             `, [

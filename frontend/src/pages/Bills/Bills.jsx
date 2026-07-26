@@ -57,8 +57,9 @@ export const Bills = () => {
       // 1. Crear la factura
       const newBill = await addBill({
         order_id: order.id,
-        user_id: user.id,
-        client_id: order.client_id ?? 1
+        cashier_id: user.id,
+        user_id: order.waiter_id ?? user.id,
+        client_id: order.client_id ?? null
       })
 
       // 2. Cambiar estado de la orden a FACTURADO

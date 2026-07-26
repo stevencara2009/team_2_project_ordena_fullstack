@@ -1,45 +1,36 @@
-import mysql from 'mysql2/promise'
-import { toUpperCase } from 'zod'
+import mysql from "mysql2/promise";
+import { toUpperCase } from "zod";
+import bcrypt from "bcryptjs";
 
 const config = {
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   port: process.env.DB_PORT,
   password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE
-}
+  database: process.env.DB_DATABASE,
+};
 
-const connection = await mysql.createConnection(config)
+const connection = await mysql.createConnection(config);
 
 export class UserModel {
-
   // =========================================
   // OBTENER USUARIOS
   // =========================================
   static async getAll({ role }) {
     if (role) {
-      const lowerCaseRole = role.toLowerCase()
+      const lowerCaseRole = role.toLowerCase();
       const [roles] = await connection.query(
-        'SELECT * FROM tbl_users WHERE LOWER(role) = ?;', [lowerCaseRole]
-      )
+        "SELECT * FROM tbl_users WHERE LOWER(role) = ?;",
+        [lowerCaseRole],
+      );
       // No role found
-      if (roles.length === 0) return []
+      if (roles.length === 0) return [];
 
-      // get the id from the first role result
-      //const [{ id }] = roles
-
-      // get all users ids from database table
-      // query to user roles
-      // join 
-      // return results
-      return roles
+      return roles;
     }
 
-
-    const [users] = await connection.query(
-      'SELECT * FROM tbl_users;'
-    )
-    return users
+    const [users] = await connection.query("SELECT * FROM tbl_users;");
+    return users;
   }
 
   // =========================================
@@ -47,18 +38,18 @@ export class UserModel {
   // =========================================
   static async getById({ id }) {
     const [users] = await connection.query(
-      `SELECT * FROM tbl_users WHERE id = ?;`, [id]
-    )
+      `SELECT * FROM tbl_users WHERE id = ?;`,
+      [id],
+    );
 
-    if (users.length === 0) return null
-    return users
+    if (users.length === 0) return null;
+    return users;
   }
 
   // =========================================
   // CREAR USUARIO
   // =========================================
   static async create({ input }) {
-
     const {
       name,
       lastname,
@@ -71,126 +62,148 @@ export class UserModel {
       nationality,
       image,
       active,
-      birthdate
-    } = input
+      birthdate,
+    } = input;
 
-
-    /* const [uuidResult] = await connection.query(`SELECT UUID() uuid;`)
-    const [{ uuid }] = uuidResult */
-
-    let insertId
+    let insertId;
 
     try {
+      const hashedPassword = await bcrypt.hash(password, 10);
       const [result] = await connection.query(
         `INSERT INTO tbl_users (name, lastname, dni, typeDocument, email, password, phone, role, nationality, image, active, birthdate) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`,
-        [name, lastname, dni, typeDocument, email, password, phone, role, nationality, image, active, birthdate]
-      )
-      insertId = result.insertId
+        [
+          name,
+          lastname,
+          dni,
+          typeDocument,
+          email,
+          hashedPassword,
+          phone,
+          role,
+          nationality,
+          image,
+          active,
+          birthdate,
+        ],
+      );
+
+      insertId = result.insertId;
     } catch (e) {
-      console.error(e)
-      throw new Error('Error creating user')
+      // Capturamos el error de clave duplicada de MySQL (Duplicate entry)
+      if (e.code === "ER_DUP_ENTRY" || e.errno === 1062) {
+        const customError = new Error("EmailAlreadyExists");
+        customError.code = "EMAIL_DUPLICATED";
+        throw customError;
+      }
+
+      console.error("Error no controlado en UserModel.create:", e);
+      throw new Error("DatabaseError");
     }
 
-
-
     const [users] = await connection.query(
-      `SELECT * FROM tbl_users WHERE id = ? ;`, [insertId]
-    )
-    return users[0]
+      `SELECT * FROM tbl_users WHERE id = ? ;`,
+      [insertId],
+    );
+    return users[0];
   }
 
   // =========================================
   // ACTUALIZAR USUARIO
   // =========================================
   static async update({ id, input }) {
-    const fields = []
-    const values = []
+    const fields = [];
+    const values = [];
 
     if (input.name !== undefined) {
-      fields.push('name = ?')
-      values.push(input.name)
+      fields.push("name = ?");
+      values.push(input.name);
     }
 
     if (input.lastname !== undefined) {
-      fields.push('lastname = ?')
-      values.push(input.lastname)
+      fields.push("lastname = ?");
+      values.push(input.lastname);
     }
 
     if (input.dni !== undefined) {
-      fields.push('dni = ?')
-      values.push(input.dni)
+      fields.push("dni = ?");
+      values.push(input.dni);
     }
 
     if (input.email !== undefined) {
-      fields.push('email = ?')
-      values.push(input.email)
+      fields.push("email = ?");
+      values.push(input.email);
     }
 
     if (input.password !== undefined) {
-      fields.push('password = ?')
-      values.push(input.password)
+      fields.push("password = ?");
+      values.push(input.password);
     }
 
     if (input.phone !== undefined) {
-      fields.push('phone = ?')
-      values.push(input.phone)
+      fields.push("phone = ?");
+      values.push(input.phone);
     }
 
     if (input.role !== undefined) {
-      fields.push('role = ?')
-      values.push(input.role)
+      fields.push("role = ?");
+      values.push(input.role);
+    }
+
+    if (input.birthdate !== undefined) {
+      fields.push("birthdate = ?");
+      values.push(input.birthdate);
     }
 
     if (input.nationality !== undefined) {
-      fields.push('nationality = ?')
-      values.push(input.nationality)
+      fields.push("nationality = ?");
+      values.push(input.nationality);
     }
 
     if (input.image !== undefined) {
-      fields.push('image = ?')
-      values.push(input.image)
+      fields.push("image = ?");
+      values.push(input.image);
     }
 
     if (input.created_at !== undefined) {
-      fields.push('created_at = ?')
-      values.push(input.created_at)
+      fields.push("created_at = ?");
+      values.push(input.created_at);
     }
 
     await connection.query(
       `UPDATE tbl_users SET 
-        ${fields.join(',')}
-      WHERE id = ?;`, [...values, id]
-    )
+        ${fields.join(",")}
+      WHERE id = ?;`,
+      [...values, id],
+    );
 
-    if (fields.length === 0) return null
+    if (fields.length === 0) return null;
 
     const [users] = await connection.query(
-      `SELECT * FROM tbl_users WHERE id = ?;`, [id]
-    )
+      `SELECT * FROM tbl_users WHERE id = ?;`,
+      [id],
+    );
 
-    return users[0]
+    return users[0];
   }
-
 
   // =========================================
   // ELIMINAR USUARIO
   // =========================================
   static async delete({ id }) {
     const [users] = await connection.query(
-      `DELETE FROM tbl_users WHERE id = ?;`, [id]
-    )
+      `DELETE FROM tbl_users WHERE id = ?;`,
+      [id],
+    );
   }
 
   // =========================================
   // LOGUEARSE
-  // ========================================= 
+  // =========================================
   static async usernameLogin({ email }) {
     const [users] = await connection.query(
-      'SELECT * FROM tbl_users WHERE email = ?;',
-      [email]
+      "SELECT * FROM tbl_users WHERE email = ?;",
+      [email],
     );
-    return users[0]
+    return users[0];
   }
-
-
 }

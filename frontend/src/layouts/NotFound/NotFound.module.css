@@ -1,26 +1,58 @@
-.divButton {
-    width: 150px;
-    height: 25px;
-    margin: 0 auto;
+/* Contenedor principal a pantalla completa */
+.notFoundContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh; /* Ocupa al menos el alto de la ventana */
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 20px;
 }
 
-.navItem {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    justify-items: center;
-    list-style-type: none;
-    color: white;
-    font-size: 0.8rem;
-    cursor: pointer;
-    width: 150px;
-    height: 100%;
-    border-radius: 5px;
-    background-color: rgb(217, 101, 35);
+/* Contenedor de contenido para agrupar elementos */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px; /* Espaciado automático entre elementos */
+  max-width: 500px;
 }
 
-.navItem:hover {
-    background-color: rgb(146, 70, 25);
-    transition: 0.2s ease-in-out;
+/* Área del Icono (usando el color naranja de tu app) */
+.iconArea {
+  color: rgb(217, 101, 35); /* Tu color naranja original */
+}
+
+/* Área de Texto */
+.textArea {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.title {
+  font-size: 6rem; /* Título 404 muy grande */
+  font-weight: bold;
+  margin: 0;
+  line-height: 1;
+}
+
+.subtitle {
+  font-size: 1.8rem;
+  margin: 0;
+  color: #f1f1f1;
+}
+
+.message {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #ccc;
+  margin: 0 auto;
+  max-width: 90%;
+}
+
+/* Área del Botón (Simplificado) */
+.buttonArea {
+  margin-top: 10px;
 }

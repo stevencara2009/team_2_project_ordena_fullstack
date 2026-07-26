@@ -193,7 +193,7 @@ export const UserCreateModal = ({
                 name="nationality"
                 value={createFormData.nationality}
                 onChange={handleChangeCreate}
-                data={COUNTRIES}
+                data={COUNTRIES.slice(1)}
                 variant="Light"
               />
 
@@ -203,7 +203,7 @@ export const UserCreateModal = ({
                 name="role"
                 value={createFormData.role}
                 onChange={handleChangeCreate}
-                data={USERS_TYPE}
+                data={USERS_TYPE.slice(1)}
                 variant="Light"
               />
 
@@ -273,8 +273,8 @@ export const UserCreateModal = ({
               />
 
               <div className={styles.divActionsOrder}>
-                <Button text='Borrar' className='btnDelete' onClick={handleClear} />
-                <Button text='Añadir' className='btnAdd' type='submit' />
+                <Button text='Limpiar' className='btnDelete' onClick={handleClear} />
+                <Button text='Crear' className='btnAdd' type='submit' />
               </div>
 
             </div>

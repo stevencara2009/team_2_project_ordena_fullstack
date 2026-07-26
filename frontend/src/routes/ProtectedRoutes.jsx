@@ -1,19 +1,27 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import { Loader } from "../components/Loader/Loader";
+import AccessDenied from "../components/AccessDenied/AccessDenied";
 
-export const  ProtectedRoute = ({ children, allowedRoles}) => {
-    const {user} = useAuth()
 
-    // No loguedo
-    if(!user){
-        return <Navigate to="/login" />
-    }
+export const ProtectedRoute = ({ children, allowedRoles }) => {
+  const { user, loading } = useAuth();
 
-    // Sin permisos
-    if(!allowedRoles.includes(user.role)){
-        return(<h2>⛔ Acceso denegado</h2>)
-    }
+  if (loading) {
+    return <Loader />;
+  }
 
-    return children 
+  // No loguedo
+  if (!user) {
+    return <Navigate to="/login" />;
+  }
 
-} 
+  // Sin permisos
+  if (!allowedRoles.includes(user.role)) {
+    return (
+      <AccessDenied />
+    )
+  }
+
+  return children;
+};

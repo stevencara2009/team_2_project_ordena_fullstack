@@ -126,52 +126,6 @@ DELETE http://localhost:1234/tables/3
 
 
 
-### Obtener clientes
-GET http://localhost:1234/clients
-
-### Obtener un cliente
-GET http://localhost:1234/clients/1
-
-### Crear un cliente con POST
-POST http://localhost:1234/clients
-Content-Type: application/json
-
-{
-  "name": "Alejo",
-  "lastname": "Vergel",
-  "email": "als@tmaisal.com",
-  "dni": "5214259632",
-  "typeDocument": "CEDULA DE EXTRANJERIA",
-  "password": "123456789dvk#",
-  "phone": "3124568596",
-  "nationality": "americano",
-  "image": "https://example.com/clients/jorge.jpg",
-  "active": true,
-  "birthdate":"2008-04-01T00:00:00.000Z"
- }
-
-### Actualizar un cliente
-PATCH http://localhost:1234/clients/22
-Content-Type: application/json
-
-{
-  "name": "Alejo",
-  "lastname": "Mendoza"
-}
-
-### Eliminar un cliente
-DELETE http://localhost:1234/clients/23
-
-
-
-
-
-
-
-
-
-
-
 
 
 

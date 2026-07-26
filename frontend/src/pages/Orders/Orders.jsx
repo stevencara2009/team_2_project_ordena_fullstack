@@ -29,7 +29,11 @@ export const Orders = () => {
   })
 
   const filteredProducts = apiProducts.filter(
-    product => product.category === formData.category
+    product => {
+      const matchesCategory = product.category === formData.category
+      const matchesAvailability = product.availability === 1
+      return matchesCategory && matchesAvailability
+    }
   )
 
   // Capturar cambios del formulario
@@ -52,7 +56,7 @@ export const Orders = () => {
     try {
       const payload = {
         table_number: Number(table),
-        client_id: 1,
+        client_id: null,
         user_id: user.id
       }
 
@@ -119,7 +123,7 @@ export const Orders = () => {
 
     setLoading(true)
     try {
-      await updateOrder(currentOrder.id, { state: 'EN PREPARACION' })
+      await updateOrder(currentOrder.id, { state: 'PENDIENTE' })
       alert(`Pedido #${currentOrder.id} enviado a cocina`)
 
       // Limpiar el formulario para un nuevo pedido
@@ -236,7 +240,7 @@ export const Orders = () => {
                       name="category"
                       value={formData.category}
                       onChange={handleChange}
-                      data={PLATES_TYPE}
+                      data={PLATES_TYPE.slice(1)}
                     />
 
                     <InputSelect

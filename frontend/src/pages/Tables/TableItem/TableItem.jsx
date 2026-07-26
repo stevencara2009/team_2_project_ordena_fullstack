@@ -8,11 +8,11 @@ export const TableItem = ({ tables, onSelectTable }) => {
       {tables.map((table) => (
         <div
           key={table.number}
-          className={`${styles.tableItem}  ${table.state === "LIBRE"
-            ? styles.free
-            : table.state === "OCUPADA"
-              ? styles.busy
-              : styles.reserved
+          className={`${styles.tableItem}  ${
+            table.state === "LIBRE" ? styles.free
+            : table.state === "OCUPADA" ? styles.busy
+            : table.state === "RESERVADA" ? styles.reserved
+            : styles.disabled
             }`}
           onClick={() => onSelectTable(table)}
 

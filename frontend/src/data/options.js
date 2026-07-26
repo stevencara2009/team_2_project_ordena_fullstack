@@ -14,9 +14,8 @@ export const PLATES_TYPE = [
   "Platos fuertes",
 ];
 
-//Eliminar: Saludable
-
 export const DOCUMENTS_TYPE = [
+  "Todos",
   "CEDULA DE CIUDADANIA",
   "CEDULA DE EXTRANJERIA",
   "PASAPORTE",
@@ -31,7 +30,13 @@ export const USERS_TYPE = [
   "CLIENTE",
 ];
 
-export const TABLES_STATE = ["Todos", "LIBRE", "OCUPADA", "RESERVADA"];
+export const TABLES_STATE = [
+  "Todos",
+  "LIBRE",
+  "OCUPADA",
+  "RESERVADA",
+  "DESHABILITADA",
+];
 
 export const ORDERS_STATE = [
   "Todos",
@@ -43,6 +48,7 @@ export const ORDERS_STATE = [
 ];
 
 export const COUNTRIES = [
+  "Todos",
   "Afghanistan",
   "Åland Islands",
   "Albania",
@@ -300,4 +306,10 @@ export const FILTERS_BY = [
   "Más antiguos",
   "Mayor precio",
   "Menor precio",
+];
+
+export const AVAILABILITY = [
+  { value: "", label: "Todas" }, // Si slice(1) omite este
+  { value: 1, label: "DISPONIBLE" },
+  { value: 0, label: "AGOTADO" },
 ];

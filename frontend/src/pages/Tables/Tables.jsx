@@ -246,9 +246,7 @@ export const Tables = ({ selectedTable, setSelectedTable }) => {
               name="state"
               value={formData.state}
               onChange={handleChangeEdit}
-              data={TABLES_STATE.filter(
-                state => state !== "Todos"
-              )}
+              data={TABLES_STATE.slice(1)}
               className="inputPrimary"
             />
 
