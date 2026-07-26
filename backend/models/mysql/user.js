@@ -224,5 +224,40 @@ export class UserModel {
     return users[0] ?? null;
   }
 
+  
+  // =========================================
+  // GUARDAR TOKEN DE RECUPERACION
+  // =========================================
+  static async setResetToken({ email, token, expires }) {
+    const [result] = await connection.query(
+      `UPDATE tbl_users SET reset_token = ?, reset_token_expires = ? WHERE email = ?;`,
+      [token, expires, email],
+    );
+    return result.affectedRows > 0;
+  }
+
+  // =========================================
+  // BUSCAR USUARIO POR TOKEN VALIDO
+  // =========================================
+  static async getByResetToken({ token }) {
+    const [users] = await connection.query(
+      `SELECT * FROM tbl_users WHERE reset_token = ? AND reset_token_expires > NOW();`,
+      [token],
+    );
+    return users[0] ?? null;
+  }
+
+  // =========================================
+  // ACTUALIZAR CONTRASEÑA Y LIMPIAR TOKEN
+  // =========================================
+  static async resetPassword({ id, hashedPassword }) {
+    const [result] = await connection.query(
+      `UPDATE tbl_users SET password = ?, reset_token = NULL, reset_token_expires = NULL WHERE id = ?;`,
+      [hashedPassword, id],
+    );
+    return result.affectedRows > 0;
+  }
+
+
 
 }

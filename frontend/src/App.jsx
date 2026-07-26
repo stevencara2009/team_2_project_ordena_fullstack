@@ -16,6 +16,7 @@ import { Menu } from "./pages/Menu/Menu";
 import { Bills } from "./pages/Bills/Bills";
 import { Profile } from "./pages/Profile/Profile";
 import { BillsHistory } from "./pages/BillHistory/BillsHistory";
+import { ResetPassword } from "./pages/ResetPassword/ResetPassword";
 
 function App() {
   const { user } = useAuth();
@@ -118,7 +119,8 @@ function App() {
             }
           />
         </Route>
-
+        
+        <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

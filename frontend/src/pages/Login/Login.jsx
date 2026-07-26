@@ -7,6 +7,7 @@ import { Loader } from "../../components/Loader/Loader";
 import { useAuth } from "../../hooks/useAuth";
 import { roleRoutes } from "../../utils/roleRoutes";
 import { Modal } from "../../components/Modal/Modal";
+import * as authService from '../../services/authService'
 
 
 export const Login = () => {
@@ -66,18 +67,23 @@ export const Login = () => {
   }
 
     // FUNCIÓN PARA ENVIAR EL CORREO DE RECUPERACION
-    const handleSubmitEmailToRecoverCredencials = (e) => {
-
+    const handleSubmitEmailToRecoverCredencials = async (e) => {
       e.preventDefault();
+
       if (!email.includes('@')) {
         alert("Debes ingresar un correo válido")
         return
       }
 
-      console.log("El correo a recuperar es: ", email)
-      alert("Se envió correo de recuperación a ", email)
-      setOpenModal(false);
-      setEmail("")
+      try {
+        await authService.forgotPassword(email)
+        alert("Si el correo está registrado, se envió un enlace de recuperación")
+      } catch (error) {
+        alert(error.message || "No fue posible enviar el correo de recuperación")
+      } finally {
+        setOpenModal(false)
+        setEmail("")
+      }
     };
 
     return (
@@ -128,7 +134,7 @@ export const Login = () => {
               </div>
 
               {/* Modal Recuperación de credenciales */}
-              <Modal isOpenModal={openModal} onCloseModal={() => setOpenModal(!openModal)} onAccept={() => { }} >
+              <Modal isOpenModal={openModal} onCloseModal={() => setOpenModal(!openModal)} >
                 <div style={{ width: "100%", height: "100%", }}>
                   <h3 style={{ color: "black" }}>Recuperar contraseña</h3>
                   <fieldset>

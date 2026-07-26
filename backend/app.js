@@ -31,7 +31,6 @@ export const createApp = ({ productModel, userModel, tableModel, orderModel, ord
   app.use('/bills', createBillRouter({ billModel }))
   app.use('/api/auth', createAuthRouter({ userModel }))
 
-  
   const PORT = process.env.PORT ?? 1234
 
   app.listen(PORT, () => {

@@ -8,7 +8,7 @@ import { Modal } from "../../components/Modal/Modal"
 import { BillDetail } from "../../pages/Bills/BillDetail/BillDetail"
 
 export function Profile() {
-  // Si no se le pasa un usuario específico por prop, toma el usuario autenticado del Context
+
   const { user } = useAuth();
   const {
     bills,
