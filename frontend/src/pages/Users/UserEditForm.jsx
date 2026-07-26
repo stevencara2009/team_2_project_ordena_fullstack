@@ -1,6 +1,6 @@
 import styles from './Users.module.css'
 import { Input, InputSelect } from '../../components/Input/Input'
-import { USERS_TYPE, DOCUMENTS_TYPE, COUNTRIES } from "../../data/options.js"
+import { USERS_TYPE, DOCUMENTS_TYPE, COUNTRIES, USER_STATE } from "../../data/options.js"
 import { uploadUserImage } from '../../services/userService.js'
 import { Button } from '../../components/Button/Button'
 import { useEffect, useRef, useState } from 'react'
@@ -218,35 +218,17 @@ export const UserEditForm = ({
                   onChange={handleChangeEdit}
                 />
 
-              </div>
-
-
-              <div style={{ display: "flex" }}>
-                <Input
-                  label="Cambiar contraseña"
-                  type={!visible ? "password" : "text"}
-                  placeholder=""
+                <InputSelect
+                  label="Estado"
                   className="inputPrimary"
-                  name="password"
-                  value={formData.password}
+                  name="active"
+                  value={formData?.active}
                   onChange={handleChangeEdit}
-                  required
+                  data={USER_STATE.slice(1)}
                 />
-                <i className={`fa-solid fa-eye ${styles.icon}`}
-                  onClick={() => setVisible(!visible)}
-                ></i>
+
               </div>
 
-              <Input
-                label="Confirme Contraseña"
-                type={!visible ? "password" : "text"}
-                placeholder=""
-                className="inputPrimary"
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleChangeEdit}
-                required
-              />
 
               <div className={styles.divActionsOrder}>
                 <Button text='Eliminar' className='btnDelete' onClick={() => {

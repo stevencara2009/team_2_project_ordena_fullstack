@@ -63,7 +63,7 @@ export const OrderItem = ({
             {/* Fila Inferior: Total */}
             <div className={styles.footerRow}>
               <span className={styles.totalLabel}>Total:</span>
-              <span className={styles.totalAmount}>$ {order.total || '28,000'}</span>
+              <span className={styles.totalAmount}>$ {order.total || '0'}</span>
             </div>
           </div>
         )

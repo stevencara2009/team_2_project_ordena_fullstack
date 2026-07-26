@@ -47,11 +47,18 @@ export const MenuHamburguer = () => {
 
   return (
     <div
-      style={{ display: "flex", justifyContent:"center", alignItems: "center", width: "70px", height: "100%", cursor: "pointer" }}
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "70px",
+        height: "100%",
+        cursor: "pointer",
+      }}
       ref={menuRef}
       onClick={toggleMenu}
     >
-      <div className={styles.icon} >
+      <div className={styles.icon}>
         <i className={`fa-solid fa-bars `}></i>
       </div>
       <div className={`${styles.menu} ${isOpen ? styles.open : ""} `}>
@@ -86,6 +93,11 @@ export const MenuHamburguer = () => {
         {/* MENU OPCIONES PARA CLIENTES */}
         {user?.role === "CLIENTE" && (
           <ul>
+            <Link to="/profile">
+              <li className={styles.menuItem} onClick={toggleMenu}>
+                Información personal
+              </li>
+            </Link>
             <li className={styles.menuItem} onClick={toggleModal}>
               Cerrar Sesión
             </li>
@@ -160,6 +172,11 @@ export const MenuHamburguer = () => {
                 Facturas
               </li>
             </Link>
+            <Link to="/bills-history">
+              <li className={styles.menuItem} onClick={toggleMenu}>
+                Historial de facturas
+              </li>
+            </Link>
             <Link to="/profile">
               <li className={styles.menuItem} onClick={toggleMenu}>
                 Información personal
@@ -214,6 +231,11 @@ export const MenuHamburguer = () => {
                 Ver Pedidos
               </li>
             </Link>
+            <Link to="/profile">
+              <li className={styles.menuItem} onClick={toggleMenu}>
+                Información personal
+              </li>
+            </Link>
             <li className={styles.menuItem} onClick={toggleModal}>
               Cerrar Sesión
             </li>
@@ -266,6 +288,11 @@ export const MenuHamburguer = () => {
             <Link to="/orders">
               <li className={styles.menuItem} onClick={toggleMenu}>
                 Crear pedido
+              </li>
+            </Link>
+            <Link to="/profile">
+              <li className={styles.menuItem} onClick={toggleMenu}>
+                Información personal
               </li>
             </Link>
             <li className={styles.menuItem} onClick={toggleModal}>

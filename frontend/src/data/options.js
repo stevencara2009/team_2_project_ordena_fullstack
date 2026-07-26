@@ -313,3 +313,15 @@ export const AVAILABILITY = [
   { value: 1, label: "DISPONIBLE" },
   { value: 0, label: "AGOTADO" },
 ];
+
+export const USER_STATE = [
+  { value: "", label: "Todas" }, // Si slice(1) omite este
+  { value: 1, label: "ACTIVO" },
+  { value: 0, label: "INACTIVO" },
+];
+
+export const PAYMENT_METHOD = [
+  "Todos",
+  "EFECTIVO",
+  "TARJETA"
+];

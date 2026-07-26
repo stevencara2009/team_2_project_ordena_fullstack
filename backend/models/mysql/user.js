@@ -164,6 +164,11 @@ export class UserModel {
       values.push(input.image);
     }
 
+    if (input.active !== undefined) {
+      fields.push("active = ?");
+      values.push(input.active);
+    }
+
     if (input.created_at !== undefined) {
       fields.push("created_at = ?");
       values.push(input.created_at);
@@ -206,4 +211,18 @@ export class UserModel {
     );
     return users[0];
   }
+
+  
+  // =========================================
+  // BUSCAR USUARIO POR DNI (para facturación)
+  // =========================================
+  static async getByDni({ dni }) {
+    const [users] = await connection.query(
+      `SELECT id, name, lastname, dni FROM tbl_users WHERE dni = ?;`,
+      [dni],
+    );
+    return users[0] ?? null;
+  }
+
+
 }

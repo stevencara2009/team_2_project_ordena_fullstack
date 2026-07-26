@@ -215,10 +215,10 @@ DELETE http://localhost:1234/order-products/300/52
 GET http://localhost:1234/bills/
 
 ### Ver Detalle de factura
-GET http://localhost:1234/bills/5/details
+GET http://localhost:1234/bills/8/details
 
 ### Ver factura por ID
-GET http://localhost:1234/bills/5
+GET http://localhost:1234/bills/8
 
 ### Agregar factura
 POST http://localhost:1234/bills

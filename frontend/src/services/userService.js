@@ -37,13 +37,14 @@ export const createUser = async (product) => {
 
 
 // Servicio para actualizar un usuario
-export const updateUser = async (id, product) => {
+export const updateUser = async (id, user) => {
+  console.log(user)
   const response = await fetch(`${API_URL}/users/${id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(product),
+    body: JSON.stringify(user),
   });
 
   if (!response.ok) {

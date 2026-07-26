@@ -155,7 +155,7 @@ export const Products = () => {
 
       alert(`Se ha actualizado el producto "${formData.name}" con éxito`);
 
-      // Limpiar el detalle tras eliminar
+      // Limpiar el detalle tras actualizar
       setEditingId(null);
       setFormData({
         name: "",
@@ -163,6 +163,7 @@ export const Products = () => {
         price: 0,
         description: "",
         image: "",
+        availability: ""
       });
       return true;
     } catch (error) {

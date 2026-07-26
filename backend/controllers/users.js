@@ -54,6 +54,8 @@ export class UserController {
   update = async (req, res) => {
     try {
       const result = validatePartialUser(req.body);
+      console.log(result)
+      
       if (!result.success)
         return res.status(400).json({ error: result.error.message });
       const { id } = req.params;

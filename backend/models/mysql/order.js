@@ -44,7 +44,7 @@ export class OrderModel {
             ON o.client_id = c.id
 
         INNER JOIN TBL_USERS u
-            ON o.waiter_id = u.id
+            ON o.user_id = u.id
 
         ORDER BY o.id DESC
         `)
@@ -131,7 +131,7 @@ export class OrderModel {
             (
             table_number,
             client_id,
-            waiter_id
+            user_id
             )
             VALUES (?, ?, ?)
             `, [

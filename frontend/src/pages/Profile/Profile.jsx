@@ -1,11 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/useAuth"; // O la vía por la que obtengas el usuario actual
 import defaultAvatar from "../../assets/without_photo_profile.jpg";
 import styles from "./Profile.module.css";
+import { useBills } from "../../hooks/useBills";
+import { BillsTable } from "../../components/Table/BillsTable";
+import { Modal } from "../../components/Modal/Modal"
+import { BillDetail } from "../../pages/Bills/BillDetail/BillDetail"
 
 export function Profile() {
   // Si no se le pasa un usuario específico por prop, toma el usuario autenticado del Context
   const { user } = useAuth();
+  const {
+    bills,
+    selectedBillDetails,
+    loadBills,
+    loadBillDetails,
+    clearSelectedBillDetails,
+  } = useBills();
+  const [showBillModal, setShowBillModal] = useState(false);
+
+  useEffect(() => {
+    if (user?.id) {
+      loadBills({ client_id: user.id });
+    }
+  }, [user?.id]);
 
   if (!user) {
     return (
@@ -21,6 +39,16 @@ export function Profile() {
       month: "long",
       day: "numeric",
     });
+  };
+
+  const handleRowClick = async (bill) => {
+    await loadBillDetails(bill.id);
+    setShowBillModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowBillModal(false);
+    clearSelectedBillDetails();
   };
 
   return (
@@ -99,10 +127,24 @@ export function Profile() {
                   <p>{user.active === 1 ? "Activo" : "Inactivo"}</p>
                 </div>
               </div>
+
+              <hr className={styles.divider} />
+              <h3 className={styles.sectionTitle}>Mis Facturas</h3>
+              <BillsTable
+                bills={bills}
+                onRowClick={handleRowClick}
+                emptyMessage="Aún no tienes facturas asociadas."
+              />
             </div>
           </div>
         </div>
       </div>
+      {showBillModal && (
+        <Modal isOpenModal={showBillModal} onCloseModal={handleCloseModal}>
+          <BillDetail billDetails={selectedBillDetails} />
+        </Modal>
+
+      )}
     </div>
   );
 }

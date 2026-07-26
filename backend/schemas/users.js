@@ -84,7 +84,16 @@ const userSchema = z.object({
     .string()
     .optional(),
 
-  active: z.boolean().default(true),
+  active: z.preprocess(
+    (val) => {
+      if (typeof val === 'number') return val === 1;
+      if (typeof val === 'string') return val === '1' || val === 'true';
+      return val;
+    },
+    z.boolean({
+      invalid_type_error: 'Active debe ser un booleano (true/false)'
+    })
+  ),
 
   birthdate: z
     .coerce // Convierte el string del input/JSON a un objeto Date de JS

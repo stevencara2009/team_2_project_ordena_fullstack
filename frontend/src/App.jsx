@@ -15,6 +15,7 @@ import { AdminLayout } from "./layouts/Admin/Admin";
 import { Menu } from "./pages/Menu/Menu";
 import { Bills } from "./pages/Bills/Bills";
 import { Profile } from "./pages/Profile/Profile";
+import { BillsHistory } from "./pages/BillHistory/BillsHistory";
 
 function App() {
   const { user } = useAuth();
@@ -91,10 +92,27 @@ function App() {
               </ProtectedRoute>
             }
           />
+
+          <Route
+            path="bills-history"
+            element={
+              <ProtectedRoute allowedRoles={["ADMINISTRADOR"]}>
+                <BillsHistory />
+              </ProtectedRoute>
+            }
+          />
+
           <Route
             path="profile"
             element={
-              <ProtectedRoute allowedRoles={["ADMINISTRADOR", "CLIENTE", "COCINERO", "MESERO"]}>
+              <ProtectedRoute
+                allowedRoles={[
+                  "ADMINISTRADOR",
+                  "CLIENTE",
+                  "COCINERO",
+                  "MESERO",
+                ]}
+              >
                 <Profile />
               </ProtectedRoute>
             }

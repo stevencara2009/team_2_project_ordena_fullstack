@@ -7,10 +7,10 @@ export const useBills = () => {
   const [selectedBillDetails, setSelectedBillDetails] = useState(null)
   const [loading, setLoading] = useState(false)
 
-  const loadBills = async () => {
+  const loadBills = async (filters = {}) => {
     setLoading(true)
     try {
-      const data = await billService.getBills()
+      const data = await billService.getBills(filters)
       setBills(data)
       return data
     } finally {
@@ -27,6 +27,10 @@ export const useBills = () => {
     } finally {
       setLoading(false)
     }
+  }
+
+  const clearSelectedBillDetails = () => {
+    setSelectedBillDetails(null)
   }
 
   const addBill = async (payload) => {
@@ -46,6 +50,7 @@ export const useBills = () => {
     loading,
     loadBills,
     loadBillDetails,
+    clearSelectedBillDetails,
     addBill
   }
 }

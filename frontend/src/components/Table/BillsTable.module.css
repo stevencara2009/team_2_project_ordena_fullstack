@@ -1,0 +1,32 @@
+/* BillsTable.module.css */
+.emptyMessage {
+  text-align: center;
+  color: #888;
+  padding: 1rem;
+}
+
+.billsTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+
+.billsTable td {
+  padding: 0.5rem;
+  text-align: left;
+  border-bottom: 1px solid #333;
+}
+
+.billsTable th{
+  background-color: rgb(217, 101, 35);
+    padding: 0.5rem;
+      border-bottom: 1px solid #333;
+}
+
+.row {
+  cursor: pointer;
+}
+
+.row:hover {
+  background: rgba(255, 255, 255, 0.05);
+}

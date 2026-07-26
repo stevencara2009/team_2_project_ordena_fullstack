@@ -1,0 +1,35 @@
+/* BillsHistory.module.css */
+.filterBtn {
+  align-self: flex-end;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.summaryBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
+  font-weight: 600;
+}
+
+.exportBtn {
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+}
+
+
+
+.billsTable {
+  width: 100%;
+  border-collapse: collapse;
+  color: white;
+  font-size: 10px;
+}
+
+
+
+.closeBtn {
+  margin-bottom: 0.75rem;
+  cursor: pointer;
+}

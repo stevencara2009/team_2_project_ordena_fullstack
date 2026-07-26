@@ -3,8 +3,6 @@ import { getStateColor } from '../../../utils/orderUtils'
 
 export const BillItem = ({
   ordersFiltered,
-  selectedOrder,
-  setSelectedOrder,
   onCreateBill
 }) => {
 
@@ -20,13 +18,13 @@ export const BillItem = ({
   return (
     <div className={styles.ordersContainer}>
       {ordersFiltered.map((order) => {
-        const isSelected = selectedOrder?.id === order.id
+
 
         return (
           <div
             key={order.id}
-            className={`${styles.order} ${isSelected ? styles.orderOrange : styles.orderDark}`}
-            onClick={() => setSelectedOrder(order)}
+            className={`${styles.order} ${styles.orderDark}`}
+            
           >
             {/* Fila Superior: ID y Mesa */}
             <div className={styles.headerRow}>
@@ -61,7 +59,7 @@ export const BillItem = ({
                     onCreateBill(order)
                   }}
                 >
-                  Generar factura
+                  Facturar
                 </div>
               )}
             </div>
@@ -72,7 +70,7 @@ export const BillItem = ({
               <span className={styles.totalAmount}>
                 $ {order.total
                   ? Number(order.total).toLocaleString()
-                  : '---'}
+                  : 0}
               </span>
             </div>
           </div>
