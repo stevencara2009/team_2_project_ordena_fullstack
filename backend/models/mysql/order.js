@@ -1,22 +1,24 @@
-import mysql from 'mysql2/promise'
+import mysql from "mysql2/promise";
 
 const config = {
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT,
-    database: process.env.DB_DATABASE
-}
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
+  database: process.env.DB_DATABASE,
+  ssl: {
+    rejectUnauthorized: true,
+  },
+};
 
-const connection = await mysql.createConnection(config)
+const connection = await mysql.createConnection(config);
 
 export class OrderModel {
-
-    // =========================================
-    // OBTENER ORDENES
-    // =========================================
-    static async getAll() {
-        const [orders] = await connection.query(`
+  // =========================================
+  // OBTENER ORDENES
+  // =========================================
+  static async getAll() {
+    const [orders] = await connection.query(`
         SELECT
             o.id,
             o.state,
@@ -47,86 +49,84 @@ export class OrderModel {
             ON o.user_id = u.id
 
         ORDER BY o.id DESC
-        `)
+        `);
 
-        return orders
-    }
+    return orders;
+  }
 
-
-
-    // =========================================
-    // OBTENER ORDEN POR ID
-    // =========================================
-    static async getById({ id }) {
-
-        const [orders] = await connection.query(`
+  // =========================================
+  // OBTENER ORDEN POR ID
+  // =========================================
+  static async getById({ id }) {
+    const [orders] = await connection.query(
+      `
       SELECT *
       FROM tbl_orders
       WHERE id = ?
-    `, [id])
+    `,
+      [id],
+    );
 
-        if (orders.length === 0) return null
-        return orders[0]
-    }
+    if (orders.length === 0) return null;
+    return orders[0];
+  }
 
-    // =========================================
-    // OBTENER ORDENES POR MESA
-    // =========================================
-    static async getByTable({ id }) {
-        console.log(id)
-        const [orders] = await connection.query(`
+  // =========================================
+  // OBTENER ORDENES POR MESA
+  // =========================================
+  static async getByTable({ id }) {
+    console.log(id);
+    const [orders] = await connection.query(
+      `
             SELECT *
             FROM tbl_orders
             WHERE table_number = ?
-        `, [id])
+        `,
+      [id],
+    );
 
-        if (orders.length === 0) return null
-        return orders
-    }
+    if (orders.length === 0) return null;
+    return orders;
+  }
 
+  // =========================================
+  // CREAR ORDEN
+  // =========================================
+  static async create({ input }) {
+    const { table_number, client_id, user_id } = input;
+    console.log(input);
 
+    // INICIAR TRANSACCION
+    const pool = mysql.createPool(config);
+    const conn = await pool.getConnection();
 
-    // =========================================
-    // CREAR ORDEN
-    // =========================================
-    static async create({ input }) {
+    try {
+      await conn.beginTransaction();
 
-
-        const {
-            table_number,
-            client_id,
-            user_id
-        } = input
-        console.log(input)
-        
-        // INICIAR TRANSACCION
-        const pool = mysql.createPool(config)
-        const conn = await pool.getConnection()
-
-        try {
-            await conn.beginTransaction()
-
-            // VALIDAR QUE LA MESA EXISTA
-            const [tables] = await conn.query(`
+      // VALIDAR QUE LA MESA EXISTA
+      const [tables] = await conn.query(
+        `
             SELECT *
             FROM TBL_TABLES
             WHERE number = ?
-            `, [table_number])
+            `,
+        [table_number],
+      );
 
-            const table = tables[0]
+      const table = tables[0];
 
+      if (!table) {
+        throw new Error("Table not found");
+      }
 
-            if (!table) {
-                throw new Error('Table not found')
-            }
+      // VALIDAR ESTADO DE MESA
+      if (table.state !== "LIBRE") {
+        throw new Error("Table is not available");
+      }
 
-            // VALIDAR ESTADO DE MESA
-            if (table.state !== 'LIBRE') {
-                throw new Error('Table is not available')
-            }
-
-            // CREAR ORDEN
-            const [result] = await conn.query(`
+      // CREAR ORDEN
+      const [result] = await conn.query(
+        `
             INSERT INTO tbl_orders
             (
             table_number,
@@ -134,103 +134,102 @@ export class OrderModel {
             user_id
             )
             VALUES (?, ?, ?)
-            `, [
-                table_number,
-                client_id ?? null,
-                user_id
-            ])
+            `,
+        [table_number, client_id ?? null, user_id],
+      );
 
-
-            // CAMBIAR ESTADO MESA
-            await conn.query(`
+      // CAMBIAR ESTADO MESA
+      await conn.query(
+        `
             UPDATE TBL_TABLES
             SET state = 'OCUPADA'
             WHERE number = ?
-            `, [table_number])
+            `,
+        [table_number],
+      );
 
-            await conn.commit()
+      await conn.commit();
 
-            const [orders] = await conn.query(`
+      const [orders] = await conn.query(
+        `
             SELECT *
             FROM tbl_orders
             WHERE id = ?
-            `, [result.insertId])
+            `,
+        [result.insertId],
+      );
 
-            return orders[0]
+      return orders[0];
+    } catch (error) {
+      await conn.rollback();
+      throw error;
+    } finally {
+      conn.release();
+    }
+  }
 
-        } catch (error) {
+  // =========================================
+  // ACTUALIZAR ORDEN
+  // =========================================
+  static async update({ id, input }) {
+    const fields = [];
+    const values = [];
 
-            await conn.rollback()
-            throw error
-
-        } finally {
-
-            conn.release()
-
-        }
+    if (input.table_number !== undefined) {
+      fields.push("table_number = ?");
+      values.push(input.table_number);
     }
 
+    if (input.client_id !== undefined) {
+      fields.push("client_id = ?");
+      values.push(input.client_id);
+    }
 
+    if (input.user_id !== undefined) {
+      fields.push("user_id = ?");
+      values.push(input.user_id);
+    }
 
+    if (input.state !== undefined) {
+      fields.push("state = ?");
+      values.push(input.state);
+    }
 
-    // =========================================
-    // ACTUALIZAR ORDEN
-    // =========================================
-    static async update({ id, input }) {
+    if (fields.length === 0) return null;
 
-        const fields = []
-        const values = []
-
-        if (input.table_number !== undefined) {
-            fields.push('table_number = ?')
-            values.push(input.table_number)
-        }
-
-        if (input.client_id !== undefined) {
-            fields.push('client_id = ?')
-            values.push(input.client_id)
-        }
-
-        if (input.user_id !== undefined) {
-            fields.push('user_id = ?')
-            values.push(input.user_id)
-        }
-
-        if (input.state !== undefined) {
-            fields.push('state = ?')
-            values.push(input.state)
-        }
-
-        if (fields.length === 0) return null
-
-
-        await connection.query(`
+    await connection.query(
+      `
             UPDATE tbl_orders
-            SET ${fields.join(', ')}
+            SET ${fields.join(", ")}
             WHERE id = ?
-        `, [...values, id])
+        `,
+      [...values, id],
+    );
 
-        const [orders] = await connection.query(`
+    const [orders] = await connection.query(
+      `
             SELECT *
             FROM tbl_orders
             WHERE id = ?
-        `, [id])
+        `,
+      [id],
+    );
 
-        return orders[0]
-    }
+    return orders[0];
+  }
 
-
-
-    // =========================================
-    // ELIMINAR ORDEN
-    // =========================================
-    static async delete({ id }) {
-
-        const [order] = await connection.query(`
+  // =========================================
+  // ELIMINAR ORDEN
+  // =========================================
+  static async delete({ id }) {
+    const [order] = await connection.query(
+      `
       DELETE FROM tbl_orders
       WHERE id = ?
-    `, [id])
+    `,
+      [id],
+    );
 
-        return order.affectedRows > 0
-    }
+    return order.affectedRows > 0;
+  }
 }

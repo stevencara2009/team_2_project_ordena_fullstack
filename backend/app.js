@@ -31,9 +31,9 @@ export const createApp = ({ productModel, userModel, tableModel, orderModel, ord
   app.use('/bills', createBillRouter({ billModel }))
   app.use('/api/auth', createAuthRouter({ userModel }))
 
-  const PORT = process.env.PORT ?? 1234
+  const PORT = process.env.PORT || 1234
 
-  app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`)
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server running on port: ${PORT}`)
   })
 }

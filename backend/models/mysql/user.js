@@ -8,6 +8,9 @@ const config = {
   port: process.env.DB_PORT,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
+  ssl: {
+    rejectUnauthorized: true,
+  },
 };
 
 const connection = await mysql.createConnection(config);
@@ -212,7 +215,6 @@ export class UserModel {
     return users[0];
   }
 
-  
   // =========================================
   // BUSCAR USUARIO POR DNI (para facturación)
   // =========================================
@@ -224,7 +226,6 @@ export class UserModel {
     return users[0] ?? null;
   }
 
-  
   // =========================================
   // GUARDAR TOKEN DE RECUPERACION
   // =========================================
@@ -257,7 +258,4 @@ export class UserModel {
     );
     return result.affectedRows > 0;
   }
-
-
-
 }
