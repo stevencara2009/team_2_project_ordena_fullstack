@@ -36,6 +36,7 @@ export const Products = () => {
     price: 0,
     description: "",
     image: "",
+    availability: 1
   });
 
   // Combinar filtro de categoría y el de búsqueda por nombre

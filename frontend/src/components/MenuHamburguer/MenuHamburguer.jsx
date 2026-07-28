@@ -169,7 +169,7 @@ export const MenuHamburguer = () => {
             </Link>
             <Link to="/bills">
               <li className={styles.menuItem} onClick={toggleMenu}>
-                Facturas
+                Facturar
               </li>
             </Link>
             <Link to="/bills-history">

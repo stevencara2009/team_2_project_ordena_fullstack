@@ -1,27 +1,18 @@
 import nodemailer from "nodemailer";
 
-let transporterPromise = null;
 
-// Crea (una sola vez) una cuenta de prueba de Ethereal y el transporter
-const getTransporter = () => {
-  if (!transporterPromise) {
-    transporterPromise = nodemailer.createTestAccount().then((testAccount) => {
-      return nodemailer.createTransport({
-        host: "smtp.ethereal.email",
-        port: 587,
-        secure: false,
-        auth: {
-          user: testAccount.user,
-          pass: testAccount.pass,
-        },
-      });
-    });
-  }
-  return transporterPromise;
-};
+const transporter = nodemailer.createTransport({
+  host: "smtp.ethereal.email",
+  port: 587,
+  secure: false,
+  auth: {
+    user: process.env.ETHEREAL_USER,
+    pass: process.env.ETHEREAL_PASS,
+  },
+});
 
 export const sendResetEmail = async ({ to, token }) => {
-  const transporter = await getTransporter();
+
   const resetUrl = `${process.env.FRONTEND_URL}/reset-password?token=${token}`;
 
   const info = await transporter.sendMail({

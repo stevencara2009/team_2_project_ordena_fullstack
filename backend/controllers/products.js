@@ -44,6 +44,7 @@ export class ProductController {
 
   update = async (req, res) => {
     try {
+
       const result = validatePartialProduct(req.body)
       if (!result.success) return res.status(400).json({ error: result.error.message })
       const { id } = req.params

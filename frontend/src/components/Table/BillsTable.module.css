@@ -8,6 +8,7 @@
 .billsTable {
   width: 100%;
   border-collapse: collapse;
+  color: gray;
 }
 
 
@@ -18,7 +19,7 @@
 }
 
 .billsTable th{
-  background-color: rgb(217, 101, 35);
+  background-color: white;
     padding: 0.5rem;
       border-bottom: 1px solid #333;
 }

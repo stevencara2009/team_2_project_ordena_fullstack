@@ -1,144 +1,133 @@
-import mysql from 'mysql2/promise'
+import mysql from "mysql2/promise";
 
 const config = {
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   port: process.env.DB_PORT,
   password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE
-}
+  database: process.env.DB_DATABASE,
+};
 
-const connection = await mysql.createConnection(config)
+const connection = await mysql.createConnection(config);
 
 export class ProductModel {
-
   static async getAll({ category }) {
     if (category) {
-      const lowerCaseCategory = category.toLowerCase()
+      const lowerCaseCategory = category.toLowerCase();
       const [categories] = await connection.query(
-        'SELECT * FROM tbl_products WHERE LOWER(category) = ?;', [lowerCaseCategory]
-      )
+        "SELECT * FROM tbl_products WHERE LOWER(category) = ?;",
+        [lowerCaseCategory],
+      );
       // No category found
-      if (categories.length === 0) return []
+      if (categories.length === 0) return [];
 
       // get the id from the first category result
       //const [{ id }] = categories
 
       // get all products ids from database table
       // query to product categories
-      // join 
+      // join
       // return results
-      return categories
+      return categories;
     }
 
-    const [products] = await connection.query(
-      'SELECT * FROM tbl_products;'
-    )
-    return products
+    const [products] = await connection.query("SELECT * FROM tbl_products;");
+    return products;
   }
-
-
-
 
   static async getById({ id }) {
     const [products] = await connection.query(
-      `SELECT * FROM tbl_products WHERE id = ?;`, [id]
-    )
+      `SELECT * FROM tbl_products WHERE id = ?;`,
+      [id],
+    );
 
-    if (products.length === 0) return null
+    if (products.length === 0) return null;
 
-    return products
+    return products;
   }
 
-
-
   static async create({ input }) {
-    const {
-      name,
-      category,
-      availability,
-      price,
-      image,
-      description
-    } = input
+    const { name, category, availability, price, image, description } = input;
 
-    console.log(input)
+    console.log(input);
     /* const [uuidResult] = await connection.query(`SELECT UUID() uuid;`)
     const [{ uuid }] = uuidResult */
 
-    let insertId
+    let insertId;
 
     try {
       const [result] = await connection.query(
         `INSERT INTO tbl_products (name, category, availability, price, image, description) VALUES ( ?, ?, ?, ?, ?, ?);`,
-        [name, category[0], availability, price, image, description]
-      )
-      insertId = result.insertId
+        [name, category[0], availability, price, image, description],
+      );
+      insertId = result.insertId;
     } catch (e) {
-      console.error(e)
-      throw new Error('Error creating product')
+      console.error(e);
+      throw new Error("Error creating product");
     }
 
-
-
     const [products] = await connection.query(
-      `SELECT id, name, category, availability, price, image, description, created_at FROM tbl_products WHERE id = ? ;`, [insertId]
-    )
-    return products[0]
+      `SELECT id, name, category, availability, price, image, description, created_at FROM tbl_products WHERE id = ? ;`,
+      [insertId],
+    );
+    return products[0];
   }
 
-
-
   static async update({ id, input }) {
-    const fields = []
-    const values = []
+    const fields = [];
+    const values = [];
 
     if (input.name !== undefined) {
-      fields.push('name = ?')
-      values.push(input.name)
+      fields.push("name = ?");
+      values.push(input.name);
     }
 
     if (input.category !== undefined) {
-      fields.push('category = ?')
-      values.push(input.category[0] ?? input.category)
+      fields.push("category = ?");
+      values.push(input.category[0] ?? input.category);
     }
 
-    if (input.availability !== undefined) {
-      fields.push('availability = ?')
-      values.push(input.availability)
+    if (input.description !== undefined) {
+      fields.push("description = ?");
+      values.push(input.description);
     }
 
     if (input.price !== undefined) {
-      fields.push('price = ?')
-      values.push(input.price)
+      fields.push("price = ?");
+      values.push(input.price);
+    }
+
+    if (input.availability !== undefined) {
+      fields.push("availability = ?");
+      values.push(input.availability);
     }
 
     if (input.image !== undefined) {
-      fields.push('image = ?')
-      values.push(input.image)
+      fields.push("image = ?");
+      values.push(input.image);
     }
 
     await connection.query(
       `UPDATE tbl_products SET 
-        ${fields.join(',')}
-      WHERE id = ?;`, [...values, id]
-    )
+        ${fields.join(",")}
+      WHERE id = ?;`,
+      [...values, id],
+    );
 
-    if (fields.length === 0) return null
+    if (fields.length === 0) return null;
 
     const [products] = await connection.query(
-      `SELECT * FROM tbl_products WHERE id = ?;`, [id]
-    )
+      `SELECT * FROM tbl_products WHERE id = ?;`,
+      [id],
+    );
 
-    return products[0]
+    return products[0];
   }
 
-
-  
   static async delete({ id }) {
     const [product] = await connection.query(
-      `DELETE FROM tbl_products WHERE id = ?;`, [id]
-    )
+      `DELETE FROM tbl_products WHERE id = ?;`,
+      [id],
+    );
   }
-
 }

@@ -1,21 +1,14 @@
-import styles from './Tables.module.css'
-import { useState } from 'react';
-import { Input, InputSelect } from '../../components/Input/Input';
-import { TableItem } from './TableItem/TableItem';
+import styles from "./Tables.module.css";
+import { useState } from "react";
+import { Input, InputSelect } from "../../components/Input/Input";
+import { TableItem } from "./TableItem/TableItem";
 import { useTables } from "../../hooks/useTables";
-import { Modal } from '../../components/Modal/Modal';
-import { Button } from '../../components/Button/Button'
-import {  TABLES_STATE } from '../../data/options';
-
+import { Modal } from "../../components/Modal/Modal";
+import { Button } from "../../components/Button/Button";
+import { TABLES_STATE } from "../../data/options";
 
 export const Tables = ({ selectedTable, setSelectedTable }) => {
-
-  const {
-    tables,
-    addTable,
-    editTable,
-    removeTable
-  } = useTables();
+  const { tables, addTable, editTable, removeTable } = useTables();
 
   const [tableSearch, setTableSearch] = useState("");
   const [tableState, setTableState] = useState("Todos");
@@ -26,32 +19,25 @@ export const Tables = ({ selectedTable, setSelectedTable }) => {
     id: "",
     number: "",
     capacity: "",
-    state: ""
-  });   // Formulario edición
+    state: "",
+  }); // Formulario edición
   const [createFormData, setCreateFormData] = useState({
     number: "",
     capacity: "",
-    state: "LIBRE"
-  });   // Formulario creación
+    state: "LIBRE",
+  }); // Formulario creación
 
   // Filtro por mesa
   const tablesFiltered = tables.filter((table) => {
+    const matchesSearch = table.number.toString().includes(tableSearch);
 
-    const matchesSearch =
-      table.number
-        .toString()
-        .includes(tableSearch);
-
-    const matchesState =
-      tableState === "Todos" ||
-      table.state === tableState;
+    const matchesState = tableState === "Todos" || table.state === tableState;
 
     return matchesSearch && matchesState;
   });
 
   // HANDLERS PARA SELECCIONAR MESA
   const handleSelectTable = (table) => {
-
     setSelectedTable(table);
 
     setEditingId(table.number);
@@ -60,35 +46,29 @@ export const Tables = ({ selectedTable, setSelectedTable }) => {
       id: table.id,
       number: table.number,
       capacity: table.capacity,
-      state: table.state
+      state: table.state,
     });
-
   };
 
   // HANDLERS PARA EDITAR MESA
   const handleChangeEdit = (e) => {
-
     const { name, value } = e.target;
 
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
-
   };
 
   // HANDLER CAPTURAR DATOS
   const handleChangeCreate = (e) => {
-
     const { name, value } = e.target;
 
-    setCreateFormData(prev => ({
+    setCreateFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
-
   };
-
 
   // HANDLER UI PATCH - ACTUALIZAR UNA MESA
   const handleUpdate = async (e) => {
@@ -99,12 +79,10 @@ export const Tables = ({ selectedTable, setSelectedTable }) => {
     }
 
     try {
-      await editTable(
-        editingId,
-        {
-          capacity: Number(formData.capacity),
-          state: formData.state
-        })
+      await editTable(editingId, {
+        capacity: Number(formData.capacity),
+        state: formData.state,
+      });
       setEditingId(null);
       setSelectedTable(null);
       alert("Mesa actualizada con éxito");
@@ -113,9 +91,11 @@ export const Tables = ({ selectedTable, setSelectedTable }) => {
     }
   };
 
-
   // HANDLER DELETE - ELIMINAR UNA MESA
   const handleDelete = async () => {
+    if (!formData.id) {
+      return alert("Selecciona una mesa de la lista para eliminar");
+    }
 
     try {
       await removeTable(formData.id);
@@ -126,44 +106,39 @@ export const Tables = ({ selectedTable, setSelectedTable }) => {
         id: "",
         number: "",
         capacity: "",
-        state: ""
-      })
+        state: "",
+      });
       setOpenDeleteModal(false);
     } catch (error) {
       console.error("Error al eliminar:", error);
     }
-
   };
-
 
   // HANDLER UI POST - CREAR UNA MESA
   const handleCreate = async (e) => {
     e.preventDefault();
     if (createFormData.number === "" || createFormData.capacity === "") {
-      alert("Hay campos vacíos")
-      return
+      alert("Hay campos vacíos");
+      return;
     }
     try {
       await addTable({
         number: Number(createFormData.number),
         capacity: Number(createFormData.capacity),
-        state: createFormData.state
+        state: createFormData.state,
       });
       setCreateFormData({
         id: "",
         number: "",
         capacity: "",
-        state: ""
-      })
+        state: "",
+      });
       setOpenModal(false);
-      alert("Mesa creada")
+      alert("Mesa creada");
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-
   };
-
-
 
   return (
     <div>
@@ -180,23 +155,19 @@ export const Tables = ({ selectedTable, setSelectedTable }) => {
             name=""
             value={tableSearch}
             onChange={(e) => setTableSearch(e.target.value)}
-            variant='dark'
+            variant="dark"
           />
 
           <InputSelect
             label="Estado"
             className="inputPrimary"
             value={tableState}
-            onChange={(e) =>
-              setTableState(e.target.value)
-            }
+            onChange={(e) => setTableState(e.target.value)}
             data={TABLES_STATE}
-            variant='dark'
+            variant="dark"
           />
-
         </fieldset>
       </form>
-
 
       <Button
         text="+ Crear mesa"
@@ -206,20 +177,13 @@ export const Tables = ({ selectedTable, setSelectedTable }) => {
 
       {/* Modulo de Mesas */}
       <div className={styles.gridTables}>
-        <TableItem
-          tables={tablesFiltered}
-          onSelectTable={handleSelectTable}
-        />
+        <TableItem tables={tablesFiltered} onSelectTable={handleSelectTable} />
       </div>
-
 
       {/* Formulario actualizar / eliminar mesa */}
       {editingId && (
-
         <form onSubmit={handleUpdate}>
-
           <fieldset>
-
             <legend>Detalle Mesa</legend>
 
             <Input
@@ -250,36 +214,23 @@ export const Tables = ({ selectedTable, setSelectedTable }) => {
               className="inputPrimary"
             />
 
-            <Button
-              text="Actualizar"
-              className="btnAdd"
-              type="submit"
-            />
+            <Button text="Actualizar" className="btnAdd" type="submit" />
 
             <Button
               text="Eliminar"
               className="btnDelete"
               type="button"
-              onClick={() =>
-                setOpenDeleteModal(true)
-              }
+              onClick={() => setOpenDeleteModal(true)}
             />
-
           </fieldset>
-
         </form>
-
       )}
 
-
       {/* Modal crear una mesa */}
-      <Modal
-        isOpenModal={openModal}
-        onCloseModal={() => setOpenModal(false)}
-      >
-
-        <div style={{ width: "100%", height: "100%", }}>
+      <Modal isOpenModal={openModal} onCloseModal={() => setOpenModal(false)}>
+        <div style={{ width: "100%", height: "100%" }}>
           <h2 style={{ color: "black" }}>Crear Mesa</h2>
+
           <form onSubmit={handleCreate}>
             <Input
               label="Número"
@@ -301,38 +252,24 @@ export const Tables = ({ selectedTable, setSelectedTable }) => {
               required
             />
 
-            <Button
-              text="Crear"
-              type="submit"
-              className="btnAdd"
-            />
-
+            <Button text="Crear" type="submit" className="btnAdd" />
           </form>
         </div>
       </Modal>
 
-
       {/* Modal eliminar mesa */}
       <Modal
         isOpenModal={openDeleteModal}
-        onCloseModal={() =>
-          setOpenDeleteModal(false)
-        }
+        onCloseModal={() => setOpenDeleteModal(false)}
       >
+        <h2 style={{ color: "black" }}>Eliminar Mesa</h2>
 
-        <h2 style={{ color: "black" }}>
-          Eliminar Mesa
-        </h2>
+        <p style={{ color: "black" }}>
+          ¿Estás seguro que deseas eliminar esta mesa "{formData.number}" ?
+        </p>
 
-        <Button
-          text="Aceptar"
-          onClick={handleDelete}
-        />
-
+        <Button text="Aceptar" onClick={handleDelete} />
       </Modal>
-
-
-
     </div>
-  )
-}
+  );
+};

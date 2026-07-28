@@ -30,6 +30,7 @@ export const createProduct = async (product) => {
 
 // Servicio para actualizar un producto
 export const updateProduct = async (id, product) => {
+  console.log(id, product)
   const response = await fetch(`${API_URL}/products/${id}`, {
     method: "PATCH",
     headers: {

@@ -51,6 +51,7 @@ export const updateTable = async (id, table) => {
 
 
 export const deleteTable = async (id) => {
+  console.log(id)
   const response = await fetch(`${API_URL}/tables/${id}`, {
     method: "DELETE",
   });
