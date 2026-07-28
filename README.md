@@ -73,13 +73,22 @@ PORT = 1234
 DB_HOST = localhost
 DB_USER = root
 DB_PORT = 3306
-DB_PASSWORD = 123456789
+DB_PASSWORD = Escriba_su_contraseña
 DB_DATABASE = ordena
+
+ETHEREAL_USER=marty49@ethereal.email
+ETHEREAL_PASS=tqSjwKXUzBDHc8pB9W
 
 CLOUDINARY_CLOUD_NAME = dbhwc6lgi
 CLOUDINARY_API_KEY = 835918579196947
 CLOUDINARY_API_SECRET = g2bFuMqcr8ZVJaJWEbfc2Axh6vQ
 CLOUDINARY_URL = cloudinary://835918579196947:g2bFuMqcr8ZVJaJWEbfc2Axh6vQ@dbhwc6lgi
+
+JWT_SECRET = u5S^VF^Zpg*fUuuzu$3jIm
+JWT_EXPIRES_IN = 7d
+
+FRONTEND_URL=https://team-2-project-ordena-frontend.vercel.app
+
 
 (Nota: Reemplace SU_CONTRASEÑA_DE_MYSQL_AQUI por la clave de su usuario local de MySQL. Si no tiene contraseña, deje el espacio en blanco).
 
@@ -131,7 +140,16 @@ Una vez que ambos servidores estén encendidos, abra su navegador web de prefere
 
 
 🔑 Credenciales de Prueba Disponibles:
-Utilice las cuentas de correo y contraseñas que se importaron por defecto en su tabla TBL_USERS para probar los diferentes flujos del sistema según su rol (Administrador, Mesero, Cocinero o Cliente). Ejemplo para el rol de administrador:
+Utilice las cuentas de correo y contraseñas que se importaron por defecto en su tabla TBL_USERS para probar los diferentes flujos del sistema según su rol (Administrador, Mesero, Cocinero o Cliente). Ejemplos válidos:
 
-user: stevencara20@gmail.com
-password: 123456A#
+usuario: administrador@gmail.com
+contraseña: Sena11111#
+
+usuario: cliente@gmail.com
+contraseña: Sena11111#
+
+usuario: cocinero@gmail.com
+contraseña: Sena11111#
+
+usuario: mesero@gmail.com
+contraseña: Sena11111#
