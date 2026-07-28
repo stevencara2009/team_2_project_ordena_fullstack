@@ -14,7 +14,7 @@ export const createApp = ({ productModel, userModel, tableModel, orderModel, ord
   app.use(json())
   app.use(cookieParser()) 
   app.use(cors({
-    origin: process.env.FRONTEND_URL,
+    origin: process.env.FRONTEND_URL || "http://localhost:5173",
     credentials: true
   }));
   app.disable('x-powered-by')
