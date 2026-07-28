@@ -1,39 +1,60 @@
-import express, { json } from 'express';
-import cors from 'cors';
-import cookieParser from 'cookie-parser'
-import { createProductRouter } from './routes/products.js'
-import { createUserRouter } from './routes/users.js'
-import { createTableRouter } from './routes/table.js'
-import { createOrderRouter } from './routes/orders.js'
-import { createOrderProductRouter } from './routes/orderProducts.js'
-import { createBillRouter } from './routes/bills.js'
-import { createAuthRouter } from './routes/auth.js';
+import express, { json } from "express";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+import { createProductRouter } from "./routes/products.js";
+import { createUserRouter } from "./routes/users.js";
+import { createTableRouter } from "./routes/table.js";
+import { createOrderRouter } from "./routes/orders.js";
+import { createOrderProductRouter } from "./routes/orderProducts.js";
+import { createBillRouter } from "./routes/bills.js";
+import { createAuthRouter } from "./routes/auth.js";
 
-export const createApp = ({ productModel, userModel, tableModel, orderModel, orderProductModel, billModel }) => {
-  const app = express()
-  app.use(json())
-  app.use(cookieParser()) 
-  app.use(cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:5173",
-    credentials: true
-  }));
-  app.disable('x-powered-by')
+export const createApp = ({
+  productModel,
+  userModel,
+  tableModel,
+  orderModel,
+  orderProductModel,
+  billModel,
+}) => {
+  const app = express();
+  app.use(json());
+  app.use(cookieParser());
 
-  app.get('/', (req, res) => {
-    res.json({ message: 'hola mundo' })
-  })
+  const ACCEPTED_ORIGINS = [
+    "http://localhost:5173",
+    process.env.FRONTEND_URL, // https://team-2-project-ordena-frontend.vercel.app
+  ].filter(Boolean);
 
-  app.use('/products', createProductRouter({ productModel }))
-  app.use('/users', createUserRouter({ userModel }));
-  app.use('/tables', createTableRouter({ tableModel }));
-  app.use('/orders', createOrderRouter({ orderModel }))
-  app.use('/order-products', createOrderProductRouter({ orderProductModel }))
-  app.use('/bills', createBillRouter({ billModel }))
-  app.use('/api/auth', createAuthRouter({ userModel }))
+  app.use(
+    cors({
+      origin: (origin, callback) => {
+        if (!origin || ACCEPTED_ORIGINS.includes(origin)) {
+          return callback(null, true);
+        }
+        return callback(new Error("Bloqueado por CORS"));
+      },
+      credentials: true,
+    }),
+  );
+  
+  app.disable("x-powered-by");
 
-  const PORT = process.env.PORT || 1234
+  app.get("/", (req, res) => {
+    res.json({ message: "hola mundo" });
+  });
 
-  app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server running on port: ${PORT}`)
-  })
-}
+  app.use("/products", createProductRouter({ productModel }));
+  app.use("/users", createUserRouter({ userModel }));
+  app.use("/tables", createTableRouter({ tableModel }));
+  app.use("/orders", createOrderRouter({ orderModel }));
+  app.use("/order-products", createOrderProductRouter({ orderProductModel }));
+  app.use("/bills", createBillRouter({ billModel }));
+  app.use("/api/auth", createAuthRouter({ userModel }));
+
+  const PORT = process.env.PORT || 1234;
+
+  app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Server running on port: ${PORT}`);
+  });
+};

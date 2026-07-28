@@ -8,6 +8,7 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const API_URL = import.meta.env.VITE_API_URL;
 
+    console.log(API_URL)
  // Al montar la app (o al refrescar), preguntamos al backend
   // si la cookie sigue siendo válida
   useEffect(() => {

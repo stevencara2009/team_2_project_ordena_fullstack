@@ -1,14 +1,14 @@
 import mysql from "mysql2/promise";
 
+const isLocalhost = process.env.DB_HOST === 'localhost' || process.env.DB_HOST === '127.0.0.1';
+
 const config = {
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
+  host: process.env.DB_HOST || 'localhost',
+  user: process.env.DB_USER || 'root',
+  port: process.env.DB_PORT || 3306,
   password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
   database: process.env.DB_DATABASE,
-  ssl: {
-    rejectUnauthorized: true,
-  },
+  ssl: isLocalhost ? false : { rejectUnauthorized: false },
 };
 
 const connection = await mysql.createConnection(config);
