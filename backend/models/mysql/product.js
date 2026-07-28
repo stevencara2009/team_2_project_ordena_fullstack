@@ -8,11 +8,16 @@ const config = {
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
   port: Number(process.env.DB_PORT) || 3306,
+    waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
+  enableKeepAlive: true,
+  keepAliveInitialDelay: 0,
   ssl: isProduction ? { rejectUnauthorized: false } : false
 };
 
 
-const connection = await mysql.createConnection(config);
+const connection = await mysql.createPool(config);
 
 export class ProductModel {
   static async getAll({ category }) {
