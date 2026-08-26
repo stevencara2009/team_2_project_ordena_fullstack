@@ -20,9 +20,9 @@ export const UserFilters = ({ userSearch, setUserSearch, userType, setUserType }
           required
         />
 
-        <div className="divSearch">
+        {/*<div className="divSearch">
           <button type='button' ><i className="fa-solid fa-magnifying-glass" style={{ width: 25, height: 25 }}></i></button>
-        </div>
+        </div>*/}
 
         <InputSelect
           label="Filtrar por:"

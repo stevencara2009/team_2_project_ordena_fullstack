@@ -64,8 +64,10 @@ export const useUsers = () => {
       setLoading(true);
       await deleteUser(id);
       await loadUsers();
+      return true;
     } catch (error) {
       console.error(error);
+      throw error;
     } finally {
       setLoading(false);
     }

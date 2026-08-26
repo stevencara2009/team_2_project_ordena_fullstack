@@ -1,6 +1,6 @@
 .gridTables {
   display: grid;
-  grid-template-columns: 1fr 1fr ;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   gap: 7px;
 }
@@ -11,16 +11,17 @@
   font-weight: bold;
   width: 100%;
   height: 100px;
+  padding: 0 auto;
   border-radius: 10px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  line-height: 1px;
   align-items: center;
   cursor: pointer;
 }
 
 .tableItem:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .classWhite {
@@ -30,7 +31,6 @@
 .classOrange {
   background-color: rgb(146, 70, 25);
 }
-
 
 .free {
   background: #2ecc71;
@@ -46,4 +46,51 @@
 
 .disabled {
   background: black;
+}
+
+.description {
+  font-size: var(--font-size-xs);
+  color: white;
+  margin: 0;
+}
+
+.divAforo {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 16px;
+}
+.divAforo > img {
+  width: 14px;
+  height: 14px;
+}
+
+.divEdit {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 7px;
+  width: 60%;
+  height: 16px;
+  margin-top: 5px;
+}
+.divEdit > img {
+  width: 14px;
+  height: 14px;
+}
+.divEdit > p {
+  color: black;
+}
+
+@media screen and (max-width: 360px) {
+  .gridTables {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 7px;
+  }
 }

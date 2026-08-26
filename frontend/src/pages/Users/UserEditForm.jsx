@@ -1,71 +1,77 @@
-import styles from './Users.module.css'
-import { Input, InputSelect } from '../../components/Input/Input'
-import { USERS_TYPE, DOCUMENTS_TYPE, COUNTRIES, USER_STATE } from "../../data/options.js"
-import { uploadUserImage } from '../../services/userService.js'
-import { Button } from '../../components/Button/Button'
-import { useEffect, useRef, useState } from 'react'
-import logo from '../../assets/without_photo_profile.jpg'
+import styles from "./Users.module.css";
+import { Input, InputSelect } from "../../components/Input/Input";
+import {
+  USERS_TYPE,
+  DOCUMENTS_TYPE,
+  COUNTRIES,
+  USER_STATE,
+} from "../../data/options.js";
+import { uploadUserImage } from "../../services/userService.js";
+import { Button } from "../../components/Button/Button";
+import { useEffect, useRef, useState } from "react";
+import logo from "../../assets/without_photo_profile.jpg";
+import { useAuth } from "../../hooks/useAuth.js";
 
 export const UserEditForm = ({
   formData,
   handleChangeEdit,
   handleUpdate,
-  setOpenDeleteModal
+  setOpenDeleteModal,
 }) => {
+  const { user: currentUser } = useAuth();
+  const isSelf = currentUser && String(currentUser.id) === String(formData.id);
 
-
-  const [visible, setVisible] = useState(false)
-  const [preview, setPreview] = useState(null)
-  const [uploading, setUploading] = useState(false)
-  const [uploadError, setUploadError] = useState(null)
-  const [submitted, setSubmitted] = useState(false)
-
+  const [visible, setVisible] = useState(false);
+  const [preview, setPreview] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState(null);
+  const [submitted, setSubmitted] = useState(false);
 
   // ABRIR CALENDARIO CON CLICK EN ICONO
-  const dataRef = useRef(null)
-  const openCalendar = () => { dataRef.current.showPicker() }
+  const dataRef = useRef(null);
+  const openCalendar = () => {
+    dataRef.current.showPicker();
+  };
 
   // Si se envía el form se reinicia el preview de la imagen
   useEffect(() => {
     if (submitted) {
-      setPreview(null)
-      setUploadError(null)
-      setSubmitted(false)
+      setPreview(null);
+      setUploadError(null);
+      setSubmitted(false);
     }
-  }, [submitted])
+  }, [submitted]);
 
   useEffect(() => {
-    setPreview(null)
-    console.log(formData.id)
-  }, [formData.id])
+    setPreview(null);
+    console.log(formData.id);
+  }, [formData.id]);
 
   const handleFileChange = async (e) => {
-    const file = e.target.files[0]
-    if (!file) return
+    const file = e.target.files[0];
+    if (!file) return;
 
     // Vista previa local inmediata sin esperar a Cloudinary
-    setPreview(URL.createObjectURL(file))
-    setUploadError(null)
-    setUploading(true)
+    setPreview(URL.createObjectURL(file));
+    setUploadError(null);
+    setUploading(true);
 
     try {
-      const { imageUrl } = await uploadUserImage(file)
+      const { imageUrl } = await uploadUserImage(file);
       // Inyecta la URL de Cloudinary en createFormData.image
-      handleChangeEdit({ target: { name: 'image', value: imageUrl } })
+      handleChangeEdit({ target: { name: "image", value: imageUrl } });
     } catch (error) {
-      setUploadError('Error al subir la imagen. Intenta de nuevo.')
-      setPreview(null)
+      setUploadError("Error al subir la imagen. Intenta de nuevo.");
+      setPreview(null);
     } finally {
-      setUploading(false)
+      setUploading(false);
     }
-  }
+  };
 
   const handleSubmitEdit = async (e) => {
-    const success = await handleUpdate(e)
-    if (success) setSubmitted(true)
-  }
-
-
+    const success = await handleUpdate(e);
+    if (success) setSubmitted(true);
+  };
 
   return (
     <>
@@ -118,7 +124,6 @@ export const UserEditForm = ({
                 required
               />
 
-
               <div style={{ display: "flex" }}>
                 <Input
                   ref={dataRef}
@@ -126,13 +131,17 @@ export const UserEditForm = ({
                   type="date"
                   className="inputPrimary"
                   name="birthdate"
-                  value={formData.birthdate ? formData.birthdate.split("T")[0] : ""}
+                  value={
+                    formData.birthdate ? formData.birthdate.split("T")[0] : ""
+                  }
                   min="1936-04-26"
                   max="2008-04-26"
                   onChange={handleChangeEdit}
                   required
                 />
-                <i className={`fa-regular fa-calendar-days ${styles.icon}`} onClick={openCalendar}
+                <i
+                  className={`fa-regular fa-calendar-days ${styles.icon}`}
+                  onClick={openCalendar}
                 ></i>
               </div>
 
@@ -176,24 +185,43 @@ export const UserEditForm = ({
                 data={USERS_TYPE.slice(1)}
               />
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <label style={{ color: "white", fontSize: '12px' }}>Foto de perfil (opcional)</label>
+              <div
+                style={{ display: "flex", flexDirection: "column", gap: "8px" }}
+              >
+                <label style={{ color: "white", fontSize: "12px" }}>
+                  Foto de perfil (opcional)
+                </label>
 
                 {preview ? (
                   <img
                     src={preview}
                     alt="Vista previa"
-                    style={{ width: '100%', maxHeight: '160px', objectFit: 'cover', borderRadius: '8px' }}
+                    style={{
+                      width: "100%",
+                      maxHeight: "160px",
+                      objectFit: "cover",
+                      borderRadius: "8px",
+                    }}
                   />
                 ) : (
                   <img
-                    src={formData?.image && formData.image.trim() !== "" ? formData.image : logo}
+                    src={
+                      formData?.image && formData.image.trim() !== ""
+                        ? formData.image
+                        : logo
+                    }
                     alt="Foto de perfil"
-                    style={{ width: '100%', maxHeight: '160px', objectFit: 'cover', borderRadius: '8px' }}
+                    style={{
+                      width: "100%",
+                      maxHeight: "160px",
+                      objectFit: "cover",
+                      borderRadius: "8px",
+                    }}
                     onError={(e) => {
                       e.target.onerror = null;
                       e.target.src = logo;
-                    }} />
+                    }}
+                  />
                 )}
 
                 <input
@@ -201,12 +229,19 @@ export const UserEditForm = ({
                   accept="image/jpeg,image/png,image/webp,image/avif"
                   onChange={handleFileChange}
                   disabled={uploading}
-                  style={{ cursor: 'pointer', fontSize: '12px' }}
+                  style={{ cursor: "pointer", fontSize: "12px" }}
                 />
 
-                {uploading && <span style={{ color: '#888', fontSize: '0.85rem' }}>Subiendo imagen…</span>}
-                {uploadError && <span style={{ color: 'red', fontSize: '0.85rem' }}>{uploadError}</span>}
-
+                {uploading && (
+                  <span style={{ color: "#888", fontSize: "0.85rem" }}>
+                    Subiendo imagen…
+                  </span>
+                )}
+                {uploadError && (
+                  <span style={{ color: "red", fontSize: "0.85rem" }}>
+                    {uploadError}
+                  </span>
+                )}
 
                 <Input
                   label="…o pega una URL"
@@ -226,26 +261,29 @@ export const UserEditForm = ({
                   onChange={handleChangeEdit}
                   data={USER_STATE.slice(1)}
                 />
-
               </div>
-
 
               <div className={styles.divActionsOrder}>
-                <Button text='Eliminar' className='btnDelete' onClick={() => {
-                  if (formData.id) setOpenDeleteModal(true)
-                }} />
-                <Button text='Actualizar' className='btnAdd' type='submit' />
+                {/*
+                <Button
+                  text={isSelf ? 'No puedes eliminarte' : 'Eliminar'}
+                  className="btnDelete"
+                  disabled={isSelf}
+                  onClick={() => {
+                    if (formData.id && !isSelf) setOpenDeleteModal(true);
+                  }}
+                />
+                */}
+                <Button text="Actualizar" className="btnAdd" type="submit" />
               </div>
-
             </div>
-
           </fieldset>
         </form>
-      )
-        : <p><em>Selecciona un usuario para empezar a editar</em></p>
-      }
-
-
+      ) : (
+        <p>
+          <em>Selecciona un usuario para empezar a editar</em>
+        </p>
+      )}
     </>
-  )
-} 
+  );
+};

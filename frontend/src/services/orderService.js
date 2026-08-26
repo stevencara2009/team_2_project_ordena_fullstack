@@ -32,6 +32,7 @@ export const getOrderById = async (id) => {
 
 // Crear orden
 export const createOrder = async (payload) => {
+  console.log(payload)
   const response = await fetch(`${API_URL}/orders`, {
     method: "POST",
     headers: {

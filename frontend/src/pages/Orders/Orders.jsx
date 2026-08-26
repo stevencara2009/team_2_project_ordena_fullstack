@@ -220,8 +220,8 @@ export const Orders = () => {
                   />
 
                   <Button
-                    text={currentOrder?.id ? `Pedido #${currentOrder.id} activo` : "Crear pedido"}
-                    className="btnPrimary"
+                    text={currentOrder?.id ? `Pedido #${currentOrder.id} activo` : "+ Crear pedido"}
+                    className="btnAdd"
                     type="button"
                     onClick={handleCreateOrder}
                     disabled={currentOrder?.id }

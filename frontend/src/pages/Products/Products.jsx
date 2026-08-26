@@ -36,7 +36,7 @@ export const Products = () => {
     price: 0,
     description: "",
     image: "",
-    availability: 1
+    availability: 1,
   });
 
   // Combinar filtro de categoría y el de búsqueda por nombre
@@ -72,7 +72,7 @@ export const Products = () => {
       price: selectedProduct.price || 0,
       description: selectedProduct.description || "",
       image: selectedProduct.image || "",
-      availability: availabilityValue
+      availability: availabilityValue,
     });
   };
 
@@ -164,7 +164,7 @@ export const Products = () => {
         price: 0,
         description: "",
         image: "",
-        availability: ""
+        availability: "",
       });
       return true;
     } catch (error) {
@@ -213,6 +213,13 @@ export const Products = () => {
           <div className="container-flex">
             {/* Modulo Platillos*/}
             <div className="module">
+              <Button
+                className="btnAdd"
+                text="+ Crear producto"
+                type="submit"
+                onClick={() => setOpenModal(true)}
+              />
+
               <ProductItem
                 products={productsFiltered}
                 onSelectProduct={handleSelectProduct}
@@ -221,13 +228,6 @@ export const Products = () => {
 
             {/* Modulo Detalle Producto (EDICIÓN / PATCH) */}
             <div className="module">
-              <Button
-                className="btnAdd"
-                text="+ Crear producto"
-                type="submit"
-                onClick={() => setOpenModal(true)}
-              />
-
               <ProductEditForm
                 formData={formData}
                 handleChangeEdit={handleChangeEdit}

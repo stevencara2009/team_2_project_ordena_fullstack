@@ -108,7 +108,7 @@ export const Menu = () => {
                 onChange={(e) => setProductSearched(e.target.value)}
                 variant="dark"
               />
-
+              {/*
               <div className="divSearch">
                 <button type="button">
                   <i
@@ -124,7 +124,8 @@ export const Menu = () => {
                     }}
                   ></i>
                 </button>
-              </div>
+              </div> */}
+
             </fieldset>
           </form>
 

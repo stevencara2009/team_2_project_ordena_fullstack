@@ -23,7 +23,7 @@ export const createApp = ({
 
   const ACCEPTED_ORIGINS = [
     "http://localhost:5173",
-    process.env.FRONTEND_URL, // https://team-2-project-ordena-frontend.vercel.app
+    process.env.FRONTEND_URL, 
   ].filter(Boolean);
 
   app.use(

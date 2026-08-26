@@ -60,11 +60,18 @@ export const deleteUser = async (id) => {
   console.log(id)
   const response = await fetch(`${API_URL}/users/${id}`, {
     method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include"
   });
 
   if (!response.ok) {
-    throw new Error("Error eliminando usuario");
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(errorData.message || "Error al intentar eliminar usuario");
   }
+
+  return await response.json();
 }
 
 

@@ -7,20 +7,14 @@ import { Modal } from "../../components/Modal/Modal";
 import { Button } from "../../components/Button/Button";
 import { TABLES_STATE } from "../../data/options";
 
-export const Tables = ({ selectedTable, setSelectedTable }) => {
+export const Tables = ({ selectedTable, setSelectedTable, handleSelectTable, setOpenModal, openModal, setOpenModalUpdate }) => {
   const { tables, addTable, editTable, removeTable } = useTables();
 
   const [tableSearch, setTableSearch] = useState("");
   const [tableState, setTableState] = useState("Todos");
   const [editingId, setEditingId] = useState(null);
-  const [openModal, setOpenModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
-  const [formData, setFormData] = useState({
-    id: "",
-    number: "",
-    capacity: "",
-    state: "",
-  }); // Formulario edición
+
   const [createFormData, setCreateFormData] = useState({
     number: "",
     capacity: "",
@@ -37,7 +31,7 @@ export const Tables = ({ selectedTable, setSelectedTable }) => {
   });
 
   // HANDLERS PARA SELECCIONAR MESA
-  const handleSelectTable = (table) => {
+  {/*const handleSelectTable = (table) => {
     setSelectedTable(table);
 
     setEditingId(table.number);
@@ -48,17 +42,8 @@ export const Tables = ({ selectedTable, setSelectedTable }) => {
       capacity: table.capacity,
       state: table.state,
     });
-  };
+  };    */}
 
-  // HANDLERS PARA EDITAR MESA
-  const handleChangeEdit = (e) => {
-    const { name, value } = e.target;
-
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
 
   // HANDLER CAPTURAR DATOS
   const handleChangeCreate = (e) => {
@@ -92,7 +77,7 @@ export const Tables = ({ selectedTable, setSelectedTable }) => {
   };
 
   // HANDLER DELETE - ELIMINAR UNA MESA
-  const handleDelete = async () => {
+  {/*const handleDelete = async () => {
     if (!formData.id) {
       return alert("Selecciona una mesa de la lista para eliminar");
     }
@@ -112,7 +97,7 @@ export const Tables = ({ selectedTable, setSelectedTable }) => {
     } catch (error) {
       console.error("Error al eliminar:", error);
     }
-  };
+  };*/}
 
   // HANDLER UI POST - CREAR UNA MESA
   const handleCreate = async (e) => {
@@ -177,54 +162,9 @@ export const Tables = ({ selectedTable, setSelectedTable }) => {
 
       {/* Modulo de Mesas */}
       <div className={styles.gridTables}>
-        <TableItem tables={tablesFiltered} onSelectTable={handleSelectTable} />
+        <TableItem tables={tablesFiltered} onSelectTable={handleSelectTable}  setOpenModalUpdate={setOpenModalUpdate} />
       </div>
 
-      {/* Formulario actualizar / eliminar mesa */}
-      {editingId && (
-        <form onSubmit={handleUpdate}>
-          <fieldset>
-            <legend>Detalle Mesa</legend>
-
-            <Input
-              label="Número"
-              name="number"
-              type="number"
-              value={formData.number}
-              onChange={handleChangeEdit}
-              className="inputPrimary"
-              disabled={editingId}
-            />
-
-            <Input
-              label="Capacidad"
-              name="capacity"
-              type="number"
-              value={formData.capacity}
-              onChange={handleChangeEdit}
-              className="inputPrimary"
-            />
-
-            <InputSelect
-              label="Estado"
-              name="state"
-              value={formData.state}
-              onChange={handleChangeEdit}
-              data={TABLES_STATE.slice(1)}
-              className="inputPrimary"
-            />
-
-            <Button text="Actualizar" className="btnAdd" type="submit" />
-
-            <Button
-              text="Eliminar"
-              className="btnDelete"
-              type="button"
-              onClick={() => setOpenDeleteModal(true)}
-            />
-          </fieldset>
-        </form>
-      )}
 
       {/* Modal crear una mesa */}
       <Modal isOpenModal={openModal} onCloseModal={() => setOpenModal(false)}>
@@ -258,7 +198,7 @@ export const Tables = ({ selectedTable, setSelectedTable }) => {
       </Modal>
 
       {/* Modal eliminar mesa */}
-      <Modal
+      {/*<Modal
         isOpenModal={openDeleteModal}
         onCloseModal={() => setOpenDeleteModal(false)}
       >
@@ -269,7 +209,7 @@ export const Tables = ({ selectedTable, setSelectedTable }) => {
         </p>
 
         <Button text="Aceptar" onClick={handleDelete} />
-      </Modal>
+      </Modal>*/}
     </div>
   );
 };

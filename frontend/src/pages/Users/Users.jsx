@@ -7,8 +7,10 @@ import { UserFilters } from "./UserFilters.jsx";
 import { UserEditForm } from "./UserEditForm.jsx";
 import { UserCreateModal } from "./UserCreateModal.jsx";
 import { UserDeleteModal } from "./UserDeleteModal.jsx";
+import { useAuth } from "../../hooks/useAuth";
 
 export const Users = () => {
+  const { user: currentUser } = useAuth();
   const [userSearch, setUserSearch] = useState("");
   const [openModal, setOpenModal] = useState(false); // Modal para Crear
   const [openDeleteModal, setOpenDeleteModal] = useState(false); // Modal para Eliminar
@@ -31,7 +33,7 @@ export const Users = () => {
     nationality: "",
     image: "",
     active: 1,
-    birthdate: ""
+    birthdate: "",
   });
 
   // ESTADO FORMULARIO CREACIÓN (POST)
@@ -90,7 +92,7 @@ export const Users = () => {
       birthdate: selectedUser.birthdate || "",
     });
 
-    console.log(formData.active)
+    console.log(formData.active);
   };
 
   // HANDLERS PARA CAPTURAR DATOS INDEPENDIENTES EDITAR
@@ -240,7 +242,6 @@ export const Users = () => {
       return;
     }
 
-
     try {
       const data = {
         ...formData,
@@ -271,7 +272,7 @@ export const Users = () => {
         nationality: "",
         image: "",
         active: "",
-        birthdate: ""
+        birthdate: "",
       });
       return true;
     } catch (error) {
@@ -283,6 +284,14 @@ export const Users = () => {
   const handleDelete = async () => {
     if (!formData.id)
       return alert("Selecciona un usuario de la lista para eliminar");
+
+    // Validación preventiva en cliente
+    if (currentUser && String(currentUser.id) === String(formData.id)) {
+      setOpenDeleteModal(false);
+      return alert(
+        "No es posible eliminar tu propio usuario mientras mantienes la sesión activa.",
+      );
+    }
 
     try {
       removeUser(formData.id);
@@ -297,7 +306,7 @@ export const Users = () => {
         birthdate: "",
         email: "",
         phone: "",
-        nationality: ""
+        nationality: "",
       });
 
       setOpenDeleteModal(false);
@@ -327,18 +336,17 @@ export const Users = () => {
           <div className="container-flex">
             {/* Modulo Usuarios */}
             <div className="module">
-              <UserItem users={usersFiltered} onSelectUser={handleSelectUser} />
-            </div>
-
-            {/* Modulo Detalle Usuario (EDICIÓN / PATCH) */}
-            <div className="module">
               <Button
                 className="btnAdd"
                 text="+ Crear usuario"
                 type="submit"
                 onClick={() => setOpenModal(true)}
               />
+              <UserItem users={usersFiltered} onSelectUser={handleSelectUser} />
+            </div>
 
+            {/* Modulo Detalle Usuario (EDICIÓN / PATCH) */}
+            <div className="module">
               <UserEditForm
                 formData={formData}
                 handleChangeEdit={handleChangeEdit}

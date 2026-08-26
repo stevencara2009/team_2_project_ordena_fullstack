@@ -1,8 +1,7 @@
 import { Router } from "express";
 import { UserController } from '../controllers/users.js'
 import { createUpload } from '../middlewares/upload.js'
-
-
+import { verifyToken } from '../middlewares/auth.js'
 
 export const createUserRouter = ({ userModel }) => {
 
@@ -17,12 +16,11 @@ export const createUserRouter = ({ userModel }) => {
     res.json({ imageUrl: req.file.path })
   })
 
-
   usersRouter.get('/', userController.getAll)
   usersRouter.get('/:id', userController.getById)
   usersRouter.post('/', userController.create)
   usersRouter.patch('/:id', userController.update)
-  usersRouter.delete('/:id', userController.delete)
+  usersRouter.delete('/:id', verifyToken, userController.delete)
 
   return usersRouter
 }

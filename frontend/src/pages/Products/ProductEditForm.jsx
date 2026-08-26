@@ -186,6 +186,7 @@ export const ProductEditForm = ({
               </div>
 
               <div className={styles.divActionsOrder}>
+                {/*
                 <Button
                   type="button" // <-- Corregido para que no haga submit del form al presionar eliminar
                   className="btnDelete"
@@ -194,6 +195,7 @@ export const ProductEditForm = ({
                     if (formData?.id) setOpenDeleteModal(true);
                   }}
                 />
+                */}
                 <Button className="btnAdd" text="Actualizar" type="submit" />
               </div>
             </div>

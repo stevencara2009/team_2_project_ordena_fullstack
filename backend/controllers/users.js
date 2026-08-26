@@ -43,19 +43,17 @@ export class UserController {
           message: "El correo electrónico ya se encuentra registrado",
         });
       }
-      res
-        .status(500)
-        .json({
-          message: "Error interno del servidor al registrar el usuario",
-        });
+      res.status(500).json({
+        message: "Error interno del servidor al registrar el usuario",
+      });
     }
   };
 
   update = async (req, res) => {
     try {
       const result = validatePartialUser(req.body);
-      console.log(result)
-      
+      console.log(result);
+
       if (!result.success)
         return res.status(400).json({ error: result.error.message });
       const { id } = req.params;
@@ -72,6 +70,16 @@ export class UserController {
   delete = async (req, res) => {
     try {
       const { id } = req.params;
+
+      const currentUserId = req.user?.id;
+
+      // Validar si el usuario intenta eliminarse a sí mismo
+      if (currentUserId && String(currentUserId) === String(id)) {
+        return res.status(400).json({
+          message: "No puedes eliminar tu propia cuenta de usuario activa.",
+        });
+      }
+
       const result = await this.userModel.delete({ id });
       if (result === false) {
         return res.status(404).json({ message: "User not found" });
