@@ -280,6 +280,11 @@ export const MenuHamburguer = () => {
         {/* MENU OPCIONES PARA MESEROS */}
         {user?.role === "MESERO" && (
           <ul>
+            <Link to="/dashboard">
+              <li className={styles.menuItem} onClick={toggleMenu}>
+                Dashboard (mesas)
+              </li>
+            </Link>
             <Link to="/view-orders">
               <li className={styles.menuItem} onClick={toggleMenu}>
                 Ver Pedidos

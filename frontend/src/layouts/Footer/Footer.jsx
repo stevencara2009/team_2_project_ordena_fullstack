@@ -30,7 +30,6 @@ export const Footer = () => {
           <p style={{ marginBottom: "0px" }}><i className="fa-solid fa-location-dot" style={{ color: 'rgb(255, 255, 255)' }}></i> Calle 90 #11-20 Chapinero, Bogotá, Colombia
           </p>
           
-          <h3>Redes Sociales</h3>
           <i className={`fa-brands fa-square-facebook ${styles.icon}`}></i>
           <i className={`fa-brands fa-instagram ${styles.icon}`}></i>
           <i className={`fa-brands fa-youtube ${styles.icon}`}></i>
@@ -39,7 +38,7 @@ export const Footer = () => {
 
       </section>
 
-      <section>
+      <section style={{borderTop: "1px solid gray", width:"100%"}}>
         <p>2026 | Todos los Derechos Reservados ®</p>
       </section>
 

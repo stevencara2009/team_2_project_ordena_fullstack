@@ -15,22 +15,25 @@ export const SpecialPlates = () => {
         <div className={styles.platillos}>
 
           <article className={styles.platos}>
-            <h3 className={styles.platilloTitle}>Sobrebarriga en Salsa</h3><h3>$ 25.900</h3>
+            <h3 className={styles.platilloTitle}>Sobrebarriga en Salsa</h3>
             <div className={`${styles.img1}`}></div>
+            <h3>$ 25.900</h3>
             <p className={styles.platosParagraph}>Tierna sobrebarriga cocinada lentamente en salsa criolla, acompañada de arroz blanco, papa salada y ensalada fresca. Un clásico lleno de sabor.</p>
             {/* <Button text="Ordenar pedido" className="btnLink" /> */}
           </article>
 
           <article className={styles.platos}>
-            <h3 className={styles.platilloTitle}>Mojarra Frita</h3><h3>$ 32.000</h3>
+            <h3 className={styles.platilloTitle}>Mojarra Frita</h3>
             <div className={`${styles.img2}`}></div>
+            <h3>$ 32.000</h3>
             <p className={styles.platosParagraph}>Mojarra fresca frita al punto perfecto, acompañada de arroz con coco, patacones y ensalada. Un plato típico de la costa caribe colombiana.</p>
             {/* <Button text="Ordenar pedido" className="btnLink" /> */}
           </article>
 
           <article className={styles.platos}>
-            <h3 className={styles.platilloTitle}>Baby Beef</h3><h3>$ 40.000</h3>
+            <h3 className={styles.platilloTitle}>Baby Beef</h3>
             <div className={`${styles.img2}`}></div>
+            <h3>$ 40.000</h3>
             <p className={styles.platosParagraph}>Mojarra fresca frita al punto perfecto, acompañada de arroz con coco, patacones y ensalada. Un plato típico de la costa caribe colombiana.</p>
             {/* <Button text="Ordenar pedido" className="btnLink" /> */}
           </article>

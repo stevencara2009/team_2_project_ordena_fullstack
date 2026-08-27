@@ -4,11 +4,10 @@ import defaultAvatar from "../../assets/without_photo_profile.jpg";
 import styles from "./Profile.module.css";
 import { useBills } from "../../hooks/useBills";
 import { BillsTable } from "../../components/Table/BillsTable";
-import { Modal } from "../../components/Modal/Modal"
-import { BillDetail } from "../../pages/Bills/BillDetail/BillDetail"
+import { Modal } from "../../components/Modal/Modal";
+import { BillDetail } from "../../pages/Bills/BillDetail/BillDetail";
 
 export function Profile() {
-
   const { user } = useAuth();
   const {
     bills,
@@ -18,6 +17,17 @@ export function Profile() {
     clearSelectedBillDetails,
   } = useBills();
   const [showBillModal, setShowBillModal] = useState(false);
+  const [autoPrint, setAutoPrint] = useState(false);
+
+  useEffect(() => {
+    if (showBillModal && autoPrint && selectedBillDetails) {
+      const timer = setTimeout(() => {
+        window.print();
+        setAutoPrint(false);
+      }, 200); // pequeño delay para asegurar el render
+      return () => clearTimeout(timer);
+    }
+  }, [showBillModal, autoPrint, selectedBillDetails]);
 
   useEffect(() => {
     if (user?.id) {
@@ -43,6 +53,12 @@ export function Profile() {
 
   const handleRowClick = async (bill) => {
     await loadBillDetails(bill.id);
+    setShowBillModal(true);
+  };
+
+  const handleDownloadClick = async (bill) => {
+    await loadBillDetails(bill.id);
+    setAutoPrint(true);
     setShowBillModal(true);
   };
 
@@ -133,6 +149,7 @@ export function Profile() {
               <BillsTable
                 bills={bills}
                 onRowClick={handleRowClick}
+                onDownloadClick={handleDownloadClick}
                 emptyMessage="Aún no tienes facturas asociadas."
               />
             </div>
@@ -141,9 +158,10 @@ export function Profile() {
       </div>
       {showBillModal && (
         <Modal isOpenModal={showBillModal} onCloseModal={handleCloseModal}>
-          <BillDetail billDetails={selectedBillDetails} />
+          <div id="printable-invoice">
+            <BillDetail billDetails={selectedBillDetails} />
+          </div>
         </Modal>
-
       )}
     </div>
   );

@@ -6,6 +6,7 @@ import { useTables } from "../../hooks/useTables";
 import { Modal } from "../../components/Modal/Modal";
 import { Button } from "../../components/Button/Button";
 import { TABLES_STATE } from "../../data/options";
+import { useAuth } from "../../hooks/useAuth";
 
 export const Tables = ({ selectedTable, setSelectedTable, handleSelectTable, setOpenModal, openModal, setOpenModalUpdate }) => {
   const { tables, addTable, editTable, removeTable } = useTables();
@@ -14,6 +15,8 @@ export const Tables = ({ selectedTable, setSelectedTable, handleSelectTable, set
   const [tableState, setTableState] = useState("Todos");
   const [editingId, setEditingId] = useState(null);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
+    const { user } = useAuth();
+    
 
   const [createFormData, setCreateFormData] = useState({
     number: "",
@@ -154,11 +157,13 @@ export const Tables = ({ selectedTable, setSelectedTable, handleSelectTable, set
         </fieldset>
       </form>
 
+      {user?.role === "ADMINISTRADOR" && (
       <Button
         text="+ Crear mesa"
         className="btnAdd"
         onClick={() => setOpenModal(true)}
       />
+      )}
 
       {/* Modulo de Mesas */}
       <div className={styles.gridTables}>

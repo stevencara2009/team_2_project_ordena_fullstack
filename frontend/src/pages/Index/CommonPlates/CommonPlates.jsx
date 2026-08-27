@@ -19,8 +19,9 @@ export const CommonPlates = () => {
         </article>
 
         <article className={styles.platos}>
-          <h3 className={styles.platilloTitle}>Ajiaco Santafereño</h3><h3>$ 18.500</h3>
+          <h3 className={styles.platilloTitle}>Ajiaco Santafereño</h3>
           <div className={styles.img2}></div>
+          <h3>$ 18.500</h3>
           <p className={styles.platosParagraph}>Sopa típica bogotana preparada con pollo, papa criolla, mazorca y guascas, acompañada de arroz, alcaparras y crema de leche.</p>
         </article>
 

@@ -6,13 +6,13 @@
   margin: 20px 0;
 }
 
-.section {
+.sectionSuscription {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 0 5%;
+  padding: 0 10%;
   margin-bottom: 20px;
   height: auto;
   background-color: rgb(245, 245, 245);

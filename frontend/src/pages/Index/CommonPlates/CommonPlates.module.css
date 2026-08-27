@@ -15,7 +15,7 @@
 
 .menu {
     width: 100%;
-    padding: 0 5%;
+    padding: 0 10%;
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
@@ -61,6 +61,7 @@
     text-align: center;
     justify-content: space-around;
     font-size: var(--font-size-xs);
+    width: 250px;
 }
 
 .img1 {
@@ -112,7 +113,7 @@
     .platillos {
         display: flex;
         flex-direction: row;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
         width: 100%;
         gap: 15px;

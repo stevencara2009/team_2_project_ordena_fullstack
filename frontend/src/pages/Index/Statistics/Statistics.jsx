@@ -107,8 +107,8 @@ export const Statistics = () => {
 	return (
 		<section className={styles.dates} ref={ref}>
 			<div className={styles.datesTotal}>
-				<h2 className={`${styles.title2} ${styles.datesTotalTitle}`}>Reseñas</h2>
-				<p className={styles.datesTotalParagraph}>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci nemo aut sequi aliquam labore architecto nisi consequuntur. Possimus quos fugiat vero laboriosam, rem repellendus veritatis voluptas temporibus, laborum velit aut.</p>
+				<h2 className={`${styles.title2} ${styles.datesTotalTitle}`}>Trayectoria</h2>
+				{/*<p className={styles.datesTotalParagraph}>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci nemo aut sequi aliquam labore architecto nisi consequuntur. Possimus quos fugiat vero laboriosam, rem repellendus veritatis voluptas temporibus, laborum velit aut.</p>*/}
 
 				<div className={styles.tips}>
 

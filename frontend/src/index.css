@@ -272,3 +272,27 @@ legend {
     border: yellow;
   }
 }
+
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  #printable-invoice,
+  #printable-invoice * {
+    visibility: visible;
+  }
+
+  #printable-invoice {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  /* Opcional: oculta elementos del modal que no quieras imprimir, como un botón de cerrar */
+  .no-print {
+    display: none !important;
+  }
+}
