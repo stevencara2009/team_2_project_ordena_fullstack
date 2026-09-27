@@ -16,17 +16,20 @@
   justify-content: flex-start;
   align-items: center;
   background: white;
-  padding: 20px;
+  margin-top: 50px ;
+  padding: 15px;
   border-radius: 8px;
   width: 320px;
-  height: 80vh;
+  height: 90vh;
   position: relative;
   z-index: 50;
   overflow-y: auto; 
 }
 
-.modal p, .modal h3, .modal h4 {
- color: black;
+.modal p,
+.modal h3,
+.modal h4 {
+  color: black;
 }
 
 .closeBtn {
@@ -36,4 +39,24 @@
   border: none;
   background: red;
   color: white;
+}
+
+/* ============================================
+   RESPONSIVE: Pantallas Medianas y Grandes
+   ============================================ */
+@media (min-width: 640px) {
+  .modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80vw;
+    height: 80vh;
+    position: relative;
+    z-index: 50;
+    overflow-y: auto;
+  }
 }

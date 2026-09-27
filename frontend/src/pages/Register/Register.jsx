@@ -216,7 +216,7 @@ export const Register = () => {
             onAccept={handleAcceptTerms}
           >
             <div style={{ width: "100%", height: "100%" }}>
-              <h3 style={{ color: "black" }}>Términos y condiciones</h3>
+              <h3 style={{ color: "black", textAlign: "center" }}>Términos y condiciones</h3>
               <h4>1. Aceptación de los términos</h4>
               <p>
                 Al descargar, instalar o utilizar la aplicación, el usuario

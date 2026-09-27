@@ -132,7 +132,7 @@ export const MenuHamburguer = () => {
                   setIsOpenModal(false);
                   setIsOpen(false);
                 }}
-                className="btnBack"
+                className="btnDelete"
                 type="button"
               />
             </Modal>
@@ -216,7 +216,7 @@ export const MenuHamburguer = () => {
                   setIsOpenModal(false);
                   setIsOpen(false);
                 }}
-                className="btnBack"
+                className="btnDelete"
                 type="button"
               />
             </Modal>
@@ -270,7 +270,7 @@ export const MenuHamburguer = () => {
                   setIsOpenModal(false);
                   setIsOpen(false);
                 }}
-                className="btnBack"
+                className="btnDelete"
                 type="button"
               />
             </Modal>
@@ -334,7 +334,7 @@ export const MenuHamburguer = () => {
                   setIsOpenModal(false);
                   setIsOpen(false);
                 }}
-                className="btnBack"
+                className="btnDelete"
                 type="button"
               />
             </Modal>

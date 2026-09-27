@@ -1,17 +1,26 @@
-.divActionsOrder {
-  display: flex;
-  flex-direction: row;
-  gap: 7px;
-}
 
 .icon {
-  color: white;
-  width: 28px;
-  height: 100%;
+  color: gray;
+  width: 20px;
+  height: auto;
   display: flex;
-  text-align: center;
-  align-content: center;
-  font-size: 24px;
+  align-items: end;
+  justify-content: center;
+  font-size: 22px;
   cursor: pointer;
   margin-left: 3px;
+}
+
+
+.inputFlex {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 640px) {
+  .inputFlex {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+  }
 }

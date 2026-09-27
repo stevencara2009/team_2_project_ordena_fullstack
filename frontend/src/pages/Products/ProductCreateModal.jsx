@@ -49,7 +49,10 @@ export const ProductCreateModal = ({
       // Inyecta la URL de Cloudinary en createFormData.image
       handleChangeCreate({ target: { name: "image", value: imageUrl } });
     } catch (error) {
-      setUploadError("Formato de archivo no permitido. Deber ser: .jpeg .png .webp .avif", error);
+      setUploadError(
+        "Formato de archivo no permitido. Deber ser: .jpeg .png .webp .avif",
+        error,
+      );
       setPreview(null);
     } finally {
       setUploading(false);
@@ -80,7 +83,7 @@ export const ProductCreateModal = ({
       onAccept={() => {}}
     >
       <div style={{ width: "100%", height: "100%" }}>
-        <h2 style={{ color: "black" }}>Crear producto</h2>
+        <h2 style={{ color: "black", textAlign: "center" }}>Crear producto</h2>
         <form onSubmit={handleSubmitCreate}>
           <fieldset>
             <legend>Detalle del Producto</legend>
@@ -97,27 +100,29 @@ export const ProductCreateModal = ({
                 variant="Light"
               />
 
-              <InputSelect
-                label="Tipo de comida"
-                className="labelDark"
-                name="category"
-                value={createFormData.category}
-                onChange={handleChangeCreate}
-                data={PLATES_TYPE.slice(1)}
-                variant="Light"
-              />
+              <div className={styles.inputFlex}>
+                <InputSelect
+                  label="Tipo de comida"
+                  className="labelDark"
+                  name="category"
+                  value={createFormData.category}
+                  onChange={handleChangeCreate}
+                  data={PLATES_TYPE.slice(1)}
+                  variant="Light"
+                />
 
-              <Input
-                label="Precio"
-                type="number"
-                className="labelDark"
-                placeholder=""
-                name="price"
-                value={createFormData.price}
-                onChange={handleChangeCreate}
-                required
-                variant="Light"
-              />
+                <Input
+                  label="Precio"
+                  type="number"
+                  className="labelDark"
+                  placeholder=""
+                  name="price"
+                  value={createFormData.price}
+                  onChange={handleChangeCreate}
+                  required
+                  variant="Light"
+                />
+              </div>
 
               <Input
                 label="Descripción (opcional)"
@@ -132,9 +137,9 @@ export const ProductCreateModal = ({
               />
 
               <div
-                style={{ display: "flex", flexDirection: "column", gap: "8px" }}
+                style={{ display: "flex", flexDirection: "column" }}
               >
-                <label style={{ fontWeight: "bold" }}>
+                <label style={{ fontSize: "0.5rem", marginTop: "5px" }}>
                   Imagen del producto (opcional)
                 </label>
 
@@ -179,10 +184,9 @@ export const ProductCreateModal = ({
                   onChange={handleChangeCreate}
                   variant="Light"
                 />
-                
               </div>
 
-              <div className={styles.divActionsOrder}>
+              <div className={styles.inputFlex}>
                 <Button
                   className="btnDelete"
                   text="Limpiar"

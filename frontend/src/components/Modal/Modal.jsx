@@ -11,7 +11,7 @@ export function Modal({ isOpenModal, onCloseModal, children }) {
         <div onClick={(e) => e.stopPropagation()} style={{
           display: 'flex', width: '100%', justifyContent: 'end', alignItems: "center"
         }}  >
-          <button text="Cerrar" onClick={onCloseModal}>
+          <button text="Cerrar" onClick={onCloseModal} style={{border:"none"}}>
             <i className="fa-solid fa-rectangle-xmark" style={{ color: 'brown', fontSize: '24px', cursor: 'pointer' }}></i>
           </button>
         </div>
