@@ -124,3 +124,16 @@
   padding: 3rem;
   color: #64748b;
 }
+
+.inputFlex {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 640px) {
+  .inputFlex {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+  }
+}
