@@ -64,7 +64,7 @@ const userSchema = z.object({
     }),
 
   role: z.enum(
-    ["ADMINISTRADOR", "MESERO", "COCINERO", "CLIENTE"],
+    ["ADMINISTRADOR", "MESERO", "COCINERO", "CLIENTE", "CAJERO"],
     {
       required_error: "User role is required",
       invalid_type_error: "Invalid user role",

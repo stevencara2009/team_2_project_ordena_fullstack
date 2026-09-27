@@ -341,6 +341,80 @@ export const MenuHamburguer = () => {
           </ul>
         )}
 
+        {/* MENU OPCIONES PARA CAJEROS */}
+        {user?.role === "CAJERO" && (
+          <ul>
+            <Link to="/dashboard">
+              <li className={styles.menuItem} onClick={toggleMenu}>
+                Dashboard (mesas)
+              </li>
+            </Link>
+            <Link to="/view-orders">
+              <li className={styles.menuItem} onClick={toggleMenu}>
+                Ver Pedidos
+              </li>
+            </Link>
+            <Link to="/orders">
+              <li className={styles.menuItem} onClick={toggleMenu}>
+                Crear pedido
+              </li>
+            </Link>
+            <Link to="/bills">
+              <li className={styles.menuItem} onClick={toggleMenu}>
+                Facturar
+              </li>
+            </Link>
+            <Link to="/bills-history">
+              <li className={styles.menuItem} onClick={toggleMenu}>
+                Historial de facturas
+              </li>
+            </Link>
+            <Link to="/profile">
+              <li className={styles.menuItem} onClick={toggleMenu}>
+                Información personal
+              </li>
+            </Link>
+            <li className={styles.menuItem} onClick={toggleModal}>
+              Cerrar Sesión
+            </li>
+
+            <Modal
+              isOpenModal={isOpenModal}
+              onCloseModal={() => setIsOpenModal(false)}
+            >
+              <h2 style={{ color: "black" }}>Cerrar Sesión</h2>
+              <p style={{ color: "black" }}>
+                ¿Estás seguro que deseas cerrar sesión?
+              </p>
+
+              <Button
+                text="Aceptar"
+                onClick={() => {
+                  setIsOpenModal(false);
+                  setLoading(true);
+                  setTimeout(() => {
+                    setLoading(false);
+                    setIsOpen(false);
+                    logout();
+                    navigate("/index");
+                  }, 2000);
+                }}
+                className="btnSignOut"
+                type="button"
+              />
+              <Button
+                text="Cancelar"
+                onClick={() => {
+                  setIsOpenModal(false);
+                  setIsOpen(false);
+                }}
+                className="btnDelete"
+                type="button"
+              />
+            </Modal>
+          </ul>
+        )}
+
         {loading && <Loader />}
       </div>
     </div>

@@ -221,7 +221,7 @@ CREATE TABLE `tbl_users` (
   `email` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `phone` varchar(13) NOT NULL,
-  `role` enum('ADMINISTRADOR','MESERO','COCINERO','CLIENTE') NOT NULL,
+  `role` enum('ADMINISTRADOR','MESERO','COCINERO','CLIENTE','CAJERO') NOT NULL,
   `nationality` varchar(30) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `image` text,

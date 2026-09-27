@@ -40,7 +40,7 @@ function App() {
           <Route
             path="dashboard"
             element={
-              <ProtectedRoute allowedRoles={["ADMINISTRADOR", "MESERO"]}>
+              <ProtectedRoute allowedRoles={["ADMINISTRADOR", "MESERO", "CAJERO"]}>
                 <Dashboard />
               </ProtectedRoute>
             }
@@ -50,7 +50,7 @@ function App() {
             path="orders"
             element={
               <ProtectedRoute
-                allowedRoles={["ADMINISTRADOR", "COCINERO", "MESERO"]}
+                allowedRoles={["ADMINISTRADOR", "COCINERO", "MESERO", "CAJERO"]}
               >
                 <Orders />
               </ProtectedRoute>
@@ -79,7 +79,7 @@ function App() {
             path="view-orders"
             element={
               <ProtectedRoute
-                allowedRoles={["ADMINISTRADOR", "COCINERO", "MESERO"]}
+                allowedRoles={["ADMINISTRADOR", "COCINERO", "MESERO", "CAJERO"]}
               >
                 <ViewOrders />
               </ProtectedRoute>
@@ -89,7 +89,7 @@ function App() {
           <Route
             path="bills"
             element={
-              <ProtectedRoute allowedRoles={["ADMINISTRADOR"]}>
+              <ProtectedRoute allowedRoles={["ADMINISTRADOR", "CAJERO"]}>
                 <Bills />
               </ProtectedRoute>
             }
@@ -98,7 +98,7 @@ function App() {
           <Route
             path="bills-history"
             element={
-              <ProtectedRoute allowedRoles={["ADMINISTRADOR"]}>
+              <ProtectedRoute allowedRoles={["ADMINISTRADOR", "CAJERO"]}>
                 <BillsHistory />
               </ProtectedRoute>
             }
@@ -113,6 +113,7 @@ function App() {
                   "CLIENTE",
                   "COCINERO",
                   "MESERO",
+                  "CAJERO",
                 ]}
               >
                 <Profile />

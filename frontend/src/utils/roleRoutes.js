@@ -2,6 +2,7 @@ export const roleRoutes= {
     ADMINISTRADOR: "/dashboard",
     COCINERO: "/view-orders",
     MESERO: "/orders",
-    CLIENTE: "/index"
+    CLIENTE: "/index",
+    CAJERO: "/bills",
 }
 
