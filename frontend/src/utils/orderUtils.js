@@ -5,6 +5,13 @@ export const ORDER_STATES = [
   'ENTREGADO'
 ]
 
+// Dado el estado actual, devuelve el anterior
+export const getBeforeState = (currentState) => {
+  const index = ORDER_STATES.indexOf(currentState)
+  if (index === -1 ) return null
+  return ORDER_STATES[index - 1]
+}
+
 
 // Dado el estado actual, devuelve el siguiente
 export const getNextState = (currentState) => {
@@ -12,6 +19,8 @@ export const getNextState = (currentState) => {
   if (index === -1 || index === ORDER_STATES.length - 1) return null
   return ORDER_STATES[index + 1]
 }
+
+
 
 // Facturar
 export const bill = (currentState) => {

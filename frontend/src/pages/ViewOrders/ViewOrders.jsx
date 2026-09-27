@@ -79,10 +79,10 @@ export const ViewOrders = () => {
               {/* Formulario filtro */}
               <form>
                 <fieldset className="form-flex">
-                  <legend>Filtro</legend>
+                  <legend>Filtrar por:</legend>
 
                   <Input
-                    label="N° de orden"
+                    label="Orden:"
                     type="number"
                     className="inputPrimary"
                     placeholder=""
@@ -93,7 +93,7 @@ export const ViewOrders = () => {
                   />
 
                   <Input
-                    label="N° de mesa"
+                    label="Mesa:"
                     type="number"
                     className="inputPrimary"
                     placeholder=""
@@ -104,7 +104,7 @@ export const ViewOrders = () => {
                   />
 
                   <InputSelect
-                    label="Estado"
+                    label="Estado:"
                     className="inputPrimary"
                     value={orderState}
                     onChange={(e) =>
