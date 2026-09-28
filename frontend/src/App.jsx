@@ -17,6 +17,7 @@ import { Bills } from "./pages/Bills/Bills";
 import { Profile } from "./pages/Profile/Profile";
 import { BillsHistory } from "./pages/BillHistory/BillsHistory";
 import { ResetPassword } from "./pages/ResetPassword/ResetPassword";
+import { Cart } from "./pages/Cart/Cart";
 
 function App() {
   const { user } = useAuth();
@@ -34,6 +35,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/index" element={<Index />} />
         <Route path="/menu" element={<Menu />} />
+        <Route path="/cart" element={<Cart />} />
 
         {/* Rutas protegidas */}
         <Route path="/" element={<AdminLayout />}>

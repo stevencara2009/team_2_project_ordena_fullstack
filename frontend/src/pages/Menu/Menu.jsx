@@ -6,8 +6,19 @@ import { PLATES_TYPE } from "../../data/options";
 import { Loader } from "../../components/Loader/Loader";
 import { useProducts } from "../../hooks/useProducts";
 import { Pagination } from "../../components/Pagination/Pagination";
+import { useSearchParams } from "react-router-dom";
+import { useCart } from "../../hooks/useCart";
+import { Link } from "react-router-dom";
 
 const ScrollMenu = ({ onSetPlateType }) => {
+  const [searchParams] = useSearchParams();
+  const { setTableNumber, tableNumber, addItem, itemCount } = useCart();
+
+  useEffect(() => {
+    const mesa = searchParams.get("mesa");
+    if (mesa) setTableNumber(mesa);
+  }, [searchParams]);
+
   const [selectedType, setSelectedType] = useState(null);
   const scrollRef = useRef(null);
 
@@ -54,6 +65,7 @@ export const Menu = () => {
   const { products, loading } = useProducts();
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 12; // Muestra el número de productos a mostrar por página
+  const { setTableNumber, tableNumber, addItem, itemCount } = useCart();
 
   // Combinar filtro de categoría y el de búsqueda por nombre
   const productsFiltered = products.filter((p) => {
@@ -63,8 +75,8 @@ export const Menu = () => {
     const matchesSearch = p.name
       .toLowerCase()
       .includes(productSearched.toLowerCase());
-    const availableProducts = p.availability === 1
-    return matchesCategory && matchesSearch && availableProducts
+    const availableProducts = p.availability === 1;
+    return matchesCategory && matchesSearch && availableProducts;
   });
 
   // Si el usuario busca un producto o cambia de categoría, se devolverá a la página 1
@@ -88,7 +100,7 @@ export const Menu = () => {
     e.preventDefault();
   };
 
-      console.log(productsFiltered[0])
+  console.log(productsFiltered[0]);
   return (
     <div className="background">
       <div className="container">
@@ -125,17 +137,22 @@ export const Menu = () => {
                   ></i>
                 </button>
               </div> */}
-
             </fieldset>
           </form>
 
           <ScrollMenu onSetPlateType={setPlateType} />
 
+
+
+
           {loading ? (
             <Loader />
           ) : (
-            <div className="container-flex">
-              <div styles={{ display: "flex" }}>
+
+              <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
+
+
+
                 {/* Modulo Platillos*/}
                 <div className={styles.gridPlates}>
                   <MenuItem products={currentProducts} />
@@ -147,10 +164,22 @@ export const Menu = () => {
                   totalPages={totalPages}
                   onPageChange={setCurrentPage}
                 />
+
+                
               </div>
-            </div>
+
           )}
+
+
+
+
+
         </div>
+        {itemCount > 0 && (
+          <Link to="/cart" className={styles.cartFab}>
+            🛒 {itemCount}
+          </Link>
+        )}
       </div>
     </div>
   );

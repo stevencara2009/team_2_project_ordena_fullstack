@@ -41,6 +41,7 @@ export const TABLES_STATE = [
 
 export const ORDERS_STATE = [
   "Todos",
+  "POR CONFIRMAR", 
   "PENDIENTE",
   "EN PREPARACION",
   "LISTO",

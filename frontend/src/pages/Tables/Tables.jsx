@@ -7,16 +7,25 @@ import { Modal } from "../../components/Modal/Modal";
 import { Button } from "../../components/Button/Button";
 import { TABLES_STATE } from "../../data/options";
 import { useAuth } from "../../hooks/useAuth";
+import { TableQR } from "../../components/TableQR/TableQR";
 
-export const Tables = ({ selectedTable, setSelectedTable, handleSelectTable, setOpenModal, openModal, setOpenModalUpdate }) => {
+export const Tables = ({
+  selectedTable,
+  setSelectedTable,
+  handleSelectTable,
+  setOpenModal,
+  openModal,
+  setOpenModalUpdate,
+}) => {
   const { tables, addTable, editTable, removeTable } = useTables();
+
+  const [qrTable, setQrTable] = useState(null);
 
   const [tableSearch, setTableSearch] = useState("");
   const [tableState, setTableState] = useState("Todos");
   const [editingId, setEditingId] = useState(null);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
-    const { user } = useAuth();
-    
+  const { user } = useAuth();
 
   const [createFormData, setCreateFormData] = useState({
     number: "",
@@ -34,7 +43,8 @@ export const Tables = ({ selectedTable, setSelectedTable, handleSelectTable, set
   });
 
   // HANDLERS PARA SELECCIONAR MESA
-  {/*const handleSelectTable = (table) => {
+  {
+    /*const handleSelectTable = (table) => {
     setSelectedTable(table);
 
     setEditingId(table.number);
@@ -45,8 +55,8 @@ export const Tables = ({ selectedTable, setSelectedTable, handleSelectTable, set
       capacity: table.capacity,
       state: table.state,
     });
-  };    */}
-
+  };    */
+  }
 
   // HANDLER CAPTURAR DATOS
   const handleChangeCreate = (e) => {
@@ -80,7 +90,8 @@ export const Tables = ({ selectedTable, setSelectedTable, handleSelectTable, set
   };
 
   // HANDLER DELETE - ELIMINAR UNA MESA
-  {/*const handleDelete = async () => {
+  {
+    /*const handleDelete = async () => {
     if (!formData.id) {
       return alert("Selecciona una mesa de la lista para eliminar");
     }
@@ -100,7 +111,8 @@ export const Tables = ({ selectedTable, setSelectedTable, handleSelectTable, set
     } catch (error) {
       console.error("Error al eliminar:", error);
     }
-  };*/}
+  };*/
+  }
 
   // HANDLER UI POST - CREAR UNA MESA
   const handleCreate = async (e) => {
@@ -158,18 +170,22 @@ export const Tables = ({ selectedTable, setSelectedTable, handleSelectTable, set
       </form>
 
       {user?.role === "ADMINISTRADOR" && (
-      <Button
-        text="+ Crear mesa"
-        className="btnAdd"
-        onClick={() => setOpenModal(true)}
-      />
+        <Button
+          text="+ Crear mesa"
+          className="btnAdd"
+          onClick={() => setOpenModal(true)}
+        />
       )}
 
       {/* Modulo de Mesas */}
       <div className={styles.gridTables}>
-        <TableItem tables={tablesFiltered} onSelectTable={handleSelectTable}  setOpenModalUpdate={setOpenModalUpdate} />
+        <TableItem
+          tables={tablesFiltered}
+          onSelectTable={handleSelectTable}
+          setOpenModalUpdate={setOpenModalUpdate}
+          onShowQR={setQrTable}
+        />
       </div>
-
 
       {/* Modal crear una mesa */}
       <Modal isOpenModal={openModal} onCloseModal={() => setOpenModal(false)}>
@@ -215,6 +231,10 @@ export const Tables = ({ selectedTable, setSelectedTable, handleSelectTable, set
 
         <Button text="Aceptar" onClick={handleDelete} />
       </Modal>*/}
+      {/* Modal QR de la mesa */}
+      <Modal isOpenModal={!!qrTable} onCloseModal={() => setQrTable(null)}>
+        {qrTable && <TableQR tableNumber={qrTable.number} />}
+      </Modal>
     </div>
   );
 };

@@ -1,130 +1,136 @@
-import { validateOrder, validatePartialOrder } from '../schemas/orders.js'
+import {
+  validateOrder,
+  validatePartialOrder,
+  validateClientOrder,
+} from "../schemas/orders.js";
 
 export class OrderController {
-
   constructor({ orderModel }) {
-    this.orderModel = orderModel
+    this.orderModel = orderModel;
   }
-
-
 
   getAll = async (req, res) => {
     try {
-      const orders = await this.orderModel.getAll()
-      res.json(orders)
+      const orders = await this.orderModel.getAll();
+      res.json(orders);
     } catch (error) {
-      res.status(500).json({ message: error.message })
+      res.status(500).json({ message: error.message });
     }
-
-  }
-
-
+  };
 
   getById = async (req, res) => {
     try {
-      const { id } = req.params
-      const order = await this.orderModel.getById({ id })
+      const { id } = req.params;
+      const order = await this.orderModel.getById({ id });
       if (!order) {
         return res.status(404).json({
-          message: 'Order not found'
-        })
+          message: "Order not found",
+        });
       }
-      res.json(order)
+      res.json(order);
     } catch (error) {
-      res.status(500).json({ message: error.message })
+      res.status(500).json({ message: error.message });
     }
-
-  }
-
+  };
 
   getByTable = async (req, res) => {
     try {
-      const { id } = req.params
-      const orders = await this.orderModel.getByTable({ id })
+      const { id } = req.params;
+      const orders = await this.orderModel.getByTable({ id });
       if (!orders) {
         return res.status(404).json({
-          message: 'There are not orders asocciated that table'
-        })
+          message: "There are not orders asocciated that table",
+        });
       }
-      res.json(orders)
+      res.json(orders);
     } catch (error) {
-      res.status(500).json({ message: error.message })
+      res.status(500).json({ message: error.message });
     }
-
-  }
-
-
+  };
 
   create = async (req, res) => {
     try {
-      const result = validateOrder(req.body)
+      const result = validateOrder(req.body);
 
       if (result.error) {
-        return res.status(400).json({ error: JSON.parse(result.error.message) })
+        return res
+          .status(400)
+          .json({ error: JSON.parse(result.error.message) });
       }
 
       const newOrder = await this.orderModel.create({
-        input: result.data
-      })
+        input: result.data,
+      });
 
-
-      res.status(201).json(newOrder)
+      res.status(201).json(newOrder);
     } catch (error) {
       res.status(500).json({
-        message: error.message
-      })
+        message: error.message,
+      });
     }
-  }
+  };
 
+  createFromClient = async (req, res) => {
+    try {
+      const result = validateClientOrder(req.body);
 
+      if (!result.success) {
+        return res.status(400).json({ error: result.error.message });
+      }
+
+      const newOrder = await this.orderModel.createFromClient({
+        input: result.data,
+      });
+
+      res.status(201).json(newOrder);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
+    }
+  };
 
   update = async (req, res) => {
     try {
-      const result = validatePartialOrder(req.body)
+      const result = validatePartialOrder(req.body);
 
       if (!result.success) {
-        return res.status(400).json({ error: result.error.message })
+        return res.status(400).json({ error: result.error.message });
       }
 
-      const { id } = req.params
+      const { id } = req.params;
 
       const updatedOrder = await this.orderModel.update({
         id,
-        input: result.data
-      })
+        input: result.data,
+      });
 
       if (!updatedOrder) {
         return res.status(404).json({
-          message: 'Order not found'
-        })
+          message: "Order not found",
+        });
       }
-      res.status(200).json(updatedOrder)
+      res.status(200).json(updatedOrder);
     } catch (error) {
-      res.status(500).json({ message: error.message })
+      res.status(500).json({ message: error.message });
     }
-  }
-
-
+  };
 
   delete = async (req, res) => {
     try {
-      const { id } = req.params
+      const { id } = req.params;
 
-      const result = await this.orderModel.delete({ id })
+      const result = await this.orderModel.delete({ id });
 
       if (!result) {
         return res.status(404).json({
-          message: 'Order not found'
-        })
+          message: "Order not found",
+        });
       }
 
       return res.json({
-        message: 'Order deleted'
-      })
+        message: "Order deleted",
+      });
     } catch (error) {
-      res.status(500).json({ message: error.message })
+      res.status(500).json({ message: error.message });
     }
-  }
-
-
+  };
 }

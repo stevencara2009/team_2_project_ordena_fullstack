@@ -51,7 +51,7 @@ export class OrderModel {
         LEFT JOIN TBL_USERS c
             ON o.client_id = c.id
 
-        INNER JOIN TBL_USERS u
+        LEFT JOIN TBL_USERS u
             ON o.user_id = u.id
 
         ORDER BY o.id DESC
@@ -99,8 +99,7 @@ export class OrderModel {
   // CREAR ORDEN
   // =========================================
   static async create({ input }) {
-    const { table_number, client_id, user_id } = input;
-    console.log(input);
+    const { table_number, client_id, user_id, state } = input;
 
     // INICIAR TRANSACCION
     const pool = mysql.createPool(config);
@@ -137,11 +136,12 @@ export class OrderModel {
             (
             table_number,
             client_id,
-            user_id
+            user_id,
+            state
             )
-            VALUES (?, ?, ?)
+            VALUES (?, ?, ?, ?)
             `,
-        [table_number, client_id ?? null, user_id],
+        [table_number, client_id ?? null, user_id ?? null, state ?? 'PENDIENTE'],
       );
 
       // CAMBIAR ESTADO MESA
@@ -173,6 +173,73 @@ export class OrderModel {
       conn.release();
     }
   }
+
+
+  // =========================================
+  // CREAR ORDEN DESDE CLIENTE (carrito, sin mesero)
+  // =========================================
+  static async createFromClient({ input }) {
+    const { table_number, items } = input;
+
+    const pool = mysql.createPool(config);
+    const conn = await pool.getConnection();
+
+    try {
+      await conn.beginTransaction();
+
+      // Validar mesa
+      const [tables] = await conn.query(
+        `SELECT * FROM TBL_TABLES WHERE number = ?`,
+        [table_number],
+      );
+      const table = tables[0];
+      if (!table) throw new Error("Table not found");
+      if (table.state !== "LIBRE") throw new Error("Table is not available");
+
+      // Crear orden con estado especial y sin mesero
+      const [orderResult] = await conn.query(
+        `INSERT INTO tbl_orders (table_number, client_id, user_id, state)
+         VALUES (?, NULL, NULL, 'POR CONFIRMAR')`,
+        [table_number],
+      );
+      const orderId = orderResult.insertId;
+
+      // Insertar cada producto del carrito
+      for (const item of items) {
+        const [products] = await conn.query(
+          `SELECT * FROM TBL_PRODUCTS WHERE id = ?`,
+          [item.product_id],
+        );
+        const product = products[0];
+        if (!product) throw new Error(`Product ${item.product_id} not found`);
+
+        await conn.query(
+          `INSERT INTO TBL_ORDER_PRODUCTS (order_id, product_id, quantity, price, notes)
+           VALUES (?, ?, ?, ?, ?)`,
+          [orderId, item.product_id, item.quantity, product.price, item.notes ?? null],
+        );
+      }
+
+      // Ocupar la mesa
+      await conn.query(
+        `UPDATE TBL_TABLES SET state = 'OCUPADA' WHERE number = ?`,
+        [table_number],
+      );
+
+      await conn.commit();
+
+      const [orders] = await conn.query(`SELECT * FROM tbl_orders WHERE id = ?`, [orderId]);
+      return orders[0];
+    } catch (error) {
+      await conn.rollback();
+      throw error;
+    } finally {
+      conn.release();
+    }
+  }
+
+
+
 
   // =========================================
   // ACTUALIZAR ORDEN

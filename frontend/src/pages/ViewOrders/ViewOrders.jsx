@@ -4,8 +4,11 @@ import { OrderItem } from './OrderItem/OrderItem'
 import { useOrders } from '../../hooks/useOrders'
 import { Input, InputSelect } from '../../components/Input/Input'
 import { ORDERS_STATE } from '../../data/options'
+import { useAuth } from '../../hooks/useAuth'
 
 export const ViewOrders = () => {
+    const { user } = useAuth()
+
   const [selectedOrder, setSelectedOrder] = useState(null)
   const [orderSearch, setOrderSearch] = useState("");
   const [tableSearch, setOrderTable] = useState("");
@@ -36,8 +39,11 @@ export const ViewOrders = () => {
   // Avanzar estado de una orden
   const handleUpdateState = async (orderId, nextState) => {
     try {
-      console.log(nextState)
-      await updateOrder(orderId, { state: nextState })
+      const payload = { state: nextState }
+      if (nextState === 'PENDIENTE') {
+        payload.user_id = user.id
+      }
+      await updateOrder(orderId, payload)
 
       // Si la orden seleccionada es la que se actualizó, sincronizar
       if (selectedOrder?.id === orderId) {

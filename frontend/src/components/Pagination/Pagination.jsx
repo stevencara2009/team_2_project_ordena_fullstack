@@ -7,15 +7,14 @@ export function Pagination({ currentPage, totalPages, onPageChange }) {
 
   return (
     <div className={styles.paginationContainer}>
-      <button
-        className={styles.pageButton}
-        onClick={() => onPageChange(currentPage - 1)}
-        disabled={currentPage === 1}
-      >
-        <i className="fa-solid fa-chevron-left"></i> Anterior
-      </button>
-
       <div className={styles.pagesList}>
+        <button
+          className={styles.pageButton}
+          onClick={() => onPageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          <i className="fa-solid fa-chevron-left"></i>
+        </button>
         {pages.map((page) => (
           <button
             key={page}
@@ -27,15 +26,14 @@ export function Pagination({ currentPage, totalPages, onPageChange }) {
             {page}
           </button>
         ))}
+        <button
+          className={styles.pageButton}
+          onClick={() => onPageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          <i className="fa-solid fa-chevron-right"></i>
+        </button>
       </div>
-
-      <button
-        className={styles.pageButton}
-        onClick={() => onPageChange(currentPage + 1)}
-        disabled={currentPage === totalPages}
-      >
-        Siguiente <i className="fa-solid fa-chevron-right"></i>
-      </button>
     </div>
   );
 }

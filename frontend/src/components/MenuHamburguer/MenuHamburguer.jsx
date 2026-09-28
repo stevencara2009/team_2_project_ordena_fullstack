@@ -88,6 +88,11 @@ export const MenuHamburguer = () => {
               Menú
             </li>
           </Link>
+          <Link to="/cart">
+            <li className={styles.menuItem} onClick={toggleMenu}>
+              Ver mi pedido
+            </li>
+          </Link>
         </ul>
 
         {/* MENU OPCIONES PARA CLIENTES */}

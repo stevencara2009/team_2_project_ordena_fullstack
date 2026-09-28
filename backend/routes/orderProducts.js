@@ -1,19 +1,22 @@
-import { Router } from 'express'
-import { OrderProductController } from '../controllers/orderProducts.js'
+import { Router } from "express";
+import { OrderProductController } from "../controllers/orderProducts.js";
+import { verifyToken, authorizeRoles } from "../middlewares/auth.js";
 
 export const createOrderProductRouter = ({ orderProductModel }) => {
+  const router = Router();
+  const controller = new OrderProductController({ orderProductModel });
 
-  const router = Router()
+  const staffOnly = [
+    verifyToken,
+    authorizeRoles("ADMINISTRADOR", "MESERO", "COCINERO", "CAJERO"),
+  ];
 
-  const controller = new OrderProductController({orderProductModel})
+  router.get("/", ...staffOnly, controller.getAll);
+  router.get("/:orderId", ...staffOnly, controller.getByOrder);
+  router.post("/", ...staffOnly, controller.create);
+  router.patch("/:order_id/:product_id", ...staffOnly, controller.update);
+  router.delete("/:order_id/all", ...staffOnly, controller.deleteByOrder);
+  router.delete("/:order_id/:product_id", ...staffOnly, controller.delete);
 
-  router.get('/', controller.getAll)
-  router.get('/:orderId', controller.getByOrder)
-  router.post('/', controller.create)
-  router.patch('/:order_id/:product_id', controller.update)
-  router.delete('/:order_id/all', controller.deleteByOrder)
-  router.delete('/:order_id/:product_id', controller.delete)
-
-
-  return router
-}
+  return router;
+};

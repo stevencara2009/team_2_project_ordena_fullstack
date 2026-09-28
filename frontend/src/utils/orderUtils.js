@@ -1,4 +1,5 @@
 export const ORDER_STATES = [
+  'POR CONFIRMAR', 
   'PENDIENTE',
   'EN PREPARACION',
   'LISTO',
@@ -33,6 +34,7 @@ export const bill = (currentState) => {
 // Color por estado para el badge
 export const getStateColor = (state) => {
   const colors = {
+    'POR CONFIRMAR':   'transparent', 
     'PENDIENTE':       '#f59e0b',
     'EN PREPARACION':  '#FF2C2C',
     'LISTO':           '#10b981',

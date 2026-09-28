@@ -125,7 +125,7 @@ DROP TABLE IF EXISTS `tbl_orders`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbl_orders` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `state` enum('PENDIENTE','EN PREPARACION','LISTO','ENTREGADO','FACTURADO') DEFAULT 'PENDIENTE',
+  `state` enum('POR CONFIRMAR', 'PENDIENTE','EN PREPARACION','LISTO','ENTREGADO','FACTURADO') DEFAULT 'PENDIENTE',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `table_number` int NOT NULL,
   `client_id` int DEFAULT NULL,

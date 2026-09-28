@@ -3,7 +3,9 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 // Obtener productos de una orden
 export const getOrderProducts = async (orderId) => {
-  const response = await fetch(`${API_URL}/order-products/${orderId}`)
+  const response = await fetch(`${API_URL}/order-products/${orderId}`, {
+        credentials: "include",
+  })
   if (!response.ok) {
     throw new Error("Error obteniendo productos de la orden");
   }
@@ -19,6 +21,7 @@ export const addProduct = async (payload) => {
     headers: {
       "Content-Type": "application/json",
     },
+    credentials: "include",
     body: JSON.stringify(payload),
   })
 
@@ -41,6 +44,7 @@ export const updateProduct = async (
     headers: {
       "Content-Type": "application/json",
     },
+    credentials: "include",
     body: JSON.stringify(payload),
   });
 
@@ -59,6 +63,7 @@ export const deleteProduct = async (
 ) => {
   const response = await fetch(`${API_URL}/order-products/${orderId}/${productId}`, {
     method: "DELETE",
+    credentials: "include",
   })
 
   if (!response.ok) {
@@ -71,7 +76,8 @@ export const deleteProduct = async (
 // Eliminar todos los productos de una orden
 export const deleteAllProducts = async (orderId) => {
     const response = await fetch(`${API_URL}/order-products/${orderId}/all`, {
-        method: "DELETE"
+        method: "DELETE",
+        credentials: "include",
     })
     if (!response.ok) throw new Error("Error eliminando productos de la orden")
     return response.json()
