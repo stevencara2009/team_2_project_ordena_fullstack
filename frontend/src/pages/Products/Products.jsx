@@ -1,12 +1,13 @@
 import { useProducts } from "../../hooks/useProducts"; // Importar el hook
 import { Button } from "../../components/Button/Button";
 import { ProductItem } from "./ProductItem/ProductItem";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Loader } from "../../components/Loader/Loader";
 import { ProductFilters } from "./ProductFilters";
 import { ProductEditForm } from "./ProductEditForm";
 import { ProductCreateModal } from "./ProductCreateModal";
 import { ProductDeleteModal } from "./ProductDeleteModal";
+import { Pagination } from "../../components/Pagination/Pagination";
 
 export const Products = () => {
   const [productSearch, setProductSearch] = useState("");
@@ -14,6 +15,10 @@ export const Products = () => {
   const [openDeleteModal, setOpenDeleteModal] = useState(false); // Modal para Eliminar
   const [plateType, setPlateType] = useState("Todos");
   const [editingId, setEditingId] = useState(null);
+
+  // ESTADOS Y CONFIGURACIÓN DE PAGINACIÓN
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 12;
 
   const { products, loading, addProduct, editProduct, removeProduct } =
     useProducts();
@@ -49,6 +54,22 @@ export const Products = () => {
       .includes(productSearch.toLowerCase());
     return matchesCategory && matchesSearch;
   });
+
+// RESETEAR PÁGINA AL CAMBIAR FILTROS
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [plateType, productSearch]);
+
+  // LÓGICA DE PAGINACIÓN (SLICING)
+  const totalPages = Math.ceil(productsFiltered.length / productsPerPage);
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+
+  // Productos que corresponden a la página actual
+  const currentProducts = productsFiltered.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
 
   // AUTOCOMPLETAR FORMULARIO DE DETALLE/EDICIÓN
   const handleSelectProduct = (selectedProduct) => {
@@ -221,8 +242,15 @@ export const Products = () => {
               />
 
               <ProductItem
-                products={productsFiltered}
+                products={currentProducts}
                 onSelectProduct={handleSelectProduct}
+              />
+
+              {/* Paginador */}
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
               />
             </div>
 

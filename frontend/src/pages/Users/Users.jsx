@@ -8,6 +8,7 @@ import { UserEditForm } from "./UserEditForm.jsx";
 import { UserCreateModal } from "./UserCreateModal.jsx";
 import { UserDeleteModal } from "./UserDeleteModal.jsx";
 import { useAuth } from "../../hooks/useAuth";
+import { Pagination } from "../../components/Pagination/Pagination"; // 1. Importación del componente Pagination
 
 export const Users = () => {
   const { user: currentUser } = useAuth();
@@ -17,6 +18,10 @@ export const Users = () => {
 
   const [userType, setUserType] = useState("Todos");
   const [editingId, setEditingId] = useState(null);
+
+  // 2. ESTADOS Y CONFIGURACIÓN DE PAGINACIÓN
+  const [currentPage, setCurrentPage] = useState(1);
+  const usersPerPage = 12;
 
   const { users, loading, addUser, editUser, removeUser } = useUsers();
 
@@ -67,6 +72,22 @@ export const Users = () => {
 
     return matchesCategory && matchesSearch && isNotClient;
   });
+
+  // 3. RESETEAR A PÁGINA 1 AL FILTRAR
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [userType, userSearch]);
+
+  // 4. LÓGICA DE PAGINACIÓN (SLICING)
+  const totalPages = Math.ceil(usersFiltered.length / usersPerPage);
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+
+  // Usuarios recortados para la página activa
+  const currentUsers = usersFiltered.slice(
+    indexOfFirstUser,
+    indexOfLastUser
+  );
 
   // AUTOCOMPLETAR FORMULARIO DE DETALLE/EDICIÓN
   const handleSelectUser = (selectedUser) => {
@@ -347,7 +368,15 @@ export const Users = () => {
                 type="submit"
                 onClick={() => setOpenModal(true)}
               />
-              <UserItem users={usersFiltered} onSelectUser={handleSelectUser} />
+              {/* 5. Se pasa únicamente la porción de usuarios filtrados y paginados */}
+              <UserItem users={currentUsers} onSelectUser={handleSelectUser} />
+
+              {/* 6. Paginador renderizado */}
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
+              />
             </div>
 
             {/* Modulo Detalle Usuario (EDICIÓN / PATCH) */}

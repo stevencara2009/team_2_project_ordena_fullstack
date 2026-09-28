@@ -1,5 +1,5 @@
 import styles from "./Tables.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react"; // 1. Importar useEffect
 import { Input, InputSelect } from "../../components/Input/Input";
 import { TableItem } from "./TableItem/TableItem";
 import { useTables } from "../../hooks/useTables";
@@ -8,6 +8,7 @@ import { Button } from "../../components/Button/Button";
 import { TABLES_STATE } from "../../data/options";
 import { useAuth } from "../../hooks/useAuth";
 import { TableQR } from "../../components/TableQR/TableQR";
+import { Pagination } from "../../components/Pagination/Pagination"; // 2. Importar Pagination
 
 export const Tables = ({
   selectedTable,
@@ -27,6 +28,10 @@ export const Tables = ({
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const { user } = useAuth();
 
+  // 3. ESTADOS Y CONFIGURACIÓN DE PAGINACIÓN
+  const [currentPage, setCurrentPage] = useState(1);
+  const tablesPerPage = 12;
+
   const [createFormData, setCreateFormData] = useState({
     number: "",
     capacity: "",
@@ -36,27 +41,26 @@ export const Tables = ({
   // Filtro por mesa
   const tablesFiltered = tables.filter((table) => {
     const matchesSearch = table.number.toString().includes(tableSearch);
-
     const matchesState = tableState === "Todos" || table.state === tableState;
 
     return matchesSearch && matchesState;
   });
 
-  // HANDLERS PARA SELECCIONAR MESA
-  {
-    /*const handleSelectTable = (table) => {
-    setSelectedTable(table);
+  // 4. RESETEAR A PÁGINA 1 AL FILTRAR
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [tableSearch, tableState]);
 
-    setEditingId(table.number);
+  // 5. LÓGICA DE PAGINACIÓN (SLICING)
+  const totalPages = Math.ceil(tablesFiltered.length / tablesPerPage);
+  const indexOfLastTable = currentPage * tablesPerPage;
+  const indexOfFirstTable = indexOfLastTable - tablesPerPage;
 
-    setFormData({
-      id: table.id,
-      number: table.number,
-      capacity: table.capacity,
-      state: table.state,
-    });
-  };    */
-  }
+  // Mesas correspondientes a la página activa
+  const currentTables = tablesFiltered.slice(
+    indexOfFirstTable,
+    indexOfLastTable
+  );
 
   // HANDLER CAPTURAR DATOS
   const handleChangeCreate = (e) => {
@@ -88,31 +92,6 @@ export const Tables = ({
       console.error("Error al actualizar:", error);
     }
   };
-
-  // HANDLER DELETE - ELIMINAR UNA MESA
-  {
-    /*const handleDelete = async () => {
-    if (!formData.id) {
-      return alert("Selecciona una mesa de la lista para eliminar");
-    }
-
-    try {
-      await removeTable(formData.id);
-      setEditingId(null);
-      setSelectedTable(null);
-
-      setFormData({
-        id: "",
-        number: "",
-        capacity: "",
-        state: "",
-      });
-      setOpenDeleteModal(false);
-    } catch (error) {
-      console.error("Error al eliminar:", error);
-    }
-  };*/
-  }
 
   // HANDLER UI POST - CREAR UNA MESA
   const handleCreate = async (e) => {
@@ -179,13 +158,21 @@ export const Tables = ({
 
       {/* Modulo de Mesas */}
       <div className={styles.gridTables}>
+        {/* 6. Pasamos solo la lista recortada a TableItem */}
         <TableItem
-          tables={tablesFiltered}
+          tables={currentTables}
           onSelectTable={handleSelectTable}
           setOpenModalUpdate={setOpenModalUpdate}
           onShowQR={setQrTable}
         />
       </div>
+
+      {/* 7. Componente de Paginación */}
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+      />
 
       {/* Modal crear una mesa */}
       <Modal isOpenModal={openModal} onCloseModal={() => setOpenModal(false)}>
@@ -218,19 +205,6 @@ export const Tables = ({
         </div>
       </Modal>
 
-      {/* Modal eliminar mesa */}
-      {/*<Modal
-        isOpenModal={openDeleteModal}
-        onCloseModal={() => setOpenDeleteModal(false)}
-      >
-        <h2 style={{ color: "black" }}>Eliminar Mesa</h2>
-
-        <p style={{ color: "black" }}>
-          ¿Estás seguro que deseas eliminar esta mesa "{formData.number}" ?
-        </p>
-
-        <Button text="Aceptar" onClick={handleDelete} />
-      </Modal>*/}
       {/* Modal QR de la mesa */}
       <Modal isOpenModal={!!qrTable} onCloseModal={() => setQrTable(null)}>
         {qrTable && <TableQR tableNumber={qrTable.number} />}
