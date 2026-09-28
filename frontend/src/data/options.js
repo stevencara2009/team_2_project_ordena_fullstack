@@ -27,8 +27,8 @@ export const USERS_TYPE = [
   "MESERO",
   "COCINERO",
   "ADMINISTRADOR",
-  "CLIENTE",
   "CAJERO",
+  "CLIENTE",
 ];
 
 export const TABLES_STATE = [

@@ -60,7 +60,12 @@ export const Users = () => {
     const matchesSearch =
       u.name.toLowerCase().includes(userSearch.toLowerCase()) ||
       u.lastname.toLowerCase().includes(userSearch.toLowerCase());
-    return matchesCategory && matchesSearch;
+
+    // Excluye si el rol es 'client' o 'cliente'
+    const isNotClient =
+      u.role.toLowerCase() !== "client" && u.role.toLowerCase() !== "cliente";
+
+    return matchesCategory && matchesSearch && isNotClient;
   });
 
   // AUTOCOMPLETAR FORMULARIO DE DETALLE/EDICIÓN

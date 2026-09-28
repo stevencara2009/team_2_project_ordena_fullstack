@@ -32,7 +32,7 @@ export const UserFilters = ({ userSearch, setUserSearch, userType, setUserType }
           value={userType}
           placeholder=""
           onChange={(e) => setUserType(e.target.value)}
-          data={USERS_TYPE}
+          data={USERS_TYPE.slice(1, 5)}
         />
 
       </fieldset>
