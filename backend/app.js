@@ -7,6 +7,7 @@ import { createTableRouter } from "./routes/table.js";
 import { createOrderRouter } from "./routes/orders.js";
 import { createOrderProductRouter } from "./routes/orderProducts.js";
 import { createBillRouter } from "./routes/bills.js";
+import { createCommentRouter } from "./routes/comments.js"
 import { createAuthRouter } from "./routes/auth.js";
 
 export const createApp = ({
@@ -15,6 +16,7 @@ export const createApp = ({
   tableModel,
   orderModel,
   orderProductModel,
+  commentModel,
   billModel,
 }) => {
   const app = express();
@@ -50,6 +52,7 @@ export const createApp = ({
   app.use("/orders", createOrderRouter({ orderModel }));
   app.use("/order-products", createOrderProductRouter({ orderProductModel }));
   app.use("/bills", createBillRouter({ billModel }));
+  app.use("/comments", createCommentRouter({commentModel}))
   app.use("/api/auth", createAuthRouter({ userModel }));
 
   const PORT = process.env.PORT || 1234;

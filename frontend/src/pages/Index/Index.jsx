@@ -8,6 +8,7 @@ import { CommonPlates } from "./CommonPlates/CommonPlates"
 import { Hero } from "./Hero/Hero"
 import { Location } from "./Location/Location"
 import { FinalText } from "./FinalText/FinalText"
+import { Comments } from "./Comments/Comments"
 
 
 export const Index = () => {
@@ -26,6 +27,9 @@ export const Index = () => {
 
       {/* Seccion Reseñas */}
       <Statistics />
+
+      {/* Seccion Comentarios */}
+      <Comments />
 
       {/* Seccion Ubicación */}
       <Location />

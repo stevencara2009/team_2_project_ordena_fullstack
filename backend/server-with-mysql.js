@@ -7,6 +7,7 @@ import { TableModel } from "./models/mysql/table.js";
 import { OrderModel } from "./models/mysql/order.js";
 import { OrderProductModel } from "./models/mysql/orderProduct.js";
 import { BillModel } from "./models/mysql/bill.js";
+import { CommentModel } from './models/mysql/comment.js';
 
 
 createApp({
@@ -15,5 +16,6 @@ createApp({
     tableModel:TableModel,
     orderModel:OrderModel,
     orderProductModel: OrderProductModel,
+    commentModel: CommentModel,
     billModel: BillModel
 })

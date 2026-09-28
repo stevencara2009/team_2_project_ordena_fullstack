@@ -1,0 +1,346 @@
+
++---backend
+�   �   .env
+�   �   .gitignore
+�   �   api.http
+�   �   app.js
+�   �   package-lock.json
+�   �   package.json
+�   �   products.json
+�   �   ReadMe.md
+�   �   scripts.sql
+�   �   server-with-local.js
+�   �   server-with-mysql.js
+�   �   
+�   +---config
+�   �       cors.js
+�   �       mailer.js
+�   �       
+�   +---controllers
+�   �       auth.js
+�   �       bills.js
+�   �       orderProducts.js
+�   �       orders.js
+�   �       products.js
+�   �       tables.js
+�   �       users.js
+�   �       
+�   +---database
+�   �       init.sql
+�   �       
+�   +---middlewares
+�   �       auth.js
+�   �       upload.js
+�   �       
+�   +---models
+�   �   +---local-file-system
+�   �   �       product.js
+�   �   �       
+�   �   +---mysql
+�   �           bill.js
+�   �           order.js
+�   �           orderProduct.js
+�   �           product.js
+�   �           table.js
+�   �           user.js
+�   �                      
+�   +---routes
+�   �       auth.js
+�   �       bills.js
+�   �       orderProducts.js
+�   �       orders.js
+�   �       products.js
+�   �       table.js
+�   �       users.js
+�   �       
+�   +---schemas
+�   �       bills.js
+�   �       bills.test.js
+�   �       orderProducts.js
+�   �       orders.js
+�   �       orders.test.js
+�   �       products.js
+�   �       products.test.js
+�   �       tables.js
+�   �       tables.test.js
+�   �       users.js
+�   �       users.test.js
+�   �       
+�   +---web
+�           index.html
+�           
++---frontend
+    �   .env
+    �   .gitignore
+    �   eslint.config.js
+    �   index.html
+    �   package-lock.json
+    �   package.json
+    �   README.md
+    �   vercel.json
+    �   vite.config.js
+    �   
+    +---node_modules
+    +---public
+    �   �   logo-ordena.svg
+    �   �   
+    �   +---api
+    �           orders.json
+    �           products.json
+    �           tables.json
+    �           users.json
+    �           
+    +---src
+        �   App.css
+        �   App.jsx
+        �   index.css
+        �   main.jsx
+        �   
+        +---assets
+        �       background.jpg
+        �       background2.jpg
+        �       background3.jpg
+        �       bars-solid-full.svg
+        �       before-icon.png
+        �       editar_emoji.png
+        �       img1.jpg
+        �       img2.jpg
+        �       img3.jpeg
+        �       img4.avif
+        �       img5.jpeg
+        �       logo.jpg
+        �       next-icon.png
+        �       texture_table.avif
+        �       user_emoji.png
+        �       without_photo_product.jpg
+        �       without_photo_profile.jpg
+        �       xmark-solid-full.svg
+        �       xmark-solid.png
+        �       
+        +---components
+        �   +---AccessDenied
+        �   �       AccessDenied.jsx
+        �   �       AccessDenied.module.css
+        �   �       
+        �   +---Button
+        �   �       Button.jsx
+        �   �       Button.module.css
+        �   �       
+        �   +---Card
+        �   �       CardCreateOrder.jsx
+        �   �       CardOrder.module.css
+        �   �       CardViewOrder.jsx
+        �   �       
+        �   +---Form
+        �   �       Form.jsx
+        �   �       
+        �   +---Input
+        �   �       Input.jsx
+        �   �       Input.module.css
+        �   �       
+        �   +---Loader
+        �   �       Loader.jsx
+        �   �       Loader.module.css
+        �   �       
+        �   +---MenuHamburguer
+        �   �       MenuHamburguer.jsx
+        �   �       MenuHamburguer.module.css
+        �   �       
+        �   +---Modal
+        �   �       Modal.jsx
+        �   �       Modal.module.css
+        �   �       
+        �   +---Pagination
+        �   �       Pagination.jsx
+        �   �       Pagination.module.css
+        �   �       
+        �   +---Table
+        �   �       BillsTable.jsx
+        �   �       BillsTable.module.css
+        �   �       
+        �   +---TableQR
+        �           TableQR.jsx
+        �           
+        +---context
+        �       AuthContext.jsx
+        �       CartContext.jsx
+        �       
+        +---data
+        �       options.js
+        �       users.js
+        �       
+        +---hooks
+        �       useAuth.js
+        �       useBills.js
+        �       useCart.js
+        �       useClients.js
+        �       useOrderProducts.js
+        �       useOrders.js
+        �       useProducts.js
+        �       useTables.js
+        �       useUsers.js
+        �       
+        +---layouts
+        �   +---Admin
+        �   �       Admin.jsx
+        �   �       
+        �   +---Footer
+        �   �       Footer.jsx
+        �   �       Footer.module.css
+        �   �       
+        �   +---Navbar
+        �   �       Navbar.jsx
+        �   �       Navbar.module.css
+        �   �       
+        �   +---NotFound
+        �           NotFound.jsx
+        �           NotFound.module.css
+        �           
+        +---pages
+        �   +---BillHistory
+        �   �       BillsHistory.jsx
+        �   �       BillsHistory.module.css
+        �   �       
+        �   +---Bills
+        �   �   �   Bills.jsx
+        �   �   �   
+        �   �   +---BillDetail
+        �   �   �       BillDetail.jsx
+        �   �   �       BillDetail.module.css
+        �   �   �       
+        �   �   +---BillItem
+        �   �   �       BillItem.jsx
+        �   �   �       BillItem.module.css
+        �   �   �       
+        �   �   +---BillModal
+        �   �           BillModal.jsx
+        �   �           BillModal.module.css
+        �   �           
+        �   +---Cart
+        �   �       Cart.jsx
+        �   �       Cart.module.css
+        �   �       
+        �   +---Dashboard
+        �   �       Dashboard.jsx
+        �   �       Dashboard.module.css
+        �   �       
+        �   +---Index
+        �   �   �   Index.jsx
+        �   �   �   Index.module.css
+        �   �   �   
+        �   �   +---CommonPlates
+        �   �   �       CommonPlates.jsx
+        �   �   �       CommonPlates.module.css
+        �   �   �       
+        �   �   +---FinalText
+        �   �   �       FinalText.jsx
+        �   �   �       FinalText.module.css
+        �   �   �       
+        �   �   +---Hero
+        �   �   �       Hero.jsx
+        �   �   �       Hero.module.css
+        �   �   �       
+        �   �   +---Location
+        �   �   �       Location.jsx
+        �   �   �       Location.module.css
+        �   �   �       
+        �   �   +---SpecialPlates
+        �   �   �       SpecialPlates.jsx
+        �   �   �       SpecialPlates.module.css
+        �   �   �       
+        �   �   +---Statistics
+        �   �   �       Statistics.jsx
+        �   �   �       Statistics.module.css
+        �   �   �       
+        �   �   +---Suscribing
+        �   �           Suscribing.jsx
+        �   �           Suscribing.module.css
+        �   �           
+        �   +---Login
+        �   �       Login.jsx
+        �   �       Login.module.css
+        �   �       
+        �   +---Menu
+        �   �   �   Menu.jsx
+        �   �   �   Menu.module.css
+        �   �   �   
+        �   �   +---MenuItem
+        �   �           MenuItem.jsx
+        �   �           MenuItem.module.css
+        �   �           
+        �   +---Orders
+        �   �       Orders.jsx
+        �   �       Orders.module.css
+        �   �       
+        �   +---Products
+        �   �   �   ProductCreateModal.jsx
+        �   �   �   ProductDeleteModal.jsx
+        �   �   �   ProductEditForm.jsx
+        �   �   �   ProductFilters.jsx
+        �   �   �   Products.jsx
+        �   �   �   Products.module.css
+        �   �   �   
+        �   �   +---ProductItem
+        �   �           ProductItem.jsx
+        �   �           ProductItem.module.css
+        �   �           
+        �   +---Profile
+        �   �       Profile.jsx
+        �   �       Profile.module.css
+        �   �       
+        �   +---Register
+        �   �       ClientCreateForm.jsx
+        �   �       Register.jsx
+        �   �       Register.module.css
+        �   �       
+        �   +---ResetPassword
+        �   �       ResetPassword.jsx
+        �   �       
+        �   +---Tables
+        �   �   �   TableCreateModal.jsx
+        �   �   �   TableDeleteModal.jsx
+        �   �   �   TableEditModal.jsx
+        �   �   �   Tables.jsx
+        �   �   �   Tables.module.css
+        �   �   �   
+        �   �   +---TableItem
+        �   �           TableItem.jsx
+        �   �           
+        �   +---Users
+        �   �   �   UserCreateModal.jsx
+        �   �   �   UserDeleteModal.jsx
+        �   �   �   UserEditForm.jsx
+        �   �   �   UserFilters.jsx
+        �   �   �   Users.jsx
+        �   �   �   Users.module.css
+        �   �   �   
+        �   �   +---UserItem
+        �   �           UserItem.jsx
+        �   �           UserItem.module.css
+        �   �           
+        �   +---ViewOrders
+        �       �   ViewOrders.jsx
+        �       �   ViewOrders.module.css
+        �       �   
+        �       +---OrderItem
+        �               OrderItem.jsx
+        �               OrderItem.module.css
+        �               
+        +---routes
+        �       ProtectedRoutes.jsx
+        �       
+        +---services
+        �       api.js
+        �       authService.js
+        �       billService.js
+        �       orderProductService.js
+        �       orderService.js
+        �       productService.js
+        �       tableService.js
+        �       userService.js
+        �       
+        +---utils
+                exportCsv.js
+                orderUtils.js
+                roleRoutes.js
+                
