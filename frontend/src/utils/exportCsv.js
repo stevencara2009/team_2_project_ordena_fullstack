@@ -17,7 +17,8 @@ export const exportBillsToCsv = (bills, filename = 'facturas.csv') => {
     b.subtotal,
     b.tax,
     b.total,
-    b.payment_method
+    b.payment_method,
+    b.propina
   ])
 
   const csvContent = [headers, ...rows]

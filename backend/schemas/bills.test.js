@@ -8,6 +8,7 @@ describe("Unit Tests: backend/schemas/bills.js", () => {
       cashier_id: 2,
       client_id: 3,
       payment_method: "EFECTIVO",
+      propina: "NO",
     };
 
     const result = validateBill(inputValido);
@@ -22,6 +23,7 @@ describe("Unit Tests: backend/schemas/bills.js", () => {
       cashier_id: 2,
       client_id: 3,
       payment_method: "PERMUTA",
+      propina: "NO",
     };
 
     const result = validateBill(inputInvalido);

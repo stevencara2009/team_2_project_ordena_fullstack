@@ -1,28 +1,41 @@
-import styles from './BillDetail.module.css'
+import styles from "./BillDetail.module.css";
 
 export const BillDetail = ({ billDetails }) => {
-  if (!billDetails) return null
+  if (!billDetails) return null;
 
-  const { bill, client, waiter, cashier, table, products } = billDetails
+  const { bill, client, waiter, cashier, table, products } = billDetails;
 
   return (
     <div className={styles.billCard}>
       <h2 className={styles.billTitle}>Factura #{bill.id}</h2>
-      <p className={styles.billDate}>
-        {new Date(bill.date).toLocaleString()}
-      </p>
+      <p className={styles.billDate}>{new Date(bill.date).toLocaleString()}</p>
 
       <div className={styles.section}>
-        <p><span>Orden:</span> #{bill.order_id}</p>
-        <p><span>Mesa:</span> {table.number}</p>
-        <p><span>Mesero:</span> {waiter.name} {waiter.lastname}</p>
+        <p>
+          <span>Orden:</span> #{bill.order_id}
+        </p>
+        <p>
+          <span>Mesa:</span> {table.number}
+        </p>
+        <p>
+          <span>Mesero:</span> {waiter.name} {waiter.lastname}
+        </p>
         {cashier && (
-          <p><span>Cajero:</span> {cashier.name} {cashier.lastname}</p>
+          <p>
+            <span>Cajero:</span> {cashier.name} {cashier.lastname}
+          </p>
         )}
         {client && (
-          <p><span>Cliente:</span> {client.dni}</p>
+          <p>
+            <span>Cliente:</span> {client.dni}
+          </p>
         )}
-        <p><span>Pago:</span> {bill.payment_method}</p>
+        <p>
+          <span>Pago:</span> {bill.payment_method}
+        </p>
+        <p>
+          <span>Propina:</span> {bill.propina}
+        </p>
       </div>
 
       <table className={styles.productsTable}>
@@ -35,7 +48,7 @@ export const BillDetail = ({ billDetails }) => {
           </tr>
         </thead>
         <tbody>
-          {products.map(product => (
+          {products.map((product) => (
             <tr key={product.product_id}>
               <td>{product.name}</td>
               <td>{product.quantity}</td>
@@ -54,11 +67,19 @@ export const BillDetail = ({ billDetails }) => {
             <td>${Number(bill.tax).toLocaleString()}</td>
           </tr>
           <tr>
-            <td colSpan="3"><strong>Total</strong></td>
-            <td><strong>${Number(bill.total).toLocaleString()}</strong></td>
+            <td colSpan="3">Propina</td>
+            <td>${bill.propina === "SI" ? bill.subtotal * 0.1 : 0}</td>
+          </tr>
+          <tr>
+            <td colSpan="3">
+              <strong>Total</strong>
+            </td>
+            <td>
+              <strong>${Number(bill.total).toLocaleString()}</strong>
+            </td>
           </tr>
         </tfoot>
       </table>
     </div>
-  )
-}
+  );
+};

@@ -1,19 +1,21 @@
 import mysql from "mysql2/promise";
 
-const isProduction = process.env.NODE_ENV === 'production' || (process.env.DB_HOST && !process.env.DB_HOST.includes('localhost'));
+const isProduction =
+  process.env.NODE_ENV === "production" ||
+  (process.env.DB_HOST && !process.env.DB_HOST.includes("localhost"));
 
 const config = {
-  host: process.env.DB_HOST || 'localhost',
-  user: process.env.DB_USER || 'root',
+  host: process.env.DB_HOST || "localhost",
+  user: process.env.DB_USER || "root",
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
   port: Number(process.env.DB_PORT) || 3306,
-    waitForConnections: true,
+  waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
   enableKeepAlive: true,
   keepAliveInitialDelay: 0,
-  ssl: isProduction ? { rejectUnauthorized: false } : false
+  ssl: isProduction ? { rejectUnauthorized: false } : false,
 };
 
 const pool = mysql.createPool(config);
@@ -74,6 +76,7 @@ export class BillModel {
       b.tax,
       b.total,
       b.payment_method,
+      b.propina,
 
       t.number AS table_number,
 
@@ -139,6 +142,7 @@ export class BillModel {
             b.tax,
             b.total,
             b.payment_method,
+            b.propina,
 
             cl.id AS client_id,
             cl.name AS client_name,
@@ -214,6 +218,7 @@ export class BillModel {
         tax: bill.tax,
         total: bill.total,
         payment_method: bill.payment_method,
+        propina: bill.propina,
       },
 
       client: bill.client_id
@@ -257,7 +262,8 @@ export class BillModel {
     try {
       await conn.beginTransaction();
 
-      const { order_id, cashier_id, client_dni, payment_method } = input;
+      const { order_id, cashier_id, client_dni, payment_method, propina } =
+        input;
 
       // Paso 1: Validar orden
       const [orders] = await conn.query(
@@ -313,13 +319,15 @@ export class BillModel {
       }
 
       const tax = Number((subtotal * TAX_RATE).toFixed(2));
-      const total = Number((Number(subtotal) + tax).toFixed(2));
+      const valuePropina = propina === "SI" ? Number((subtotal * 0.10).toFixed(2)) : 0;
+
+      const total = Number((Number(subtotal) + valuePropina).toFixed(2));
 
       // Paso 4: Crear factura
       const [result] = await conn.query(
         `INSERT INTO tbl_bills
-         (subtotal, tax, total, order_id, waiter_id, cashier_id, client_id, payment_method)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+         (subtotal, tax, total, order_id, waiter_id, cashier_id, client_id, payment_method, propina)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
           subtotal,
           tax,
@@ -329,6 +337,7 @@ export class BillModel {
           cashier_id,
           client_id,
           payment_method,
+          propina,
         ],
       );
 

@@ -39,6 +39,7 @@ export const BillsTable = ({
             </td>
             <td>${Number(bill.total).toLocaleString()}</td>
             <td>{bill.payment_method}</td>
+            <td>{bill.propina}</td>
             <td>
               <button
                 type="button"

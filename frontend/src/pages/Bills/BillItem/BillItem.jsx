@@ -54,7 +54,7 @@ export const BillItem = ({
               <div className={styles.bodyRow}>
                 <div className={styles.metaInfo}>
                   <p><span>Mesero:</span> {order.user_name} {order.user_lastname}</p>
-                  <p className={styles.time}>
+                  <p className={styles.time}><span>Fecha: </span>
                     {new Date(order.created_at).toLocaleString()}
                   </p>
                 </div>

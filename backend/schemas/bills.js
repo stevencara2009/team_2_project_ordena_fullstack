@@ -16,6 +16,10 @@ const billSchema = z.object({
   payment_method: z.enum(["EFECTIVO", "TARJETA"], {
     required_error: "Payment method is required",
   }),
+
+  propina: z.enum(["SI", "NO"], {
+    required_error: "Campo propina is required",
+  }),
 });
 
 export function validateBill(input) {

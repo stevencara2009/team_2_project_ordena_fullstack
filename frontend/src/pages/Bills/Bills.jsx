@@ -40,13 +40,14 @@ export const Bills = () => {
   }
 
   // Confirma la factura desde el modal
-  const handleConfirmBill = async ({ client_dni, payment_method }) => {
+  const handleConfirmBill = async ({ client_dni, payment_method, propina }) => {
     try {
       const newBill = await addBill({
         order_id: billingOrder.id,
         cashier_id: user.id,
         client_dni,
-        payment_method
+        payment_method,
+        propina
       })
 
       await updateOrder(billingOrder.id, { state: 'FACTURADO' })
@@ -83,10 +84,10 @@ export const Bills = () => {
             <div className="module">
               <form>
                 <fieldset className="form-flex">
-                  <legend>Filtro</legend>
+                  <legend>Filtrar por</legend>
 
                   <Input
-                    label="N° de orden"
+                    label="Orden:"
                     type="number"
                     className="inputPrimary"
                     value={orderSearch}
@@ -95,7 +96,7 @@ export const Bills = () => {
                   />
 
                   <Input
-                    label="N° de mesa"
+                    label="Mesa:"
                     type="number"
                     className="inputPrimary"
                     value={tableSearch}
@@ -104,7 +105,7 @@ export const Bills = () => {
                   />
 
                   <InputSelect
-                    label="Estado"
+                    label="Estado:"
                     className="inputPrimary"
                     value={orderState}
                     onChange={(e) => setOrderState(e.target.value)}

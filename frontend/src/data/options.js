@@ -327,3 +327,9 @@ export const PAYMENT_METHOD = [
   "EFECTIVO",
   "TARJETA"
 ];
+
+export const PROPINA = [
+  "Todos",
+  "SI",
+  "NO"
+];

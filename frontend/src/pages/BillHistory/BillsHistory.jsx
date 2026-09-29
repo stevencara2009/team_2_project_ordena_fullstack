@@ -87,7 +87,7 @@ export const BillsHistory = () => {
                   <Button
                     text="Filtrar"
                     type="submit"
-                    className={styles.filterBtn}
+                    className="btnAdd"
                   />
                 </fieldset>
               </form>
@@ -101,7 +101,7 @@ export const BillsHistory = () => {
                   type="button"
                   onClick={() => exportBillsToCsv(bills)}
                   disabled={!bills.length}
-                  className={styles.exportBtn}
+                  className="btnAdd"
                 />
               </div>
 
@@ -121,7 +121,7 @@ export const BillsHistory = () => {
                 <>
                   <Button
                     text="Cerrar detalle"
-                    className={styles.closeBtn}
+                    className="btnBack"
                     onClick={clearSelectedBillDetails}
                   />
 
