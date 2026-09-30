@@ -9,8 +9,8 @@
   padding: 15px 10%;
   padding-bottom: 10px;
   bottom: 0;
-  background-color: rgb(32, 32, 32);
-  color: white;
+  background-color: var(--color-dark);
+  color: var(--color-light);
   position: static;
   text-align: center;
   font-size: 0.7rem;
@@ -39,7 +39,7 @@
 }
 
 .icon {
-  color: white;
+  color: var(--color-light);
   width: 28px;
   height: 10px;
   display: flex;

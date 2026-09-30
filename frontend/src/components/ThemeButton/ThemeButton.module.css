@@ -1,0 +1,45 @@
+.fab {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3);
+
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  border: 2px solid var(--color-primary);
+  border-right: none;
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-sm);
+  font-weight: bold;
+}
+
+.fab:hover {
+  border-color: var(--color-light);
+}
+
+.fab:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* En móvil solo se muestra el icono */
+@media (max-width: 600px) {
+  .text {
+    display: none;
+  }
+}
+
+@media print {
+  .fab {
+    display: none;
+  }
+}

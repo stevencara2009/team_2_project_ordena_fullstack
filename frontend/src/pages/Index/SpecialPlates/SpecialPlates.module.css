@@ -20,12 +20,12 @@
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
-    background-color: rgb(89, 34, 14);
+    background-color: var(--color-fourth);
     align-items: center;
 }
 
 .menuTitle {
-    color: rgb(245, 245, 245);
+    color: var(--color-light);
 }
 
 .menuParagraph {

@@ -5,7 +5,7 @@
   align-items: end;
   width: 100vw;
   height: 50px;
-  background-color: rgb(217, 101, 35);
+  background-color: var(--color-primary);
   padding: 3px;
   position: fixed;
   top: 0;
@@ -38,7 +38,7 @@
   align-items: center;
   text-align: center;
   list-style-type: none;
-  color: white;
+  color: var(--color-light);
   font-size: 0.8rem;
   cursor: pointer;
   width: 80px;
@@ -48,7 +48,7 @@
 }
 
 .navItem:hover {
-  background-color: rgb(146, 70, 25);
+  background-color: var(--color-secondary);
   transition: 0.2s ease-in-out;
 }
 

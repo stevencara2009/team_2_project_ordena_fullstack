@@ -35,10 +35,9 @@ export const TableItem = ({
         >
           <div
             className={styles.divEdit}
-            onClick={() => setOpenModalUpdate(true)}
           >
             <h3>Mesa {table.number}</h3>
-            <img src={editar_emoji} alt="editar_emoji" />
+            <div style={{width:"20px", height: "20px"}} onClick={() => setOpenModalUpdate(true)} ><img src={editar_emoji} alt="editar_emoji" /></div>
           </div>
           <div className={styles.divAforo}>
             <p className={styles.description}>Aforo máx: {table.capacity} </p>

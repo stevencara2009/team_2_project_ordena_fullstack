@@ -10,12 +10,13 @@
   border-radius: 7px;
   padding: 8px;
   cursor: pointer;
-  color: white;
+  color: var(--color-light);
   transition: 0.2s ease-in-out;
+  background-color: var(--color-transparent);
 }
 
 .productItem:hover {
-  background-color: rgb(146, 70, 25);
+  background-color: var(--color-secondary);
   transform: scale(1.05);
 }
 
@@ -66,7 +67,7 @@
     border-radius: 7px;
     padding: 8px;
     cursor: pointer;
-    color: white;
+    color: var(--color-light);
     transition: 0.2s ease-in-out;
   }
 }

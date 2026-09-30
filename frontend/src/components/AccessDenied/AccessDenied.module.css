@@ -12,7 +12,7 @@
 }
 
 .card {
-  background-color: rgba(0, 0, 0, 0.90);
+  background-color: var(--color-dark);
   border: 1px solid rgb(166, 43, 15); /* Borde acentuado con el rojo borgoña */
   border-radius: 12px;
   padding: var(--space-8) var(--space-6);
@@ -31,9 +31,9 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background-color: rgba(166, 43, 15, 0.15);
-  border: 2px solid rgb(166, 43, 15);
-  color: rgb(217, 101, 35); /* Tu naranja principal */
+  background-color: var(--color-dark);
+  border: 2px solid var(--color-secondary);
+  color: var(--color-primary); /* Tu naranja principal */
   margin-bottom: var(--space-4);
 }
 
@@ -45,8 +45,8 @@
 
 .badge {
   display: inline-block;
-  background-color: rgb(115, 31, 13);
-  color: rgb(242, 242, 235);
+  background-color: var(--color-fourth);
+  color: var(--color-light);
   font-size: var(--font-size-xs);
   font-weight: bold;
   letter-spacing: 1px;
@@ -57,13 +57,13 @@
 }
 
 .title {
-  color: rgb(242, 242, 235);
+  color: var(--color-light);
   font-size: var(--font-size-2xl);
   margin-bottom: var(--space-2);
 }
 
 .description {
-  color: rgba(242, 242, 235, 0.8);
+  color: var(--color-light);
   font-size: var(--font-size-base);
   margin-bottom: var(--space-6);
   line-height: 1.5;
@@ -94,24 +94,23 @@
 
 /* Botón Principal (Volver al inicio) */
 .btnPrimary {
-  background-color: rgb(217, 101, 35);
-  color: rgb(242, 242, 235);
+  background-color: var(--color-primary);
+  color: var(--color-light);
 }
 
 .btnPrimary:hover {
-  background-color: rgb(166, 43, 15);
+  background-color: var(--color-secondary);
 }
 
 /* Botón Secundario (Regresar) */
 .btnSecondary {
-  background-color: transparent;
-  color: rgb(242, 242, 235);
+  background-color: var(--color-transparent);
+  color: var(--color-light);
   border: 1px solid rgb(89, 34, 14);
 }
 
 .btnSecondary:hover {
-  background-color: rgba(89, 34, 14, 0.4);
-  border-color: rgb(166, 43, 15);
+  background-color: var(--color-primary);
 }
 
 @keyframes fadeIn {

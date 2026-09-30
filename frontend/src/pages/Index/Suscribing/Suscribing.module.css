@@ -15,18 +15,18 @@
   padding: 0 10%;
   margin-bottom: 20px;
   height: auto;
-  background-color: rgb(245, 245, 245);
+  background-color: var(--color-light);
 }
 
 .suscriptionTitle {
-  color: black;
+  color: var(--color-dark);
 }
 
 .suscriptionParagraph {
   font-size: var(--font-size-sm);
   text-align: center;
   width: 100%;
-  color: var(--color-text-dark);
+  color: var(--color-dark);
 }
 
 .formText {
@@ -57,7 +57,7 @@
     padding: 0 30%;
     margin-bottom: 20px;
     height: auto;
-    background-color: rgb(245, 245, 245);
+    background-color: var(--color-light);
   }
 
 

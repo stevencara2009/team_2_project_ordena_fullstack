@@ -21,6 +21,8 @@ export const BillsTable = ({
           <th>Mesero</th>
           <th>Total</th>
           <th>Pago</th>
+          <th>Propina</th>
+          <th>Descargar</th>
         </tr>
       </thead>
       <tbody>

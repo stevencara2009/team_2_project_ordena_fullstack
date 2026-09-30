@@ -9,18 +9,18 @@
 }
 
 .productItem:hover {
-  background-color: rgb(146, 70, 25);
+  background-color: var(--color-secondary);
   transition: 0.2s ease-in-out;
 }
 
 .productOrange {
-  background-color: rgb(217, 101, 35);
-  color: white;
+  background-color: var(--color-primary);
+  color: var(--color-light);
 }
 
 .productDark {
-  background-color: transparent;
-  color: white;
+  background-color: var(--color-transparent);
+  color: var(--color-light);
 }
 
 .productItemTitle {

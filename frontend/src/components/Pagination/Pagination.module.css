@@ -9,8 +9,8 @@
 }
 
 .pageButton {
-  background-color: #333;
-  color: #fff;
+  background-color: var(--color-primary);
+  color: var(--color-light);
   border: none;
   padding: 8px 16px;
   border-radius: 5px;
@@ -23,12 +23,12 @@
 }
 
 .pageButton:hover:not(:disabled) {
-  background-color: #e67e22; /* Color naranja de tu app */
+  background-color: var(--color-secondary); /* Color naranja de tu app */
 }
 
 .pageButton:disabled {
-  background-color: #ccc;
-  color: #888;
+  background-color: var(--color-light);
+  color: var(--color-dark);
   cursor: not-allowed;
 }
 
@@ -42,7 +42,7 @@
 .pageNumber {
   background: none;
   border: 1px solid #ccc;
-  color: #333;
+  color: var(--color-primary);
   width: 35px;
   height: 35px;
   border-radius: 5px;
@@ -55,12 +55,12 @@
 }
 
 .pageNumber:hover {
-  border-color: #e67e22;
-  color: #e67e22;
+  border-color: var(--color-primary);
+  color: var(--color-light);
 }
 
 .activePage {
-  background-color: #e67e22; /* Activo con tu color naranja corporativo */
-  border-color: #e67e22;
-  color: #fff;
+  background-color: var(--color-primary); /* Activo con tu color naranja corporativo */
+  border-color: var(--color-primary);
+  color: var(--color-light);
 }

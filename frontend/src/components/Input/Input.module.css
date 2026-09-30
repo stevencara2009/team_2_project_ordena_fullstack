@@ -9,9 +9,9 @@
 }
 
 .inputPrimary {
-  background-color: rgb(30, 25, 25);
-  color: white;
-
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  border: 1px solid var(--color-third);
 }
 
 .inputContainer{
@@ -24,12 +24,12 @@
   margin-bottom: var(--space-8);
 }
 
-.labelLight { color: white }
-.labelDark { color: black }
+.labelLight { color: var(--color-light) }
+.labelDark { color: var(--color-dark) }
 
 
 .inputDescription {
-  color: black;
+  color: var(--color-dark);
   width: 95%;
   min-height: 40px;
   margin-bottom: 7px;

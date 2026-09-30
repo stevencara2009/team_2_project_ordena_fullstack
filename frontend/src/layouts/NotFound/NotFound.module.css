@@ -5,8 +5,8 @@
   align-items: center;
   width: 100%;
   min-height: 100vh; /* Ocupa al menos el alto de la ventana */
-  background-color: black;
-  color: white;
+  background-color: var(--color-dark);
+  color: var(--color-light);
   text-align: center;
   padding: 20px;
 }
@@ -21,7 +21,7 @@
 
 /* Área del Icono (usando el color naranja de tu app) */
 .iconArea {
-  color: rgb(217, 101, 35); /* Tu color naranja original */
+  color: var(--color-primary); /* Tu color naranja original */
 }
 
 /* Área de Texto */
@@ -41,13 +41,13 @@
 .subtitle {
   font-size: 1.8rem;
   margin: 0;
-  color: #f1f1f1;
+  color: var(--color-light);
 }
 
 .message {
   font-size: 1rem;
   line-height: 1.5;
-  color: #ccc;
+  color: var(--color-light);
   margin: 0 auto;
   max-width: 90%;
 }

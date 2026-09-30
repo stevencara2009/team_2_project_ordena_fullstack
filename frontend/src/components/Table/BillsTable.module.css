@@ -1,25 +1,32 @@
 /* BillsTable.module.css */
 .emptyMessage {
   text-align: center;
-  color: #888;
+  color: var(--color-light);
   padding: 1rem;
 }
 
 .billsTable {
   width: 100%;
   border-collapse: collapse;
-  color: gray;
 }
 
+.billsTable thead {
+  background-color: var(--color-primary);
+  text-align: center;
+  color: var(--color-light);
+    font-size: 9px;
+}
 
 .billsTable td {
   padding: 0.5rem;
   text-align: left;
   border-bottom: 1px solid #333;
+  color: var(--color-light);
+  font-size: 9px;
+  
 }
 
 .billsTable th{
-  background-color: white;
     padding: 0.5rem;
       border-bottom: 1px solid #333;
 }

@@ -13,21 +13,23 @@
   font-weight: 600;
 }
 
+.summaryBar span {
+  font-size: 10px;
+  color: var(--color-light);
+  min-width: 80px;
+}
+
 .exportBtn {
   padding: 0.4rem 0.8rem;
   cursor: pointer;
 }
 
-
-
 .billsTable {
   width: 100%;
   border-collapse: collapse;
-  color: white;
+  color: var(--color-light);
   font-size: 10px;
 }
-
-
 
 .closeBtn {
   margin-bottom: 0.75rem;

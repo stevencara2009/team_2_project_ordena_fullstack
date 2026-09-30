@@ -6,7 +6,7 @@
 }
 
 .tableItem {
-  color: black;
+  color: var(--color-dark);
   border: 1px solid white;
   font-weight: bold;
   width: 100%;
@@ -25,11 +25,11 @@
 }
 
 .classWhite {
-  background-color: rgb(245, 245, 245);
+  background-color: var(--color-light);
 }
 
 .classOrange {
-  background-color: rgb(146, 70, 25);
+  background-color: var(--color-primary);
 }
 
 .free {
@@ -50,7 +50,7 @@
 
 .description {
   font-size: var(--font-size-xs);
-  color: white;
+  color: var(--color-light);
   margin: 0;
 }
 
@@ -84,11 +84,11 @@
 .divEdit > img {
   width: 18px;
   height: 18px;
-  background-color: white;
+  background-color: var(--color-light);
   border-radius: 3px;
 }
 .divEdit > p {
-  color: black;
+  color: var(--color-dark);
 }
 
 .qrButton {
@@ -97,7 +97,7 @@
   border: none;
   border-radius: 6px;
   background: #ff9800;
-  color: #000;
+  color: var(--color-dark);
   font-weight: bold;
   cursor: pointer;
 }

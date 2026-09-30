@@ -30,11 +30,11 @@
   width: 100%;
   text-align: center;
   font-size: var(--font-size-sm);
-  color: yellow;
+  color: var(--color-light);
 }
 
 .finalTxtTitle {
-  color: yellow;
+  color: rgb(255, 174, 0);
 }
 
 

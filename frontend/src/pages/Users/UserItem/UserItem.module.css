@@ -9,18 +9,18 @@
 }
 
 .userItem:hover {
-  background-color: rgb(146, 70, 25);
+  background-color: var(--color-secondary);
   transition: 0.2s ease-in-out;
 }
 
 .userOrange{
-  background-color: rgb(146, 70, 25);
-  color: white;
+  background-color: var(--color-primary);
+  color: var(--color-light);
 }
 
 .userDark{
-  background-color: transparent;
-  color: white;
+  background-color: var(--color-transparent);
+  color: var(--color-light);
 }
 
 .userItemTitle {

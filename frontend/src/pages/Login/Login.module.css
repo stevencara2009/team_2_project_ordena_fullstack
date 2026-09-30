@@ -2,13 +2,13 @@
 
 
 .link {
-  color: rgb(217, 101, 35);
+  color: var(--color-primary);
   font-size: 0.7rem;
   cursor: pointer;
 }
 
 .paragragh {
-  color: white;
+  color: var(--color-light);
   font-size: 0.7rem;
 }
 

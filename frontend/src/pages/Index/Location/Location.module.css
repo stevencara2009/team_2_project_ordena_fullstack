@@ -6,7 +6,7 @@
     height: auto;
     margin-bottom: 20px;
     padding: 0 5% 20px;
-    background-color: rgb(166, 43, 15);
+    background-color: var(--color-secondary);
 }
 
 .title2 {
@@ -17,7 +17,7 @@
 }
 
 .presentationTitle {
-    color: rgb(255, 174, 0);
+    color: var(--color-light);
 }
 
 .map {
