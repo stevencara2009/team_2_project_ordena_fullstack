@@ -1,27 +1,58 @@
 import nodemailer from "nodemailer";
 
-// Función para obtener/crear el transporter dinámicamente
-const createTransporter = async () => {
-  // Si tienes credenciales en el .env las usa, de lo contrario genera una cuenta de prueba al vuelo
-  if (process.env.ETHEREAL_USER && process.env.ETHEREAL_PASS) {
-    return nodemailer.createTransport({
-      host: "smtp.ethereal.email",
-      port: 587,
-      secure: false,
-      auth: {
-        user: process.env.ETHEREAL_USER,
-        pass: process.env.ETHEREAL_PASS,
-      },
-    });
+export const sendResetEmail = async ({ to, token }) => {
+  const resetUrl = `${process.env.FRONTEND_URL}/reset-password?token=${token}`;
+
+  // 1. Si estamos en ENTORNO DE PRODUCCIÓN o tenemos configurado RESEND_API_KEY
+  if (process.env.RESEND_API_KEY) {
+    try {
+      const response = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${process.env.RESEND_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          from: "Ordena <onboarding@resend.dev>", // Cambiar por tu dominio verificado si tienes uno
+          to: [to],
+          subject: "Recuperación de contraseña",
+          html: `
+            <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+              <h2>Recuperación de Contraseña</h2>
+              <p>Recibimos una solicitud para restablecer la contraseña de tu cuenta en <strong>Ordena</strong>.</p>
+              <p>Haz clic en el siguiente botón para continuar (enlace válido por 1 hora):</p>
+              <p style="margin: 25px 0;">
+                <a href="${resetUrl}" 
+                   style="background-color: #2563eb; color: #ffffff; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
+                  Restablecer Contraseña
+                </a>
+              </p>
+              <p style="font-size: 0.9em; color: #666;">Si el botón no funciona, copia y pega este enlace en tu navegador:</p>
+              <p style="font-size: 0.9em; color: #2563eb;">${resetUrl}</p>
+              <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;" />
+              <p style="font-size: 0.8em; color: #999;">Si no solicitaste este cambio, puedes ignorar este correo de forma segura.</p>
+            </div>
+          `,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || JSON.stringify(data));
+      }
+
+      console.log("📧 Correo de recuperación enviado vía Resend:", data.id);
+      return data;
+    } catch (error) {
+      console.error("❌ Error enviando correo con Resend:", error);
+      throw error;
+    }
   }
 
-  // Genera cuenta de prueba temporal automáticamente si no hay en .env
+  // 2. ENTORNO DE DESARROLLO / LOCAL (Ethereal Fallback)
   const testAccount = await nodemailer.createTestAccount();
-  console.log("🛠️ Cuenta de prueba de Ethereal creada:");
-  console.log(`  User: ${testAccount.user}`);
-  console.log(`  Pass: ${testAccount.pass}`);
-
-  return nodemailer.createTransport({
+  const transporter = nodemailer.createTransport({
     host: "smtp.ethereal.email",
     port: 587,
     secure: false,
@@ -30,23 +61,17 @@ const createTransporter = async () => {
       pass: testAccount.pass,
     },
   });
-};
-
-export const sendResetEmail = async ({ to, token }) => {
-  const transporter = await createTransporter();
-  const resetUrl = `${process.env.FRONTEND_URL}/reset-password?token=${token}`;
 
   const info = await transporter.sendMail({
     from: '"Ordena" <no-reply@ordena.com>',
     to,
-    subject: "Recuperación de contraseña",
+    subject: "Recuperación de contraseña (Local)",
     html: `
       <p>Recibimos una solicitud para restablecer tu contraseña.</p>
       <p>Haz clic en el siguiente enlace (válido por 1 hora):</p>
       <a href="${resetUrl}">${resetUrl}</a>
-      <p>Si no solicitaste esto, ignora este correo.</p>
     `,
   });
 
-  console.log("📧 Vista previa del correo:", nodemailer.getTestMessageUrl(info));
+  console.log("📧 Vista previa del correo (Ethereal):", nodemailer.getTestMessageUrl(info));
 };
