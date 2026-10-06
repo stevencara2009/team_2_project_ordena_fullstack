@@ -3,17 +3,17 @@ import nodemailer from "nodemailer";
 export const sendResetEmail = async ({ to, token }) => {
   const resetUrl = `${process.env.FRONTEND_URL}/reset-password?token=${token}`;
 
-  // 1. Si estamos en ENTORNO DE PRODUCCIÓN o tenemos configurado RESEND_API_KEY
+  // 1. Intentar enviar vía Resend si la API Key existe
   if (process.env.RESEND_API_KEY) {
     try {
       const response = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${process.env.RESEND_API_KEY}`,
+          Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          from: "Ordena <onboarding@resend.dev>", // Cambiar por tu dominio verificado si tienes uno
+          from: "Ordena <onboarding@resend.dev>",
           to: [to],
           subject: "Recuperación de contraseña",
           html: `
@@ -39,14 +39,14 @@ export const sendResetEmail = async ({ to, token }) => {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || JSON.stringify(data));
+        console.error("❌ Resend API Error:", data);
+        throw new Error(data.message || "Error al enviar desde Resend");
       }
 
-      console.log("📧 Correo de recuperación enviado vía Resend:", data.id);
+      console.log("📧 Correo enviado con éxito vía Resend. ID:", data.id);
       return data;
     } catch (error) {
-      console.error("❌ Error enviando correo con Resend:", error);
-      throw error;
+      console.warn("⚠️ Falló el envío vía Resend, intentando vía Ethereal...", error.message);
     }
   }
 
@@ -73,5 +73,10 @@ export const sendResetEmail = async ({ to, token }) => {
     `,
   });
 
-  console.log("📧 Vista previa del correo (Ethereal):", nodemailer.getTestMessageUrl(info));
+  console.log(
+    "📧 Vista previa del correo (Ethereal):",
+    nodemailer.getTestMessageUrl(info),
+  );
+
+  return info;
 };
