@@ -4,6 +4,7 @@ export const forgotPassword = async (email) => {
   const response = await fetch(`${API_URL}/api/auth/forgot-password`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
+    credentials: "include",
     body: JSON.stringify({ email })
   })
 
@@ -22,6 +23,7 @@ export const resetPassword = async ({ token, password }) => {
   const response = await fetch(`${API_URL}/api/auth/reset-password`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
+    credentials: "include",
     body: JSON.stringify({ token, password })
   })
 

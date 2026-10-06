@@ -17,7 +17,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <App />
           <ThemeButton />
         </CartProvider>
-      </AuthProvider>
+      </AuthProvider> 
     </ThemeProvider>
-  </BrowserRouter>,
+  </BrowserRouter>
 );

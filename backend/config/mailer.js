@@ -1,18 +1,39 @@
 import nodemailer from "nodemailer";
 
+// Función para obtener/crear el transporter dinámicamente
+const createTransporter = async () => {
+  // Si tienes credenciales en el .env las usa, de lo contrario genera una cuenta de prueba al vuelo
+  if (process.env.ETHEREAL_USER && process.env.ETHEREAL_PASS) {
+    return nodemailer.createTransport({
+      host: "smtp.ethereal.email",
+      port: 587,
+      secure: false,
+      auth: {
+        user: process.env.ETHEREAL_USER,
+        pass: process.env.ETHEREAL_PASS,
+      },
+    });
+  }
 
-const transporter = nodemailer.createTransport({
-  host: "smtp.ethereal.email",
-  port: 587,
-  secure: false,
-  auth: {
-    user: process.env.ETHEREAL_USER,
-    pass: process.env.ETHEREAL_PASS,
-  },
-});
+  // Genera cuenta de prueba temporal automáticamente si no hay en .env
+  const testAccount = await nodemailer.createTestAccount();
+  console.log("🛠️ Cuenta de prueba de Ethereal creada:");
+  console.log(`  User: ${testAccount.user}`);
+  console.log(`  Pass: ${testAccount.pass}`);
+
+  return nodemailer.createTransport({
+    host: "smtp.ethereal.email",
+    port: 587,
+    secure: false,
+    auth: {
+      user: testAccount.user,
+      pass: testAccount.pass,
+    },
+  });
+};
 
 export const sendResetEmail = async ({ to, token }) => {
-
+  const transporter = await createTransporter();
   const resetUrl = `${process.env.FRONTEND_URL}/reset-password?token=${token}`;
 
   const info = await transporter.sendMail({
@@ -27,6 +48,5 @@ export const sendResetEmail = async ({ to, token }) => {
     `,
   });
 
-  // Esto es lo importante para pruebas: te da el link para "ver" el correo
   console.log("📧 Vista previa del correo:", nodemailer.getTestMessageUrl(info));
 };
