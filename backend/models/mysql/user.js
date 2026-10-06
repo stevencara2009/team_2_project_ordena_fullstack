@@ -2,23 +2,23 @@ import mysql from "mysql2/promise";
 import { toUpperCase } from "zod";
 import bcrypt from "bcryptjs";
 
-const isProduction = process.env.NODE_ENV === 'production' || (process.env.DB_HOST && !process.env.DB_HOST.includes('localhost'));
+const isProduction =
+  process.env.NODE_ENV === "production" ||
+  (process.env.DB_HOST && !process.env.DB_HOST.includes("localhost"));
 
 const config = {
-  host: process.env.DB_HOST || 'localhost',
-  user: process.env.DB_USER || 'root',
+  host: process.env.DB_HOST || "localhost",
+  user: process.env.DB_USER || "root",
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
   port: Number(process.env.DB_PORT) || 3306,
-    waitForConnections: true,
+  waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
   enableKeepAlive: true,
   keepAliveInitialDelay: 0,
-  ssl: isProduction ? { rejectUnauthorized: false } : false
+  ssl: isProduction ? { rejectUnauthorized: false } : false,
 };
-
-
 
 const connection = await mysql.createPool(config);
 
@@ -237,9 +237,15 @@ export class UserModel {
   // GUARDAR TOKEN DE RECUPERACION
   // =========================================
   static async setResetToken({ email, token, expires }) {
+    // Formatear a YYYY-MM-DD HH:MM:SS en formato UTC para evitar conflictos de zona horaria
+    const formattedExpires = new Date(expires)
+      .toISOString()
+      .slice(0, 19)
+      .replace("T", " ");
+
     const [result] = await connection.query(
       `UPDATE tbl_users SET reset_token = ?, reset_token_expires = ? WHERE email = ?;`,
-      [token, expires, email],
+      [token, formattedExpires, email],
     );
     return result.affectedRows > 0;
   }
@@ -248,9 +254,11 @@ export class UserModel {
   // BUSCAR USUARIO POR TOKEN VALIDO
   // =========================================
   static async getByResetToken({ token }) {
+    const now = new Date().toISOString().slice(0, 19).replace("T", " ");
+
     const [users] = await connection.query(
-      `SELECT * FROM tbl_users WHERE reset_token = ? AND reset_token_expires > NOW();`,
-      [token],
+      `SELECT * FROM tbl_users WHERE reset_token = ? AND reset_token_expires > ?;`,
+      [token, now],
     );
     return users[0] ?? null;
   }
