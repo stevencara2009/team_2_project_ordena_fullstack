@@ -259,7 +259,7 @@ export class UserModel {
     const [users] = await connection.query(
       `SELECT * FROM tbl_users WHERE reset_token = ? AND reset_token_expires > ?;`,
       [token, now],
-    );
+    );  
     return users[0] ?? null;
   }
 
