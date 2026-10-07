@@ -36,3 +36,13 @@
   margin-left: 3px;
   padding-bottom: var(--space-4);
 }
+
+.primary{
+    color: var(--color-primary) !important;
+    text-align: center;
+}
+
+.dark{
+  color: var(--color-light) !important;
+  font-size: 0.85rem;
+}

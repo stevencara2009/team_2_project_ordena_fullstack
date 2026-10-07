@@ -215,47 +215,47 @@ export const Register = () => {
             onCloseModal={() => setOpenModal(!openModal)}
             onAccept={handleAcceptTerms}
           >
-            <div style={{ width: "100%", height: "100%" }}>
-              <h3 style={{ color: "black", textAlign: "center" }}>Términos y condiciones</h3>
-              <h4>1. Aceptación de los términos</h4>
-              <p>
+            <div style={{ width: "100%", height: "100%" }} >
+              <h3 className={styles.primary}>Términos y condiciones</h3>
+              <h4 className={styles.dark}>1. Aceptación de los términos</h4>
+              <p className={styles.dark}>
                 Al descargar, instalar o utilizar la aplicación, el usuario
                 acepta de forma expresa el presente acuerdo. Si no está de
                 acuerdo, debe abstenerse de usarla.{" "}
               </p>
 
-              <h4>2. Uso de la aplicación y restricciones</h4>
-              <p>
+              <h4 className={styles.dark}>2. Uso de la aplicación y restricciones</h4>
+              <p className={styles.dark}>
                 Se otorga una licencia limitada, no exclusiva e intransferible
                 para uso personal.Está prohibido modificar, realizar ingeniería
                 inversa, extraer bases de datos (uso de bots) o utilizar la app
                 para fines ilícitos.
               </p>
 
-              <h4>3. Propiedad intelectual</h4>
-              <p>
+              <h4 className={styles.dark}>3. Propiedad intelectual</h4>
+              <p className={styles.dark}>
                 Todo el contenido, diseño, logotipos, códigos y material de la
                 app son propiedad exclusiva de (Tu Nombre o Empresa).
               </p>
 
-              <h4>4. Privacidad y tratamiento de datos</h4>
-              <p>
+              <h4 className={styles.dark}>4. Privacidad y tratamiento de datos</h4>
+              <p className={styles.dark}>
                 El uso de la aplicación se rige por nuestra Política de
                 Privacidad. El usuario autoriza el acceso a permisos necesarios
                 (como ubicación, cámara o notificaciones) para el correcto
                 funcionamiento de la app.
               </p>
 
-              <h4>5. Limitación de responsabilidad</h4>
-              <p>
+              <h4 className={styles.dark}>5. Limitación de responsabilidad</h4>
+              <p className={styles.dark}>
                 El desarrollador no se hace responsable de daños directos,
                 indirectos o incidentales derivados del uso o la imposibilidad
                 de uso de la aplicación, ni de fallos en dispositivos de
                 terceros.
               </p>
 
-              <h4>6. Modificaciones</h4>
-              <p>
+              <h4 className={styles.dark}>6. Modificaciones</h4>
+              <p className={styles.dark}>
                 Nos reservamos el derecho de modificar estos términos y
                 condiciones en cualquier momento. Las actualizaciones serán
                 notificadas dentro de la app o por correo electrónico.
