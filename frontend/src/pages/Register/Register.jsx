@@ -295,7 +295,6 @@ export const Register = () => {
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    variant=""
                   />
 
                   <Button

@@ -51,9 +51,15 @@
 }
 
 
+.labelCardItem {
+    font-size: 0.7rem;
+    font-weight: bold;
+  color: var(--color-dark);
+}
 
 .spanCardItem {
   font-size: 0.7rem;
+    color: var(--color-dark);
 }
 
 
@@ -96,6 +102,7 @@
   margin: 5px 0 5px 0;
   width: 100%;
   font-size: 12px;
+  color: var(--color-dark);
 }
 
 .description {
@@ -121,3 +128,4 @@
   letter-spacing: 0.5px;
   text-align: center;
 }
+

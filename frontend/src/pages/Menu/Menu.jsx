@@ -118,7 +118,6 @@ export const Menu = () => {
                 name="productName"
                 value={productSearched}
                 onChange={(e) => setProductSearched(e.target.value)}
-                variant="dark"
               />
               {/*
               <div className="divSearch">

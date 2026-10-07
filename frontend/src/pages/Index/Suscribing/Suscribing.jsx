@@ -44,12 +44,11 @@ export const Suscribing = () => {
             <Input
               label="Correo"
               type="text"
-              className="labelBase"
-              placeholder=""
+              className="labelDark"
+              placeholder="Escribe un email"
               name="email"
               value={formData}
               onChange={(e) => setFormData(e.target.value)}
-              variant="Light"
             />
             <div style={{display:"flex", justifyContent:"center", alignItems:"center"}}><Button text="Suscribirse" className="btnLink" type="submit" /></div>
           </fieldset>

@@ -83,7 +83,7 @@ export const ProductCreateModal = ({
       onAccept={() => {}}
     >
       <div style={{ width: "100%", height: "100%" }}>
-        <h2 style={{ color: "black", textAlign: "center" }}>Crear producto</h2>
+        <h2 className={styles.title}>Crear producto</h2>
         <form onSubmit={handleSubmitCreate}>
           <fieldset>
             <legend>Detalle del Producto</legend>
@@ -97,7 +97,6 @@ export const ProductCreateModal = ({
                 value={createFormData.name}
                 onChange={handleChangeCreate}
                 required
-                variant="Light"
               />
 
               <div className={styles.inputFlex}>
@@ -108,7 +107,6 @@ export const ProductCreateModal = ({
                   value={createFormData.category}
                   onChange={handleChangeCreate}
                   data={PLATES_TYPE.slice(1)}
-                  variant="Light"
                 />
 
                 <Input
@@ -120,7 +118,6 @@ export const ProductCreateModal = ({
                   value={createFormData.price}
                   onChange={handleChangeCreate}
                   required
-                  variant="Light"
                 />
               </div>
 
@@ -133,7 +130,6 @@ export const ProductCreateModal = ({
                 value={createFormData.description}
                 onChange={handleChangeCreate}
                 required
-                variant="Light"
               />
 
               <div
@@ -182,7 +178,6 @@ export const ProductCreateModal = ({
                   placeholder="https://..."
                   value={createFormData.image}
                   onChange={handleChangeCreate}
-                  variant="Light"
                 />
               </div>
 

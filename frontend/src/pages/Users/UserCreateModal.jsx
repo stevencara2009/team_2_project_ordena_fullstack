@@ -94,7 +94,7 @@ export const UserCreateModal = ({
       onAccept={() => {}}
     >
       <div style={{ width: "100%", height: "100%" }}>
-        <h2 style={{ color: "black", textAlign: "center" }}>Crear usuario</h2>
+        <h2 className={styles.title} >Crear usuario</h2>
         <form onSubmit={handleSubmitCreate}>
           <fieldset>
             <legend>Detalle del Usuario</legend>
@@ -109,7 +109,6 @@ export const UserCreateModal = ({
                   value={createFormData.name}
                   onChange={handleChangeCreate}
                   required
-                  variant="Light"
                 />
 
                 <Input
@@ -121,7 +120,6 @@ export const UserCreateModal = ({
                   value={createFormData.lastname}
                   onChange={handleChangeCreate}
                   required
-                  variant="Light"
                 />
               </div>
 
@@ -133,7 +131,6 @@ export const UserCreateModal = ({
                   value={createFormData.typeDocument}
                   onChange={handleChangeCreate}
                   data={DOCUMENTS_TYPE}
-                  variant="Light"
                 />
 
                 <Input
@@ -145,7 +142,6 @@ export const UserCreateModal = ({
                   value={createFormData.dni}
                   onChange={handleChangeCreate}
                   required
-                  variant="Light"
                 />
               </div>
 
@@ -159,7 +155,6 @@ export const UserCreateModal = ({
                   value={createFormData.email}
                   onChange={handleChangeCreate}
                   required
-                  variant="Light"
                 />
                 <Input
                   label="Teléfono"
@@ -170,7 +165,6 @@ export const UserCreateModal = ({
                   value={createFormData.phone}
                   onChange={handleChangeCreate}
                   required
-                  variant="Light"
                 />
               </div>
 
@@ -182,7 +176,6 @@ export const UserCreateModal = ({
                   value={createFormData.nationality}
                   onChange={handleChangeCreate}
                   data={COUNTRIES.slice(1)}
-                  variant="Light"
                 />
 
                 <Input
@@ -196,7 +189,6 @@ export const UserCreateModal = ({
                   max="2008-04-26"
                   onChange={handleChangeCreate}
                   required
-                  variant="Light"
                 />
                 <div className={styles.icon}>
                   <i
@@ -252,7 +244,6 @@ export const UserCreateModal = ({
                     placeholder="https://..."
                     value={createFormData.image}
                     onChange={handleChangeCreate}
-                    variant="Light"
                   />
                   <InputSelect
                     label="Tipo de usuario"
@@ -261,7 +252,6 @@ export const UserCreateModal = ({
                     value={createFormData.role}
                     onChange={handleChangeCreate}
                     data={USERS_TYPE.slice(1)}
-                    variant="Light"
                   />
                 </div>
               </div>
@@ -276,7 +266,6 @@ export const UserCreateModal = ({
                   value={createFormData.password}
                   onChange={handleChangeCreate}
                   required
-                  variant="Light"
                 />
 
                 <Input
@@ -288,7 +277,6 @@ export const UserCreateModal = ({
                   value={createFormData.confirmPassword}
                   onChange={handleChangeCreate}
                   required
-                  variant="Light"
                 />
                 <div className={styles.icon}>
                   <i

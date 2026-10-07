@@ -214,7 +214,6 @@ export const Orders = () => {
                         label: `Mesa ${table.number} (${table.capacity} personas)`
                       }))
                     }
-                    variant='dark'
                     disabled={currentOrder?.id }
                     required
                   />
@@ -249,7 +248,6 @@ export const Orders = () => {
                       name="productId"
                       value={formData.productId}
                       onChange={handleChange}
-                      variant='dark'
                       data={filteredProducts.map(product => ({
                         value: product.id,
                         label: product.name
@@ -266,7 +264,6 @@ export const Orders = () => {
                       value={formData.quantity}
                       onChange={handleChange}
                       required
-                      variant='dark'
                     />
 
                     <Input
@@ -277,7 +274,6 @@ export const Orders = () => {
                       name="notes"
                       value={formData.notes}
                       onChange={handleChange}
-                      variant='dark'
                     />
 
 

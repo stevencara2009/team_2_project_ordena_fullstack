@@ -32,7 +32,6 @@ export const TableEditModal = ({
                 value={formData.number}
                 onChange={handleChangeEdit}
                 className="labelDark"
-                variant="Light"
                 disabled={true}
               />
 
@@ -43,7 +42,6 @@ export const TableEditModal = ({
                 value={formData.capacity}
                 onChange={handleChangeEdit}
                 className="labelDark"
-                variant="Light"
               />
 
               <InputSelect
@@ -53,7 +51,6 @@ export const TableEditModal = ({
                 onChange={handleChangeEdit}
                 data={TABLES_STATE.slice(1)}
                 className="labelDark"
-                variant="Light"
               />
 
               <Button text="Actualizar" className="btnAdd" type="submit" />

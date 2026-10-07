@@ -92,7 +92,6 @@ export const Bills = () => {
                     className="inputPrimary"
                     value={orderSearch}
                     onChange={(e) => setOrderSearch(e.target.value)}
-                    variant='dark'
                   />
 
                   <Input
@@ -101,7 +100,6 @@ export const Bills = () => {
                     className="inputPrimary"
                     value={tableSearch}
                     onChange={(e) => setTableSearch(e.target.value)}
-                    variant='dark'
                   />
 
                   <InputSelect
@@ -110,7 +108,6 @@ export const Bills = () => {
                     value={orderState}
                     onChange={(e) => setOrderState(e.target.value)}
                     data={ORDERS_STATE}
-                    variant='dark'
                   />
                 </fieldset>
               </form>

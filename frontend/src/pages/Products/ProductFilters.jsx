@@ -15,7 +15,6 @@ export const ProductFilters = ({ productSearch, setProductSearch, plateType, set
           name="productName"
           value={productSearch}
           onChange={(e) => setProductSearch(e.target.value)}
-          variant='dark'
         />
 
         {/*<div className="divSearch">

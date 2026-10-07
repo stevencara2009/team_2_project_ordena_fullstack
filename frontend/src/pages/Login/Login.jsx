@@ -136,7 +136,7 @@ export const Login = () => {
               {/* Modal Recuperación de credenciales */}
               <Modal isOpenModal={openModal} onCloseModal={() => setOpenModal(!openModal)} >
                 <div style={{ width: "100%", height: "100%", }}>
-                  <h3 style={{ color: "black" }}>Recuperar contraseña</h3>
+                  <h3 className={styles.title}>Recuperar contraseña</h3>
                   <fieldset>
                     <legend>Datos de usuario</legend>
                     <form action="" onSubmit={handleSubmitEmailToRecoverCredencials}>
@@ -149,7 +149,6 @@ export const Login = () => {
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        variant=""
                       />
 
                       <Button className='btnRegister' text='Solicitar recuperación' type="submit" />

@@ -60,7 +60,7 @@ export const BillModal = ({ order, onClose, onConfirm }) => {
   return (
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        <h2 style={{ color: "black" }}>Facturar orden #{order.id}</h2>
+        <h2 className={styles.title}>Facturar orden #{order.id}</h2>
         <p className={styles.subtitle}>Mesa {order.table_number}</p>
 
         <form onSubmit={handleSubmit} className={styles.form}>
@@ -72,7 +72,6 @@ export const BillModal = ({ order, onClose, onConfirm }) => {
             name="name"
             value={dni}
             onChange={(e) => setDni(e.target.value)}
-            variant="light"
             required
           />
 
@@ -83,7 +82,6 @@ export const BillModal = ({ order, onClose, onConfirm }) => {
             value={paymentMethod}
             onChange={(e) => setPaymentMethod(e.target.value)}
             data={PAYMENT_METHOD.slice(1)}
-            variant="light"
           />
 
           <InputSelect
@@ -93,7 +91,6 @@ export const BillModal = ({ order, onClose, onConfirm }) => {
             value={hasPropina}
             onChange={(e) => setHasPropina(e.target.value)}
             data={PROPINA.slice(1)}
-            variant="light"
           />
 
           <div className={styles.summary}>

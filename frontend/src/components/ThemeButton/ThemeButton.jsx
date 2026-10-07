@@ -27,7 +27,6 @@ export const ThemeButton = () => {
         </svg>
       )}
 
-      <span className={styles.text}>{isLight ? 'Modo oscuro' : 'Modo claro'}</span>
     </button>
   )
 }

@@ -134,7 +134,6 @@ export const Tables = ({
             name=""
             value={tableSearch}
             onChange={(e) => setTableSearch(e.target.value)}
-            variant="dark"
           />
 
           <InputSelect
@@ -143,7 +142,6 @@ export const Tables = ({
             value={tableState}
             onChange={(e) => setTableState(e.target.value)}
             data={TABLES_STATE}
-            variant="dark"
           />
         </fieldset>
       </form>
@@ -177,7 +175,7 @@ export const Tables = ({
       {/* Modal crear una mesa */}
       <Modal isOpenModal={openModal} onCloseModal={() => setOpenModal(false)}>
         <div style={{ width: "100%", height: "100%" }}>
-          <h2 style={{ color: "black" }}>Crear Mesa</h2>
+          <h2 className={styles.title}>Crear Mesa</h2>
 
           <form onSubmit={handleCreate}>
             <Input
@@ -186,7 +184,6 @@ export const Tables = ({
               type="number"
               value={createFormData.number}
               onChange={handleChangeCreate}
-              variant="Light"
               required
             />
 
@@ -196,7 +193,6 @@ export const Tables = ({
               type="number"
               value={createFormData.capacity}
               onChange={handleChangeCreate}
-              variant="Light"
               required
             />
 

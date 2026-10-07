@@ -95,7 +95,6 @@ export const ViewOrders = () => {
                     name=""
                     value={orderSearch}
                     onChange={(e) => setOrderSearch(e.target.value)}
-                    variant='dark'
                   />
 
                   <Input
@@ -106,7 +105,6 @@ export const ViewOrders = () => {
                     name=""
                     value={tableSearch}
                     onChange={(e) => setOrderTable(e.target.value)}
-                    variant='dark'
                   />
 
                   <InputSelect
@@ -117,7 +115,6 @@ export const ViewOrders = () => {
                       setOrderState(e.target.value)
                     }
                     data={ORDERS_STATE}
-                    variant='dark'
                   />
 
                 </fieldset>

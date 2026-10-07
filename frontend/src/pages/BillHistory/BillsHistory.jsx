@@ -63,7 +63,6 @@ export const BillsHistory = () => {
                     className="inputPrimary"
                     value={from}
                     onChange={(e) => setFrom(e.target.value)}
-                    variant="dark"
                   />
 
                   <Input
@@ -72,7 +71,6 @@ export const BillsHistory = () => {
                     className="inputPrimary"
                     value={to}
                     onChange={(e) => setTo(e.target.value)}
-                    variant="dark"
                   />
 
                   <InputSelect
@@ -81,7 +79,6 @@ export const BillsHistory = () => {
                     value={paymentMethod}
                     onChange={(e) => setPaymentMethod(e.target.value)}
                     data={PAYMENT_METHODS}
-                    variant="dark"
                   />
 
                   <Button

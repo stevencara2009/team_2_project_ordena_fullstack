@@ -12,7 +12,7 @@ export function Modal({ isOpenModal, onCloseModal, children }) {
           display: 'flex', width: '100%', justifyContent: 'end', alignItems: "center"
         }}  >
           <button text="Cerrar" onClick={onCloseModal} style={{border:"none"}}>
-            <i className="fa-solid fa-rectangle-xmark" style={{ color: 'brown', fontSize: '24px', cursor: 'pointer' }}></i>
+            <i className={`fa-solid fa-rectangle-xmark  ${styles.closeButton}`} ></i>
           </button>
         </div>
         {children}

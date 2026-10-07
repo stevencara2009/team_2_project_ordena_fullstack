@@ -12,21 +12,18 @@ export const Input = forwardRef(({
   max = "",
   maxLength,
   onChange,
-  variant = "dark",
   disabled = false
 }, ref) => {
 
-  const labelStyle = variant === "dark" ? styles.labelLight : styles.labelDark;
-
   return (
     <div className={styles.inputContainer}>
-      <label className={`${styles.label} ${labelStyle}`} htmlFor={label} >{label}
+      <label className={`${styles.label}`} htmlFor={label} >{label}
       </label>
       <input
         ref={ref}
         type={type}
         placeholder={placeholder}
-        className={`${styles.input} ${styles[className]}`}
+        className={`${styles.input}`}
         name={name}
         min={min}
         max={max}
@@ -47,17 +44,15 @@ export const InputSelect = ({
   value,
   onChange,
   data = [],
-  variant = "dark",
   disabled = false
 }) => {
 
-  const labelStyle = variant === "dark" ? styles.labelLight : styles.labelDark
 
   return (
     <div className={styles.inputContainer}>
-      <label className={`${styles.label} ${labelStyle}`} htmlFor={label} >{label}
+      <label className={`${styles.label}`} htmlFor={label} >{label}
         <select
-          className={`${styles.input} ${styles[className]}`}
+          className={`${styles.input}`}
           name={name}
           value={value}
           onChange={onChange}

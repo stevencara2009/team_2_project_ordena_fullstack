@@ -12,7 +12,9 @@
   font-size: 0.7rem;
 }
 
-
+.title{
+  color: var(--color-light) !important;
+}
 
 .countOptions {
   display: flex;

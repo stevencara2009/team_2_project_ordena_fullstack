@@ -80,6 +80,7 @@
 
 .body {
   padding: 2rem;
+  background-color: var(--color-dark);
 }
 
 .sectionTitle {
@@ -100,15 +101,15 @@
 .infoGroup label {
   display: block;
   font-size: 0.8rem;
-  color: var(--color-dark);
+  color: var(--color-light);
   font-weight: bold;
   margin-bottom: 0.25rem;
 }
 
 .infoGroup p {
   margin: 0;
-  font-size: 0.95rem;
-  color: var(--color-dark);
+  font-size: 0.80rem;
+  color: var(--color-light);
   word-break: break-word;
 }
 

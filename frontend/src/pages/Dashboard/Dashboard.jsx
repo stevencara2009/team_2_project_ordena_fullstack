@@ -132,7 +132,6 @@ export const Dashboard = () => {
                       setOrderState(e.target.value)
                     }
                     data={ORDERS_STATE}
-                    variant='dark'
                   />
 
                 </fieldset>

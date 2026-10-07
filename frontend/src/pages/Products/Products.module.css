@@ -3,6 +3,12 @@
   flex-direction: column;
 }
 
+.title {
+  color: var(--color-light);
+  text-align: center;
+}
+
+
 @media (min-width: 640px) {
   .inputFlex {
     display: flex;

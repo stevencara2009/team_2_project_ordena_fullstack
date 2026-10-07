@@ -39,7 +39,7 @@
 }
 
 .corpusParagraph {
-  color: var(--color-light);
+  color: white;
   width: 100%;
   font-size: var(--font-size-base);
 }

@@ -52,7 +52,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 3px solid white;
+    border: 3px solid var(--color-light);
     border-radius: 50%;
     width: 90px;
     height: 90px;

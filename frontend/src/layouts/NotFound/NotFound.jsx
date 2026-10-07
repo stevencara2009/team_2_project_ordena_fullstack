@@ -32,7 +32,6 @@ export const NotFound = () => {
         {/* Botón Principal (Reutilizando tu componente Button) */}
         <div className={styles.buttonArea}>
           <Button 
-            variant="orange" // Asumimos que "orange" es una de las variantes de tu Button
             onClick={handleGoHome}
             text="Ir a inicio" // Asumimos que tu Button acepta 'text'
           >

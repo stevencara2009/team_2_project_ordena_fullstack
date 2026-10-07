@@ -17,15 +17,29 @@ export const MenuHamburguer = () => {
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+    setIsOpenModal(false);
   };
 
   const toggleModal = (e) => {
     e.stopPropagation();
     setIsOpenModal(true);
+    setIsOpen(false);
   };
 
-  // 3. Efecto para detectar clics fuera del contenedor
+  const handleLogout = () => {
+    setIsOpenModal(false);
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setIsOpen(false);
+      logout();
+      navigate("/index");
+    }, 2000);
+  };
+
+  // Cierre al hacer clic fuera del menú
   useEffect(() => {
+    console.log(user?.role);
     const handleClickOutside = (event) => {
       if (
         isOpen &&
@@ -39,7 +53,6 @@ export const MenuHamburguer = () => {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -59,9 +72,10 @@ export const MenuHamburguer = () => {
       onClick={toggleMenu}
     >
       <div className={styles.icon}>
-        <i className={`fa-solid fa-bars `}></i>
+        <i className="fa-solid fa-bars"></i>
       </div>
-      <div className={`${styles.menu} ${isOpen ? styles.open : ""} `}>
+
+      <div className={`${styles.menu} ${isOpen ? styles.open : ""}`}>
         <div
           style={{
             display: "flex",
@@ -70,13 +84,13 @@ export const MenuHamburguer = () => {
           }}
         >
           <i
-            className={"fa-solid fa-xmark"}
+            className="fa-solid fa-xmark"
             style={{ color: "white", fontSize: "24px", width: 32, height: 32 }}
             onClick={toggleMenu}
           ></i>
         </div>
 
-        {/* MENU OPCIONES PARA PÚBLICO */}
+        {/* MENÚ PÚBLICO */}
         <ul>
           <Link to="/index">
             <li className={styles.menuItem} onClick={toggleMenu}>
@@ -88,16 +102,26 @@ export const MenuHamburguer = () => {
               Menú
             </li>
           </Link>
-          <Link to="/cart">
-            <li className={styles.menuItem} onClick={toggleMenu}>
-              Ver mi pedido
-            </li>
-          </Link>
         </ul>
 
-        {/* MENU OPCIONES PARA CLIENTES */}
+        {user?.role === undefined && (
+          <ul>
+            <Link to="/cart">
+              <li className={styles.menuItem} onClick={toggleMenu}>
+                Ver mi pedido
+              </li>
+            </Link>
+          </ul>
+        )}
+
+        {/* CLIENTE */}
         {user?.role === "CLIENTE" && (
           <ul>
+            <Link to="/cart">
+              <li className={styles.menuItem} onClick={toggleMenu}>
+                Ver mi pedido
+              </li>
+            </Link>
             <Link to="/profile">
               <li className={styles.menuItem} onClick={toggleMenu}>
                 Información personal
@@ -106,45 +130,10 @@ export const MenuHamburguer = () => {
             <li className={styles.menuItem} onClick={toggleModal}>
               Cerrar Sesión
             </li>
-
-            <Modal
-              isOpenModal={isOpenModal}
-              onCloseModal={() => setIsOpenModal(false)}
-            >
-              <h2 style={{ color: "black" }}>Cerrar Sesión</h2>
-              <p style={{ color: "black" }}>
-                ¿Estás seguro que deseas cerrar sesión?
-              </p>
-
-              <Button
-                text="Aceptar"
-                onClick={() => {
-                  setIsOpenModal(false);
-                  setLoading(true);
-                  setTimeout(() => {
-                    setLoading(false);
-                    setIsOpen(false);
-                    logout();
-                    navigate("/index");
-                  }, 2000);
-                }}
-                className="btnSignOut"
-                type="button"
-              />
-              <Button
-                text="Cancelar"
-                onClick={() => {
-                  setIsOpenModal(false);
-                  setIsOpen(false);
-                }}
-                className="btnDelete"
-                type="button"
-              />
-            </Modal>
           </ul>
         )}
 
-        {/* MENU OPCIONES PARA ADMINISTRADORES */}
+        {/* ADMINISTRADOR */}
         {user?.role === "ADMINISTRADOR" && (
           <ul>
             <Link to="/dashboard">
@@ -190,45 +179,10 @@ export const MenuHamburguer = () => {
             <li className={styles.menuItem} onClick={toggleModal}>
               Cerrar Sesión
             </li>
-
-            <Modal
-              isOpenModal={isOpenModal}
-              onCloseModal={() => setIsOpenModal(false)}
-            >
-              <h2 style={{ color: "black" }}>Cerrar Sesión</h2>
-              <p style={{ color: "black" }}>
-                ¿Estás seguro que deseas cerrar sesión?
-              </p>
-
-              <Button
-                text="Aceptar"
-                onClick={() => {
-                  setIsOpenModal(false);
-                  setLoading(true);
-                  setTimeout(() => {
-                    setLoading(false);
-                    setIsOpen(false);
-                    logout();
-                    navigate("/index");
-                  }, 2000);
-                }}
-                className="btnSignOut"
-                type="button"
-              />
-              <Button
-                text="Cancelar"
-                onClick={() => {
-                  setIsOpenModal(false);
-                  setIsOpen(false);
-                }}
-                className="btnDelete"
-                type="button"
-              />
-            </Modal>
           </ul>
         )}
 
-        {/* MENU OPCIONES PARA COCINEROS */}
+        {/* COCINERO */}
         {user?.role === "COCINERO" && (
           <ul>
             <Link to="/view-orders">
@@ -244,45 +198,10 @@ export const MenuHamburguer = () => {
             <li className={styles.menuItem} onClick={toggleModal}>
               Cerrar Sesión
             </li>
-
-            <Modal
-              isOpenModal={isOpenModal}
-              onCloseModal={() => setIsOpenModal(false)}
-            >
-              <h2 style={{ color: "black" }}>Cerrar Sesión</h2>
-              <p style={{ color: "black" }}>
-                ¿Estás seguro que deseas cerrar sesión?
-              </p>
-
-              <Button
-                text="Aceptar"
-                onClick={() => {
-                  setIsOpenModal(false);
-                  setLoading(true);
-                  setTimeout(() => {
-                    setLoading(false);
-                    setIsOpen(false);
-                    logout();
-                    navigate("/index");
-                  }, 2000);
-                }}
-                className="btnSignOut"
-                type="button"
-              />
-              <Button
-                text="Cancelar"
-                onClick={() => {
-                  setIsOpenModal(false);
-                  setIsOpen(false);
-                }}
-                className="btnDelete"
-                type="button"
-              />
-            </Modal>
           </ul>
         )}
 
-        {/* MENU OPCIONES PARA MESEROS */}
+        {/* MESERO */}
         {user?.role === "MESERO" && (
           <ul>
             <Link to="/dashboard">
@@ -308,45 +227,10 @@ export const MenuHamburguer = () => {
             <li className={styles.menuItem} onClick={toggleModal}>
               Cerrar Sesión
             </li>
-
-            <Modal
-              isOpenModal={isOpenModal}
-              onCloseModal={() => setIsOpenModal(false)}
-            >
-              <h2 style={{ color: "black" }}>Cerrar Sesión</h2>
-              <p style={{ color: "black" }}>
-                ¿Estás seguro que deseas cerrar sesión?
-              </p>
-
-              <Button
-                text="Aceptar"
-                onClick={() => {
-                  setIsOpenModal(false);
-                  setLoading(true);
-                  setTimeout(() => {
-                    setLoading(false);
-                    setIsOpen(false);
-                    logout();
-                    navigate("/index");
-                  }, 2000);
-                }}
-                className="btnSignOut"
-                type="button"
-              />
-              <Button
-                text="Cancelar"
-                onClick={() => {
-                  setIsOpenModal(false);
-                  setIsOpen(false);
-                }}
-                className="btnDelete"
-                type="button"
-              />
-            </Modal>
           </ul>
         )}
 
-        {/* MENU OPCIONES PARA CAJEROS */}
+        {/* CAJERO */}
         {user?.role === "CAJERO" && (
           <ul>
             <Link to="/dashboard">
@@ -382,46 +266,44 @@ export const MenuHamburguer = () => {
             <li className={styles.menuItem} onClick={toggleModal}>
               Cerrar Sesión
             </li>
-
-            <Modal
-              isOpenModal={isOpenModal}
-              onCloseModal={() => setIsOpenModal(false)}
-            >
-              <h2 style={{ color: "black" }}>Cerrar Sesión</h2>
-              <p style={{ color: "black" }}>
-                ¿Estás seguro que deseas cerrar sesión?
-              </p>
-
-              <Button
-                text="Aceptar"
-                onClick={() => {
-                  setIsOpenModal(false);
-                  setLoading(true);
-                  setTimeout(() => {
-                    setLoading(false);
-                    setIsOpen(false);
-                    logout();
-                    navigate("/index");
-                  }, 2000);
-                }}
-                className="btnSignOut"
-                type="button"
-              />
-              <Button
-                text="Cancelar"
-                onClick={() => {
-                  setIsOpenModal(false);
-                  setIsOpen(false);
-                }}
-                className="btnDelete"
-                type="button"
-              />
-            </Modal>
           </ul>
         )}
 
         {loading && <Loader />}
       </div>
+
+      {/* MODAL ÚNICO DE CERRAR SESIÓN */}
+      <Modal
+        isOpenModal={isOpenModal}
+        onCloseModal={() => setIsOpenModal(false)}
+      >
+        <h2 className={styles.title}>Cerrar Sesión</h2>
+        <p className={styles.paragraph}>
+          ¿Estás seguro que deseas cerrar sesión?
+        </p>
+
+        <div
+          style={{
+            display: "flex",
+            gap: "10px",
+            justifyContent: "center",
+            width: "100%",
+          }}
+        >
+          <Button
+            text="Cancelar"
+            onClick={() => setIsOpenModal(false)}
+            className="btnBack"
+            type="button"
+          />
+          <Button
+            text="Aceptar"
+            onClick={handleLogout}
+            className="btnAdd"
+            type="button"
+          />
+        </div>
+      </Modal>
     </div>
   );
 };
